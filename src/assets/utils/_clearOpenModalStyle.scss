@@ -1,0 +1,10 @@
+// 修復：打開 modal 時會出現畫面抖動
+// https://blog.csdn.net/fd214333890/article/details/80274160
+body{
+    overflow: auto !important;
+    padding-right: 0 !important;
+}
+
+nav, footer{
+    padding-right: 0 !important;
+}
