@@ -76,15 +76,18 @@ $danger:        $red !default;
 $light:         $gray-100 !default;
 $gray:          $gray-600;
 $dark:          $gray-900 !default;
-$cream1:        #E9D2A3; //new
-$cream2:        #f7e7c8; //new
-$cream3:        #f7edd9; //new
-$orange1:       #fc9700; //new
-$green1:        #166907; //new
-$green2:        #83B875; //new
-$brown1:        #570f00; //new
-$purple1:        #2d1113; //new
-$gray1:         #4c514d; //new
+//new
+$cream1:#E9D2A3;
+$cream2:#f7e7c8;
+$cream3:#f7edd9;
+$orange1:#fc9700;
+$green1:#166907;
+$green2:#83B875;
+$green3:#c3e5b9;
+$brown1:#570f00;
+$purple1:#2d1113;
+$gray1:#4c514d;
+$gray2:#656d67;
 // scss-docs-end theme-color-variables
 
 // scss-docs-start theme-colors-map
@@ -104,6 +107,7 @@ $theme-colors: (
   "orange1":    $orange1,
   "green1":     $green1,
   "green2":     $green2,
+  "green3":     $green3,
   "brown1":     $brown1,
   "purple1":    $purple1,
   "gray1":     $gray1,
