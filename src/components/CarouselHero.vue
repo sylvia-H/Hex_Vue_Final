@@ -82,7 +82,7 @@
             <h2 class="text-brown1 fw-bold fz-6 fz-md-10 | mb-12">
               打造屬於你的餐飲生活
             </h2>
-            <h5 class="fz-5">簡單 精緻 美好</h5>
+            <h5 class="text-gray fz-5 fz-md-6">簡單 精緻 美好</h5>
           </div>
         </div>
         <div class="carousel-item w-100 h-100" data-bs-interval="2800">
@@ -105,7 +105,7 @@
               align-middle
             "
           >
-            <h2 class="text-cream1 fw-bold fz-6 fz-md-10 | my-5">
+            <h2 class="text-cream1 fw-bold fz-6 fz-md-8 fz-lg-10 | my-5">
               好食遞 您的優質餐飲管家
             </h2>
             <!-- <h2 class="text-cream1 fw-bold fz-6 fz-md-10 | mb-10"></h2> -->
@@ -127,11 +127,11 @@
               translate-middle
             "
           >
-            <h2 class="text-gray1 fw-bold fz-6 fz-md-10 | mb-3">
+            <h2 class="text-gray1 fw-bold fz-6 fz-md-8 fz-lg-10 | mb-3">
               嚴選新鮮美味食材
             </h2>
-            <h2 class="text-gray1 fw-bold fz-6 fz-md-10 | mb-12">快速到府</h2>
-            <h5 class="fz-5">新鮮 健康 乾淨 養生</h5>
+            <h2 class="text-gray1 fw-bold fz-6 fz-md-8 fz-lg-10 | mb-12">快速到府</h2>
+            <h5 class="text-gray fz-5 fz-md-6">新鮮 健康 乾淨 養生</h5>
           </div>
         </div>
         <div class="carousel-item w-100 h-100" data-bs-interval="2800">
@@ -152,7 +152,7 @@
             <h2 class="text-gray1 fw-bold fz-7 fz-md-10 | mb-8">
               食材就是美味的關鍵
             </h2>
-            <h5 class="fz-5">每一天 每一餐 每一口 都是享受</h5>
+            <h5 class="text-gray fz-5 fz-md-6">每一天 每一餐 每一口 都是享受</h5>
           </div>
         </div>
         <div class="carousel-item w-100 h-100" data-bs-interval="2800">
@@ -173,7 +173,7 @@
             <h2 class="text-purple1 fw-bold fz-7 fz-md-10 | mb-8">
               芳香鮮醇的感官饗宴
             </h2>
-            <h5 class="fz-5">自然鮮甜 味蕾跳舞</h5>
+            <h5 class="text-brown1 fz-5 fz-md-6">自然鮮甜 味蕾跳舞</h5>
           </div>
         </div>
         <div class="carousel-item w-100 h-100" data-bs-interval="2800">
@@ -197,21 +197,21 @@
             "
           >
             <h2
-              class="text-dark fw-bold fz-7 fz-md-10 | my-5 d-block d-lg-none"
+              class="text-dark fw-bold fz-6 fz-md-8 | my-4 my-md-3 d-block d-lg-none"
             >
               均衡的營養
             </h2>
             <h2
-              class="text-dark fw-bold fz-7 fz-md-10 | my-5 d-block d-lg-none"
+              class="text-dark fw-bold fz-6 fz-md-8 | my-4 my-md-3 d-block d-lg-none"
             >
               健康地減重
             </h2>
             <h2
-              class="text-dark fw-bold fz-7 fz-md-10 | my-5 d-none d-lg-block"
+              class="text-dark fw-bold fz-md-10 | my-4 d-none d-lg-block"
             >
               均衡的營養 健康地減重
             </h2>
-            <h5 class="fz-5 | mb-5 d-none d-lg-block">
+            <h5 class="text-gray fz-5 fz-md-6 | mb-5 d-none d-lg-block">
               不再單調苦悶的減重日常 計算卡路里也很美好
             </h5>
           </div>
@@ -259,10 +259,10 @@
               py-5
             "
           >
-            <h2 class="text-brown1 fw-bold fz-6 fz-md-10 | mb-8">
+            <h2 class="text-brown1 fw-bold fz-6 fz-md-8 fz-lg-10 | mb-4">
               簡單 也能有萬千變化
             </h2>
-            <h5 class="text-dark fz-5">
+            <h5 class="text-dark fz-5 fz-lg-6">
               與朋友相聚的日子 也可以吃得無負擔且美好
             </h5>
           </div>
@@ -288,10 +288,10 @@
               py-5
             "
           >
-            <h2 class="text-brown1 fw-bold fz-6 fz-md-10 | mb-8">
+            <h2 class="text-brown1 fw-bold fz-6 fz-md-8 fz-lg-10 | mb-4">
               小變化也有大驚喜
             </h2>
-            <h5 class="text-dark fz-5 | mb-2">動動手 每一個早晨都有新的期待</h5>
+            <h5 class="text-dark fz-5 fz-lg-6">動動手 每一個早晨都有新的期待</h5>
           </div>
         </div>
       </div>
