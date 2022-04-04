@@ -21,6 +21,7 @@ const routes = [
       },
       {
         path: 'products',
+        name: 'products',
         component: () => import('../views/Front/FProductsView.vue'),
         meta: {
           title: '來選好食 | 好食遞 HEALTHY DIET',
@@ -46,7 +47,29 @@ const routes = [
       },
       {
         path: 'checkout',
-        component: () => import('../views/Front/FCheckoutOrder.vue'),
+        component: () => import('../views/Front/FCheckout.vue'),
+        children: [
+          {
+            path: 'cart',
+            name: 'checkoutCart',
+            component: () => import('../views/Front/FCheckoutCart.vue'),
+          },
+          {
+            path: 'order',
+            name: 'checkoutOrder',
+            component: () => import('../views/Front/FCheckoutOrder.vue'),
+          },
+          {
+            path: 'payment/:id',
+            name: 'checkoutPayment',
+            component: () => import('../views/Front/FCheckoutPayment.vue'),
+          },
+          {
+            path: 'complete',
+            name: 'checkoutComplete',
+            component: () => import('../views/Front/FCheckoutComplete.vue'),
+          },
+        ],
       },
     ],
   },

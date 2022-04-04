@@ -1,9 +1,9 @@
 <template>
   <footer class="bg-dark">
-    <div class="container | d-flex ai-c justify-content-center | py-5">
+    <div class="container | d-flex align-items-center justify-content-center | py-4">
       <!-- Copyright -->
       <p class="h6 text-white text-center">
-        © 2022. All Rights Reserved.
+        HEALTHY DIET © 2022. All Rights Reserved.
       </p>
     </div>
   </footer>

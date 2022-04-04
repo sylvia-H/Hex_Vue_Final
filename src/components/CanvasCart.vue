@@ -126,7 +126,7 @@
         >
           清空購物車
         </button>
-        <router-link to="./checkout">
+        <router-link :to="{ name: 'checkoutCart'}">
           <button
             type="button"
             class="btn btn-danger px-4 py-2"
