@@ -318,10 +318,6 @@
 </template>
 
 <style>
-html,
-body {
-  height: 100%;
-}
 .carousel-inner,
 .carousel .item {
   position: relative;

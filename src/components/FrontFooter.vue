@@ -10,10 +10,6 @@
 </template>
 
 <style>
-html,
-body {
-  height: 100%;
-}
 footer {
   position: relative;
   overflow: hidden;
