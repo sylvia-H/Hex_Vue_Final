@@ -6,53 +6,191 @@
         <h2 class="text-center">
           {{ product.title }}
         </h2>
-        <div class="border overflow-hidden rounded-3 shadow | m-8">
-          <img class="w-100 h-100 img-cover" :src="product.imageUrl" alt="product.title">
+        <div class="col-12">
+          <div class="border overflow-hidden rounded-3 shadow | m-8">
+            <img class="w-100 heightLimit1 img-cover" :src="tempImgUrl" :alt="product.title">
+          </div>
+        </div>
+        <div class="row m-6">
+          <div class="col-4">
+            <div class="border overflow-hidden rounded-3">
+              <img class="w-100 heightLimit2 img-cover" :src="product.imageUrl" :alt="product.title"
+                @click="changeTemp" @keydown="enter">
+            </div>
+          </div>
+          <div class="col-4" v-for="(imgUrl, i) in product.imagesUrl" :key="i">
+            <div class="border overflow-hidden rounded-3">
+              <img class="w-100 heightLimit2 img-cover" :src="imgUrl" :alt="product.title"
+                @click="changeTemp" @keydown="enter">
+            </div>
+          </div>
         </div>
       </div>
       <div class="col-12 col-md-6 | pt-15">
+        <!-- 產品介紹 product.description -->
         <div class="row | mb-5">
           <p>
             {{ product.description || '' }}
           </p>
         </div>
-        <div class="row | mb-5">
-          <p>
+        <!-- 產品份量 & 價錢 -->
+        <div class="row | my-5">
+          <div class="col-10 offset-1">
+            <hr/>
+            <div class="d-flex align-items-center">
+              <p class="fw-bold">
+                本產品內含份量：
+              </p>
+              <span>
+                {{ product.number }}
+                {{ product.unit }}
+              </span>
+            </div>
+            <div class="d-flex align-items-center">
+              <p class="fw-bold text-muted">
+                原價：
+              </p>
+              <span class="text-muted">
+                <s>{{ $filters.toCurrency(product.origin_price) }}</s> 元
+              </span>
+              <p class="ms-5">
+                折扣後優惠價：
+              </p>
+              <span class="fw-bold text-danger fz-8">
+                {{ $filters.toCurrency(product.price) }}
+              </span>
+              <p> 元</p>
+            </div>
+            <hr/>
+          </div>
+          <div class="col-10 offset-1">
+            <button
+              @click="addCart(product.id)"
+              :disabled="product.id === is_loadingItem"
+              type="button"
+              class="btn btn-danger d-flex align-items-center ms-auto"
+            >
+              <div
+                v-if="product.id === is_loadingItem"
+                class="spinner-border text-warning"
+                role="status"
+              >
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <div v-else>
+                <i class="bi bi-cart3 me-2"></i>
+                馬上加入購物車
+              </div>
+            </button>
+          </div>
+        </div>
+        <!-- 產品包裝及保存說明 product.content -->
+        <div class="row | mb-10">
+          <p class="fz-4 text-muted">
             {{ product.content || '' }}
           </p>
         </div>
-        <div class="row">
-          <div class="col-8 offset-2">
-            <table class="table table-hover table-borderless text-center">
-              <!-- <thead>
+        <!-- 營養素成份表 -->
+        <div v-if="product.is_nutrients" class="row">
+          <div class="col-12">
+            <table class="table table-hover table-bordered">
+              <thead>
                 <tr>
-                  <th colspan="2">
-                    {{ product.title }} 產品細節
+                  <th colspan="4">
+                    食材內含主要營養素成份表（每 100g ）
                   </th>
                 </tr>
-              </thead> -->
+              </thead>
               <tbody>
                 <tr>
-                  <th scope="row">產品內含份量</th>
+                  <th scope="row" style="width:30%">
+                    熱量
+                  </th>
+                  <td style="width:25%">
+                    {{ product.calorie }} kcal
+                  </td>
+                  <td style="width:30%">
+                    <b>粗蛋白</b>
+                  </td>
                   <td>
-                    {{ product.number }}
-                    {{ product.unit }}
+                    {{ product.protein }} g
                   </td>
                 </tr>
                 <tr>
-                  <th scope="row">原價</th>
+                  <th scope="row">
+                    總碳水化合物
+                  </th>
                   <td>
-                    {{ $filters.toCurrency(product.origin_price) }} 元
+                    {{ product.carbohydrate }} g
+                  </td>
+                  <td>
+                    <b>膳食纖維</b>
+                  </td>
+                  <td>
+                    {{ product.DietaryFiber }} g
                   </td>
                 </tr>
                 <tr>
-                  <th scope="row">優惠價</th>
+                  <th scope="row">
+                    粗脂肪
+                  </th>
                   <td>
-                    {{ $filters.toCurrency(product.price) }} 元
+                    {{ product.crudeFat }} g
+                  </td>
+                  <td>
+                    <b>飽和脂肪</b>
+                  </td>
+                  <td>
+                    {{ product.SaturatedFat }} g
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    鈉
+                  </th>
+                  <td>
+                    {{ product.sodium }} mg
+                  </td>
+                  <td>
+                    <b>鈣</b>
+                  </td>
+                  <td>
+                    {{ product.calcium }} mg
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    鉀
+                  </th>
+                  <td>
+                    {{ product.potassium }} mg
+                  </td>
+                  <td>
+                    <b>鋅</b>
+                  </td>
+                  <td>
+                    {{ product.zinc }} mg
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    鎂
+                  </th>
+                  <td>
+                    {{ product.magnesium }} mg
+                  </td>
+                  <td>
+                    <b>鐵</b>
+                  </td>
+                  <td>
+                    {{ product.iron }} mg
                   </td>
                 </tr>
               </tbody>
             </table>
+            <p class="text-start fz-3">
+              ✵ 依據衛生福利部食品藥物管理署所公佈<a href="https://data.gov.tw/dataset/8543" target="_blank">「食品營養成分資料集」</a>資料內容
+            </p>
           </div>
         </div>
       </div>
@@ -61,10 +199,13 @@
 </template>
 
 <style>
-.isFixed{
-  position: fixed;
-  top: 0;
+.heightLimit1 {
+  height: 350px;
 }
+.heightLimit2 {
+  height: 100px;
+}
+
 </style>
 
 <script>
@@ -72,6 +213,7 @@ export default {
   data() {
     return {
       product: [],
+      tempImgUrl: '',
       is_loadingItem: '',
       carts: [],
       isLoading: false,
@@ -86,10 +228,17 @@ export default {
         .then((res) => {
           console.log(res.data);
           this.product = res.data.product;
+          this.getTemp();
         })
         .catch((err) => {
           console.log(err.response);
         });
+    },
+    getTemp() {
+      this.tempImgUrl = this.product.imageUrl;
+    },
+    changeTemp(e) {
+      this.tempImgUrl = e.target.src;
     },
     getCart() {
       this.$http
