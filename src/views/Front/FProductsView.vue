@@ -8,27 +8,33 @@
       <div
         v-for="item in products"
         :key="item.id"
-        class="col-12 col-lg-4 | mb-6"
+        class="col-12 col-lg-3 | mb-6"
       >
         <div class="card rounded-4 overflow-hidden shadow w-100">
           <div class="ratio ratio-4x3">
-            <img :src="item.imageUrl" class="card-img-top img-cover" alt='' />
+            <img :src="item.imageUrl" class="w-100 h-100 img-cover" alt='' />
           </div>
           <div class="card-body">
-            <div class="mb-4">
-              <h4 class="mb-2">{{ item.title }}</h4>
-              <p>原價：{{ item.origin_price }}</p>
-              <p>優惠價：{{ item.price }}</p>
+            <h4 class="mb-2">
+              {{ item.title }}
+            </h4>
+            <div class="d-flex align-items-center justify-content-between | mb-4">
+              <p class="fw-bold">
+                好食價 <sapn class="fz-5 text-danger">{{ item.price }}</sapn> 元
+              </p>
+              <p class="fz-4 text-muted">
+                <s>原價 {{ item.origin_price }} 元</s>
+              </p>
             </div>
             <div class="d-flex justify-content-between">
-                <router-link :to="`/product/${item.id}`">
-                  <button type="button"
-                    class="btn btn-outline-gray d-flex align-items-center"
-                  >
-                    <i class="bi bi-eye-fill me-2"></i>
-                    詳細內容
-                  </button>
-                </router-link>
+              <router-link :to="`/product/${item.id}`">
+                <button type="button"
+                  class="btn btn-outline-gray d-flex align-items-center"
+                >
+                  <i class="bi bi-eye-fill me-1"></i>
+                  看更多
+                </button>
+              </router-link>
               <button
                 @click="addCart(item.id)"
                 :disabled="item.id === is_loadingItem"
@@ -43,7 +49,7 @@
                   <span class="visually-hidden">Loading...</span>
                 </div>
                 <div v-else>
-                  <i class="bi bi-cart3 me-2"></i>
+                  <i class="bi bi-cart3 me-1"></i>
                   加入購物車
                 </div>
               </button>
