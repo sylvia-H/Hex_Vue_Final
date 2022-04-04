@@ -10,6 +10,9 @@ const routes = [
     path: '/',
     name: 'home',
     component: () => import('../views/Front/FHome.vue'),
+    meta: {
+      title: '好食遞 HEALTHY DIET - 您的優質餐飲管家',
+    },
     children: [
       {
         path: '/',
@@ -19,18 +22,27 @@ const routes = [
       {
         path: 'products',
         component: () => import('../views/Front/FProductsView.vue'),
+        meta: {
+          title: '來選好食 | 好食遞 HEALTHY DIET',
+        },
       },
       {
         path: 'product/:id',
         component: () => import('../views/Front/FProductID.vue'),
       },
       {
-        path: 'aboutShipping',
-        component: () => import('../views/Front/FShippingView.vue'),
-      },
-      {
         path: 'dietInfo',
         component: () => import('../views/Front/FDietInfo.vue'),
+        meta: {
+          title: '食前好思 | 好食遞 HEALTHY DIET',
+        },
+      },
+      {
+        path: 'aboutShipping',
+        component: () => import('../views/Front/FShippingView.vue'),
+        meta: {
+          title: '如何好遞 | 好食遞 HEALTHY DIET',
+        },
       },
       {
         path: 'checkout',
@@ -42,6 +54,9 @@ const routes = [
     path: '/admin',
     name: 'dashboard_home',
     component: () => import('../views/Dashboard/BHomeView.vue'),
+    meta: {
+      title: '管理後台 | 好食遞 HEALTHY DIET',
+    },
     children: [
       {
         path: 'products',
@@ -66,6 +81,13 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes,
   linkActiveClass: 'active',
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.title) {
+    document.title = to.meta.title;
+  }
+  next();
 });
 
 export default router;
