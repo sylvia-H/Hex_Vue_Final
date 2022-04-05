@@ -37,7 +37,7 @@
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#navbarList"
-        aria-controls="navbarSupportedContent"
+        aria-controls="navbarList"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
@@ -47,7 +47,8 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarList">
         <ul class="navbar-nav py-6 py-md-5 py-lg-0">
           <li class="nav-item d-flex align-items-center | my-4 me-4 d-lg-none">
-            <router-link to="/products" class="d-flex text-dark">
+            <router-link to="/products"
+             class="d-flex text-dark nav-link">
               <!-- <i class="bi bi-boxes fs-4"></i> -->
               <span class="material-icons me-2">
                 restaurant_menu
@@ -56,19 +57,19 @@
             </router-link>
           </li>
           <li class="nav-item d-flex align-items-center | my-4 me-4 d-lg-none">
-            <router-link to="/products" class="d-flex text-dark">
+            <router-link to="/dietInfo" class="d-flex text-dark nav-link">
+              <!-- <i class="bi bi-boxes fs-4"></i> -->
+              <i class="bi bi-lightbulb-fill fs-5 text-dark | me-2 me-lg-0"></i>
+              <h5><strong>食前好思</strong></h5>
+            </router-link>
+          </li>
+          <li class="nav-item d-flex align-items-center | my-4 me-4 d-lg-none">
+            <router-link to="/aboutShipping" class="d-flex text-dark nav-link">
               <!-- <i class="bi bi-boxes fs-4"></i> -->
               <span class="material-icons me-2">
                 local_shipping
               </span>
               <h5><strong>如何好遞</strong></h5>
-            </router-link>
-          </li>
-          <li class="nav-item d-flex align-items-center | my-4 me-4 d-lg-none">
-            <router-link to="/products" class="d-flex text-dark">
-              <!-- <i class="bi bi-boxes fs-4"></i> -->
-              <i class="bi bi-lightbulb-fill fs-5 text-dark | me-2 me-lg-0"></i>
-              <h5><strong>食前好思</strong></h5>
             </router-link>
           </li>
           <!-- 購物車 -->
