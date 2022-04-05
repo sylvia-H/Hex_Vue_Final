@@ -15,7 +15,7 @@
             <img :src="item.imageUrl" class="w-100 h-100 img-cover" alt='' />
           </div>
           <div class="card-body">
-            <h4 class="mb-2">
+            <h4 class="fz-6 fz-md-5 fz-lg-6 mb-2">
               {{ item.title }}
             </h4>
             <div class="d-flex align-items-center justify-content-between | mb-4">
@@ -32,7 +32,12 @@
                   class="btn btn-outline-gray d-flex align-items-center"
                 >
                   <i class="bi bi-eye-fill me-1"></i>
-                  看更多
+                  <span class="d-block d-sm-none d-lg-block">
+                    看更多
+                  </span>
+                  <span class="d-none d-sm-block d-lg-none">
+                    詳細
+                  </span>
                 </button>
               </router-link>
               <button
@@ -48,9 +53,14 @@
                 >
                   <span class="visually-hidden">Loading...</span>
                 </div>
-                <div v-else>
+                <div class="d-flex" v-else>
                   <i class="bi bi-cart3 me-1"></i>
-                  加入購物車
+                  <span class="d-block d-sm-none d-lg-block">
+                    加入購物車
+                  </span>
+                  <span class="d-none d-sm-block d-lg-none">
+                    購物車
+                  </span>
                 </div>
               </button>
             </div>
