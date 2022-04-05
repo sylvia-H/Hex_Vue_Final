@@ -4,7 +4,7 @@
     bg-cream3 shadow-sm opacity-75 | py-5 py-md-4 py-lg-2">
     <div class="container">
       <!-- 首頁 logo -->
-      <router-link to="/" class="text-center me-10 | hvr-grow">
+      <router-link to="/" class="text-center me-10">
         <!-- <i class="bi bi-house-heart-fill fs-4"></i> -->
         <h1 class="text-green1 fz-9"><strong>好食遞</strong></h1>
         <span class="text-gray fz-3">HEALTHY DIET</span>
