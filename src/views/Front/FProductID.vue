@@ -1,6 +1,6 @@
 <template>
   <!-- 產品列表 -->
-  <section class="container | my-20">
+  <section class="container | py-20">
     <div class="row">
       <div class="col-12 col-md-6">
         <h2 class="text-center">

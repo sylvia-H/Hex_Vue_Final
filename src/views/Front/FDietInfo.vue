@@ -1,7 +1,7 @@
 /* eslint-disable vuejs-accessibility/label-has-for */
 <template>
   <!-- 關於健康減重資訊 -->
-  <section class="container | my-20">
+  <section class="container | py-20">
     <h2 class="text-center">食前好思</h2>
     <hr class="my-8" />
     <div class="row mb-10">

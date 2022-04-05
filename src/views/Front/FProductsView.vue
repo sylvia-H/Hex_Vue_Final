@@ -1,6 +1,6 @@
 <template>
   <!-- 產品列表 -->
-  <section class="container | my-20">
+  <section class="container | py-20">
     <h2 class="text-center">來選好食</h2>
     <hr class="my-6" />
     <div class="row">
