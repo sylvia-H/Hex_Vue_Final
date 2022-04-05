@@ -14,13 +14,15 @@
         <div class="row m-6">
           <div class="col-4">
             <div class="border overflow-hidden rounded-3">
-              <img class="w-100 heightLimit2 img-cover" :src="product.imageUrl" :alt="product.title"
+              <img class="w-100 heightLimit2 img-cover btn p-0"
+               :src="product.imageUrl" :alt="product.title"
                 @click="changeTemp" @keydown="enter">
             </div>
           </div>
           <div class="col-4" v-for="(imgUrl, i) in product.imagesUrl" :key="i">
             <div class="border overflow-hidden rounded-3">
-              <img class="w-100 heightLimit2 img-cover" :src="imgUrl" :alt="product.title"
+              <img class="w-100 heightLimit2 img-cover btn p-0"
+               :src="imgUrl" :alt="product.title"
                 @click="changeTemp" @keydown="enter">
             </div>
           </div>
@@ -285,7 +287,7 @@ export default {
       const loader = this.$loading.show();
       setTimeout(() => {
         loader.hide();
-      }, 1000);
+      }, 500);
       // this.isLoading = true;
       // setTimeout(() => {
       //   this.isLoading = false;
@@ -293,10 +295,10 @@ export default {
     },
   },
   mounted() {
+    this.showLoading();
     const { id } = this.$route.params;
     this.getProduct(id);
     this.getCart();
-    this.showLoading();
   },
 };
 </script>

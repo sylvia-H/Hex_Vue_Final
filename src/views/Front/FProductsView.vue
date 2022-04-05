@@ -8,7 +8,7 @@
       <div
         v-for="item in products"
         :key="item.id"
-        class="col-12 col-lg-3 | mb-6"
+        class="col-12 col-sm-6 col-md-4 col-lg-3 | mb-6"
       >
         <div class="card rounded-4 overflow-hidden shadow w-100">
           <div class="ratio ratio-4x3">
@@ -129,7 +129,7 @@ export default {
       const loader = this.$loading.show();
       setTimeout(() => {
         loader.hide();
-      }, 1000);
+      }, 500);
       // this.isLoading = true;
       // setTimeout(() => {
       //   this.isLoading = false;
@@ -137,9 +137,9 @@ export default {
     },
   },
   mounted() {
+    this.showLoading();
     this.getProducts();
     this.getCart();
-    this.showLoading();
   },
 };
 </script>
