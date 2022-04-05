@@ -3,8 +3,9 @@
 </template>
 
 <style>
-#checkoutLayout{
-    min-height: calc(100% - 10vh);
+#checkoutLayout {
+  position: relative;
+  min-height: 90vh;
 }
 </style>
 

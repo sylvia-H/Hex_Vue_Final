@@ -322,7 +322,7 @@
 .carousel .item {
   position: relative;
   overflow: hidden;
-  height: calc(90vh);
+  height: 90vh;
 }
 .carousel-caption {
   position: absolute;
