@@ -3,11 +3,28 @@
   <section class="container | py-20">
     <h2 class="text-center">來選好食</h2>
     <hr class="my-6" />
+    <!-- 品項分類按鈕 -->
+    <div class="row">
+      <div v-for="(item, i) in Object.keys(categories)" :key="i"
+       class="col-4 col-sm-3 col-lg-2">
+        <button type="button"
+         class="btn btn-outline-blue2 fw-bold text-blue1 w-100 py-2 mb-4"
+         :class="{ active: item===showCategory }"
+         @click="filterCategory(item)">
+          {{ item }}
+          <span class="text-blue1">
+            {{ categories[item] ? `（${categories[item]}）` : '' }}
+          </span>
+        </button>
+      </div>
+    </div>
+    <!-- 商品列表 -->
     <div class="row">
       <!-- 第一張卡片 -->
       <div
         v-for="item in products"
         :key="item.id"
+        :class="{ 'd-none': item.category !== showCategory && showCategory !== '全部商品' }"
         class="col-12 col-sm-6 col-md-4 col-lg-3 | mb-6"
       >
         <div class="card rounded-4 overflow-hidden shadow w-100">
@@ -76,6 +93,10 @@ export default {
   data() {
     return {
       products: [],
+      categories: {
+        全部商品: '',
+      },
+      showCategory: '全部商品',
       is_loadingItem: '',
       carts: [],
       isLoading: false,
@@ -89,6 +110,13 @@ export default {
         )
         .then((res) => {
           this.products = res.data.products;
+          this.products.forEach((item) => {
+            if (!this.categories[item.category]) {
+              this.categories[item.category] = 1;
+            } else {
+              this.categories[item.category] += 1;
+            }
+          });
         })
         .catch((err) => {
           console.log(err.response);
@@ -134,6 +162,9 @@ export default {
         .catch((err) => {
           console.log(err.response);
         });
+    },
+    filterCategory(category) {
+      this.showCategory = category;
     },
     showLoading() {
       const loader = this.$loading.show();
