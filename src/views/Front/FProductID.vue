@@ -2,6 +2,15 @@
   <!-- 產品列表 -->
   <section class="container | py-20">
     <div class="row">
+      <div class="col-3">
+        <router-link to="../products">
+          <button class="bttn-unite bttn-md bttn-success bttn-no-outline py-2 fz-6">
+            ⇦ 返回
+          </button>
+        </router-link>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-12 col-md-6">
         <h2 class="text-center">
           {{ product.title }}
