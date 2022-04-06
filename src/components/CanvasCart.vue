@@ -6,12 +6,21 @@
     aria-labelledby="cartLabel"
   >
     <!-- Cart 購物車 offcanvas-header -->
-    <div class="offcanvas-header pt-8 ps-8">
-      <h2 id="cartLabel" class="text-white">購物車列表</h2>
+    <div class="offcanvas-header ps-8">
+      <h2 id="cartLabel" class="text-white py-2">購物車列表</h2>
     </div>
 
     <!-- Cart 購物車 offcanvas-body -->
-    <div class="offcanvas-body fashion-scrollbar ps-8 h-100">
+    <div class="offcanvas-body fashion-scrollbar ps-8 pt-1 h-100">
+      <!-- 營養素資訊 -->
+      <h6 v-if="is_cart" class="text-white mb-4">
+        您所選購的商品<span class="text-green2">總熱量</span>：{{calorie}}kcal
+      </h6>
+      <h6 v-if="is_cart" class="text-white mb-4">
+        共含<span class="text-warning">碳水化合物</span>總量 {{carbohydrate}} g、
+        <span class="text-warning">粗脂肪</span>總量 {{protein}} g、
+        <span class="text-warning">粗蛋白質</span>總量 {{crudeFat}} g
+      </h6>
       <!-- Card 購物車卡片01 -->
       <div
         v-for="item in carts.carts"
@@ -149,9 +158,26 @@ export default {
     return {
       canvas: '',
       carts: [],
+      is_cart: 0,
+      calorie: 0,
+      carbohydrate: 0,
+      protein: 0,
+      crudeFat: 0,
     };
   },
   methods: {
+    calcNutrients() {
+      this.calorie = 0;
+      this.carbohydrate = 0;
+      this.protein = 0;
+      this.crudeFat = 0;
+      this.carts.carts.forEach((item) => {
+        this.calorie += Math.floor(item.product.calorie * (item.product.number / 100));
+        this.carbohydrate += Math.floor(item.product.carbohydrate * (item.product.number / 100));
+        this.protein += Math.floor(item.product.protein * (item.product.number / 100));
+        this.crudeFat += Math.floor(item.product.crudeFat * (item.product.number / 100));
+      });
+    },
     getCart() {
       this.$http
         .get(
@@ -159,6 +185,8 @@ export default {
         )
         .then((res) => {
           this.carts = res.data.data;
+          this.is_cart = this.carts.carts.length;
+          this.calcNutrients();
         })
         .catch((err) => {
           console.log(err.response);
