@@ -14,7 +14,7 @@
     <div class="offcanvas-body fashion-scrollbar ps-8 pt-1 h-100">
       <!-- 營養素資訊 -->
       <h6 v-if="is_cart" class="text-white mb-4">
-        您所選購的商品<span class="text-green2">總熱量</span>：{{calorie}}kcal
+        您所選購的商品<span class="text-green2">總熱量</span>：{{calorie}} kcal(仟卡)
       </h6>
       <h6 v-if="is_cart" class="text-white mb-4">
         共含<span class="text-warning">碳水化合物</span>總量 {{carbohydrate}} g、
