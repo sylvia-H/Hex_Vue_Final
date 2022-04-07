@@ -118,9 +118,11 @@ export default {
       localStorage.setItem('myFavorite', JSON.stringify(this.collection));
     },
     getCollection() {
-      const jsonData = JSON.parse(localStorage.getItem('myFavorite'));
-      this.collection = jsonData;
-      console.log(JSON.parse(localStorage.getItem('myFavorite')));
+      if (localStorage.getItem('myFavorite')) {
+        const jsonData = JSON.parse(localStorage.getItem('myFavorite'));
+        this.collection = jsonData;
+        console.log(JSON.parse(localStorage.getItem('myFavorite')));
+      }
     },
     addCart(id, qty = 1) {
       const data = {
