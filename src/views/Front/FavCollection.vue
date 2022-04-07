@@ -4,7 +4,8 @@
     <hr class="my-6" />
     <div class="row text-center">
       <div>
-        <table class="table table-hover table-responsive">
+        <!-- 我的收藏列表 -->
+        <table v-if="Object.keys(collection).length" class="table table-hover table-responsive">
           <thead>
             <tr>
               <th scope="col">品名</th>
@@ -93,6 +94,12 @@
             </tr>
           </tbody>
         </table>
+        <div v-else class="py-6">
+          <p class="text-orange1 fz-6 mb-4">
+            再多逛逛，把喜愛的商品收藏起來吧！
+          </p>
+          <i class="bi bi-search-heart text-orange1 fz-25"></i>
+        </div>
       </div>
     </div>
   </section>
