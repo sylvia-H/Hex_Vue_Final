@@ -74,12 +74,21 @@
             </div>
             <hr/>
           </div>
-          <div class="col-10 offset-1">
+          <div class="col-10 offset-1 d-flex justify-content-between">
+            <button
+              type="button"
+              @click="addCollection(product)"
+              class="btn btn-outline-danger d-flex align-items-center"
+              :class="{ active: collection[product.id] }"
+            >
+              <i class="bi bi-heart me-2"></i>
+              加入我的最愛
+            </button>
             <button
               @click="addCart(product.id)"
               :disabled="product.id === is_loadingItem"
               type="button"
-              class="btn btn-danger d-flex align-items-center ms-auto"
+              class="btn btn-dark d-flex align-items-center"
             >
               <div
                 v-if="product.id === is_loadingItem"
@@ -90,7 +99,7 @@
               </div>
               <div v-else>
                 <i class="bi bi-cart3 me-2"></i>
-                馬上加入購物車
+                馬上加進購物車
               </div>
             </button>
           </div>
@@ -228,6 +237,7 @@ export default {
       is_loadingItem: '',
       carts: [],
       isLoading: false,
+      collection: {},
     };
   },
   methods: {
@@ -240,6 +250,7 @@ export default {
           console.log(res.data);
           this.product = res.data.product;
           this.getTemp();
+          console.log(this.product);
         })
         .catch((err) => {
           console.log(err.response);
@@ -292,6 +303,22 @@ export default {
           console.log(err.response);
         });
     },
+    addCollection(item) {
+      const fvID = item.id;
+      if (this.collection[fvID]) {
+        delete this.collection[fvID];
+      } else {
+        this.collection[fvID] = item;
+      }
+      localStorage.setItem('myFavorite', JSON.stringify(this.collection));
+    },
+    getCollection() {
+      if (localStorage.getItem('myFavorite')) {
+        const jsonData = JSON.parse(localStorage.getItem('myFavorite'));
+        this.collection = jsonData;
+        console.log(JSON.parse(localStorage.getItem('myFavorite')));
+      }
+    },
     showLoading() {
       const loader = this.$loading.show();
       setTimeout(() => {
@@ -308,6 +335,7 @@ export default {
     const { id } = this.$route.params;
     this.getProduct(id);
     this.getCart();
+    this.getCollection();
   },
 };
 </script>
