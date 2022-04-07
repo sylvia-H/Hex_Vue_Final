@@ -1,5 +1,4 @@
 <template>
-  <!-- 送貨須知 -->
   <section class="container | py-20">
     <h2 class="text-center">我的收藏</h2>
     <hr class="my-6" />
