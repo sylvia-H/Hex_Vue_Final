@@ -28,9 +28,12 @@
         class="col-12 col-sm-6 col-md-4 col-lg-3 | mb-6"
       >
         <div class="card rounded-4 overflow-hidden shadow w-100">
-          <div class="ratio ratio-4x3">
-            <img :src="item.imageUrl" class="w-100 h-100 img-cover" alt='' />
-          </div>
+          <router-link :to="`/product/${item.id}`">
+            <div class="ratio ratio-4x3 hoverMask">
+              <i class="bi bi-zoom-in"></i>
+              <img :src="item.imageUrl" class="w-100 h-100 img-cover" :alt='item.title' />
+            </div>
+          </router-link>
           <div class="card-body">
             <h4 class="fz-6 fz-md-5 fz-lg-6 mb-2">
               {{ item.title }}
@@ -44,19 +47,16 @@
               </p>
             </div>
             <div class="d-flex justify-content-between">
-              <router-link :to="`/product/${item.id}`">
-                <button type="button"
-                  class="btn btn-outline-gray d-flex align-items-center"
-                >
-                  <i class="bi bi-eye-fill me-1"></i>
-                  <span class="d-block d-sm-none d-lg-block">
-                    看更多
-                  </span>
-                  <span class="d-none d-sm-block d-lg-none">
-                    詳細
-                  </span>
-                </button>
-              </router-link>
+              <button type="button"
+                @click="addCollection(item)"
+                class="btn btn-outline-danger d-flex align-items-center"
+                :class="{ active: collection[item.id] }"
+              >
+                <i class="bi bi-heart"></i>
+                <span class="d-block d-md-none d-lg-block | ms-2">
+                  收藏
+                </span>
+              </button>
               <button
                 @click="addCart(item.id)"
                 :disabled="item.id === is_loadingItem"
@@ -72,11 +72,8 @@
                 </div>
                 <div class="d-flex" v-else>
                   <i class="bi bi-cart3 me-1"></i>
-                  <span class="d-block d-sm-none d-lg-block">
+                  <span>
                     加入購物車
-                  </span>
-                  <span class="d-none d-sm-block d-lg-none">
-                    購物車
                   </span>
                 </div>
               </button>
@@ -100,6 +97,7 @@ export default {
       is_loadingItem: '',
       carts: [],
       isLoading: false,
+      collection: {},
     };
   },
   methods: {
@@ -166,6 +164,20 @@ export default {
     filterCategory(category) {
       this.showCategory = category;
     },
+    addCollection(item) {
+      const fvID = item.id;
+      if (this.collection[fvID]) {
+        delete this.collection[fvID];
+      } else {
+        this.collection[fvID] = item;
+      }
+      localStorage.setItem('myFavorite', JSON.stringify(this.collection));
+    },
+    getCollection() {
+      const jsonData = JSON.parse(localStorage.getItem('myFavorite'));
+      this.collection = jsonData;
+      console.log(JSON.parse(localStorage.getItem('myFavorite')));
+    },
     showLoading() {
       const loader = this.$loading.show();
       setTimeout(() => {
@@ -181,6 +193,7 @@ export default {
     this.showLoading();
     this.getProducts();
     this.getCart();
+    this.getCollection();
   },
 };
 </script>

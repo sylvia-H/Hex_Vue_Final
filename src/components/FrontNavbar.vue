@@ -72,17 +72,26 @@
               <h5><strong>如何好遞</strong></h5>
             </router-link>
           </li>
+          <!-- 收藏我的最愛 -->
+          <li class="nav-item d-flex align-items-center | my-4 me-5">
+            <router-link to="/myFavorite" class="d-flex text-dark nav-link">
+              <i class="bi bi-heart fz-5 fz-md-6 text-dark | me-2 me-lg-0"></i>
+              <h5 class="d-lg-none text-dark">
+                <strong>我的收藏</strong>
+              </h5>
+            </router-link>
+          </li>
           <!-- 購物車 -->
-          <li class="nav-item d-flex align-items-center | my-4 me-4"
-            @click="openCartCanvas" @keydown="canvas">
+          <li class="nav-item d-flex align-items-center | my-4 me-5"
+            @click="openCartCanvas" @keydown="enter">
             <i class="bi bi-cart3 fz-5 fz-md-6 text-dark | me-2 me-lg-0"></i>
             <h5 class="d-lg-none text-dark">
               <strong>購物車</strong>
             </h5>
           </li>
           <!-- 後台管理人員登入 -->
-          <li class="nav-item d-flex align-items-center | my-4 me-4"
-            @click="openLoginModel" @keydown="login">
+          <li class="nav-item d-flex align-items-center | my-4 me-5"
+            @click="openLoginModel" @keydown="enter">
             <!-- <router-link to="/login"> -->
               <i class="bi bi-person-circle fz-5 fz-md-6 text-dark | me-2 me-lg-0"></i>
               <h5 class="d-lg-none text-dark">

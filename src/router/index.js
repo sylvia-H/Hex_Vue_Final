@@ -46,6 +46,13 @@ const routes = [
         },
       },
       {
+        path: 'myFavorite',
+        component: () => import('../views/Front/FavCollection.vue'),
+        meta: {
+          title: '我的收藏 | 好食遞 HEALTHY DIET',
+        },
+      },
+      {
         path: 'checkout',
         component: () => import('../views/Front/FCheckout.vue'),
         children: [

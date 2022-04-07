@@ -1,0 +1,32 @@
+.hoverMask{
+    position: relative;
+    &::after{
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        opacity: 0;
+        z-index: 99;
+    }
+    &:hover::after{
+        cursor: pointer;
+        opacity: 1;
+    }
+    i {
+        display: none;
+    }
+    &:hover i {
+        display: block;
+        color: #fff;
+        position: absolute;
+        z-index: 999;
+        top: calc(50% - 1.3rem);
+        left: calc(50% - 1.3rem);
+        font-size: 2.6rem;
+    }
+}
