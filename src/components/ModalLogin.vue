@@ -7,14 +7,21 @@
     aria-hidden="true"
   >
     <div class="modal-dialog">
-      <div class="modal-content border-0">
-        <div class="modal-header bg-dark text-white">
+      <div class="modal-content">
+        <!-- <div class="modal-header bg-dark text-white">
           <h5 class="modal-title" id="loginModalLabel">管理後台入口</h5>
-        </div>
-        <div class="modal-body">
-          <p class="text-center | my-6">後台管理人員請輸入帳號密碼進行驗證</p>
+        </div> -->
+        <div class="modal-body text-center | py-8">
+          <h2 class="fw-bold text-green1 | mb-3">
+            好食遞
+          </h2>
+          <img src="https://storage.googleapis.com/vue-course-api.appspot.com/sylviah/1649313622566.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=eaP3G7k7oveDkzEmK8P660klrEd0CkisflI1l63DLRmnAcfcAVGaWlgCN2MiN5%2Bfbrq77jpO5tLTrdk71OV6ZjKM2CqPIW6G2eeNT2OuG8V%2FW9CmrsfKdI%2BNOdKfsQPxt28oEJy2g5KQMIZA%2B81FcQCcUdUKbkUdudoPu8Bcr084Tln0OZgWU9W7uk8ZMQT8NTmmD%2BUq6HdrEpPdN8j0PttcHonogdikfeRZJJmVCXooeDC76AOOMIx2xYKxk%2BsAnzur2WIMZXIKCHf86eWUtUa3Oy2o3UOxkZYJGbayCki%2BAVZfGda5leYS8vyZmeroPrGO%2FUqnElfxpDmTaeh1hQ%3D%3D"
+           alt="Healthy-Diet LOGO" class="mb-3">
+          <h4 class="text-green1 | mb-4">
+            HEALTHY DIET
+          </h4>
           <form id="form">
-            <div class="form-floating mb-3">
+            <div class="form-floating mb-4">
               <input
                 v-model="userInfo.username"
                 type="email"
@@ -24,9 +31,9 @@
                 required
               />
               <!-- eslint-disable-next-line -->
-              <label for="username">Email address</label>
+              <label for="username" class="text-brown1 fw-bold">Email address</label>
             </div>
-            <div class="form-floating mb-3">
+            <div class="form-floating mb-4">
               <input
                 v-model="userInfo.password"
                 type="password"
@@ -36,14 +43,14 @@
                 required
               />
               <!-- eslint-disable-next-line -->
-              <label for="password">Password</label>
+              <label for="password" class="text-brown1 fw-bold">Password</label>
             </div>
             <button
               @click="loginIn"
-              class="btn btn-lg btn-primary w-100 mt-3"
+              class="btn btn-lg btn-green2 text-white fw-bold w-100 mt-4"
               type="button"
             >
-              登入
+              登 入
             </button>
           </form>
         </div>
