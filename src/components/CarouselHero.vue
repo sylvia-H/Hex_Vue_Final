@@ -65,7 +65,7 @@
         ></button>
       </div>
       <div class="carousel-inner">
-        <div class="carousel-item w-100 h-100 active" data-bs-interval="2800">
+        <div class="carousel-item w-100 h-100 active" data-bs-interval="3800">
           <img
             src="../assets/img/hero01.webp"
             class="w-100 h-100 img-cover"
@@ -80,13 +80,13 @@
               translate-middle
             "
           >
-            <h2 class="text-brown1 fw-bold fz-6 fz-md-10 | mb-12">
+            <h2 class="text-brown1 fw-bold fz-6 fz-md-8 fz-lg-10 | mb-12">
               打造屬於你的餐飲生活
             </h2>
             <h5 class="text-gray fz-5 fz-md-6">簡單 精緻 美好</h5>
           </div>
         </div>
-        <div class="carousel-item w-100 h-100" data-bs-interval="2800">
+        <div class="carousel-item w-100 h-100" data-bs-interval="3800">
           <img
             src="../assets/img/hero02.webp"
             class="w-100 h-100 img-cover"
@@ -113,7 +113,7 @@
             <h5 class="text-light fz-5 | mb-5">協助您安排均衡營養的餐飲生活</h5>
           </div>
         </div>
-        <div class="carousel-item w-100 h-100" data-bs-interval="2800">
+        <div class="carousel-item w-100 h-100" data-bs-interval="3800">
           <img
             src="../assets/img/hero03.webp"
             class="w-100 h-100 img-cover"
@@ -128,14 +128,17 @@
               translate-middle
             "
           >
-            <h2 class="text-gray1 fw-bold fz-6 fz-md-8 fz-lg-10 | mb-3">
+            <h2 class="d-none d-md-block | text-gray1 fw-bold fz-md-7 fz-lg-10 | mb-3">
               嚴選新鮮美味食材
             </h2>
+            <h2 class="d-md-none | text-gray1 fw-bold fz-6 | mb-3">
+              嚴選新鮮食材
+            </h2>
             <h2 class="text-gray1 fw-bold fz-6 fz-md-8 fz-lg-10 | mb-12">快速到府</h2>
-            <h5 class="text-gray fz-5 fz-md-6">新鮮 健康 乾淨 養生</h5>
+            <h5 class="text-gray fz-4 fz-md-6">新鮮 健康 乾淨 養生</h5>
           </div>
         </div>
-        <div class="carousel-item w-100 h-100" data-bs-interval="2800">
+        <div class="carousel-item w-100 h-100" data-bs-interval="3800">
           <img
             src="../assets/img/hero04.webp"
             class="w-100 h-100 img-cover"
@@ -150,13 +153,17 @@
               translate-middle
             "
           >
-            <h2 class="text-gray1 fw-bold fz-7 fz-md-10 | mb-8">
-              食材就是美味的關鍵
+            <h2 class="d-none d-lg-block | text-gray1 fw-bold fz-7 fz-md-8 fz-lg-10 | mb-8">
+              食材 就是美味的關鍵
             </h2>
-            <h5 class="text-gray fz-5 fz-md-6">每一天 每一餐 每一口 都是享受</h5>
+            <h5 class="d-none d-lg-block | text-gray fz-lg-6">每一天 每一餐 每一口 都是享受</h5>
+            <h2 class="d-lg-none | text-gray1 fw-bold fz-6 fz-md-8 | mb-8">
+              食材<br>就是美味的關鍵
+            </h2>
+            <h5 class="d-lg-none | text-gray fz-4 fz-sm-5 fz-md-6">每一餐 每一口<br>都是享受</h5>
           </div>
         </div>
-        <div class="carousel-item w-100 h-100" data-bs-interval="2800">
+        <div class="carousel-item w-100 h-100" data-bs-interval="3800">
           <img
             src="../assets/img/hero05.webp"
             class="w-100 h-100 img-cover"
@@ -177,7 +184,7 @@
             <h5 class="text-brown1 fz-5 fz-md-6">自然鮮甜 味蕾跳舞</h5>
           </div>
         </div>
-        <div class="carousel-item w-100 h-100" data-bs-interval="2800">
+        <div class="carousel-item w-100 h-100" data-bs-interval="3800">
           <img
             src="../assets/img/hero06.webp"
             class="w-100 h-100 img-cover"
@@ -217,7 +224,7 @@
             </h5>
           </div>
         </div>
-        <div class="carousel-item w-100 h-100" data-bs-interval="2800">
+        <div class="carousel-item w-100 h-100" data-bs-interval="3800">
           <img
             src="../assets/img/hero07.webp"
             class="w-100 h-100 img-cover"
@@ -239,7 +246,7 @@
             <h5 class="text-light fz-5">一日三餐是我們與自己的小約會</h5>
           </div>
         </div>
-        <div class="carousel-item w-100 h-100" data-bs-interval="2800">
+        <div class="carousel-item w-100 h-100" data-bs-interval="3800">
           <img
             src="../assets/img/hero08.webp"
             class="w-100 h-100 img-cover"
@@ -268,7 +275,7 @@
             </h5>
           </div>
         </div>
-        <div class="carousel-item w-100 h-100" data-bs-interval="2800">
+        <div class="carousel-item w-100 h-100" data-bs-interval="3800">
           <img
             src="../assets/img/hero09.webp"
             class="w-100 h-100 img-cover"

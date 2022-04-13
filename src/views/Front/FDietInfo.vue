@@ -99,7 +99,7 @@
               </div>
               <!-- 體重 -->
               <div class="w-50">
-                <label for="height" class="form-label d-flex align-items-center w-100">
+                <label for="weight" class="form-label d-flex align-items-center w-100">
                   <p class="me-5">體重</p>
                   <input type="number" min=0 max=300 class="w-50 form-control" id="weight" require>
                   <p>公斤</p>
@@ -236,7 +236,7 @@
                       三大類營養素每日應攝取份量
                     </th>
                     <th colspan="2" style="width:65%">
-                      <label for="bmr2" class="form-label d-flex align-items-center w-100">
+                      <label for="tdee2" class="form-label d-flex align-items-center w-100">
                         <p class="me-5">您的 TDEE</p>
                         <input v-model="tdee" name="tdee2" type="number" min=0 max=5000
                           class="w-50 form-control" id="tdee2" require>

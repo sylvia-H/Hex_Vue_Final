@@ -4,7 +4,7 @@
     <h2 class="text-center">來選好食</h2>
     <hr class="my-6" />
     <!-- 品項分類按鈕 -->
-    <div class="row my-7">
+    <div class="row g-2 g-sm-1 g-md-3 my-7">
       <div v-for="(item, i) in Object.keys(categories)" :key="i"
        class="col-4 col-sm-3 col-lg-2">
         <button type="button"
@@ -12,7 +12,7 @@
          :class="{ active: item===showCategory }"
          @click="filterCategory(item)">
           {{ item }}
-          <span class="fz-3 fz-lg-4">
+          <span class="fz-3 fz-md-4">
             {{ categories[item] ? `（${categories[item]}）` : '' }}
           </span>
         </button>

@@ -1,10 +1,10 @@
 <template>
   <!-- 前台導覽列 -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top
-    bg-cream3 shadow-sm opacity-75 | py-5 py-md-4 py-lg-2">
+    bg-cream3 shadow-sm opacity-75 | py-2 py-md-4 py-lg-2">
     <div class="container">
       <router-link to="/" class="text-center me-10">
-        <h1 class="text-green1 fz-9"><strong>好食遞</strong></h1>
+        <h1 class="text-green1 fz-7 fz-md-9"><strong>好食遞</strong></h1>
         <span class="text-gray fz-3">HEALTHY DIET</span>
       </router-link>
       <router-link to="/products"
@@ -120,7 +120,9 @@ export default {
       this.$refs.cartCanvas.openCanvas();
     },
     autoCollapse() {
-      this.$refs.btnToggler.click();
+      if (this.$refs.btnToggler.getAttribute('aria-expanded') !== false) {
+        this.$refs.btnToggler.click();
+      }
     },
   },
 };

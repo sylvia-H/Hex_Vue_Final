@@ -21,6 +21,13 @@
         <span class="text-warning">粗脂肪</span>總量 {{protein}} g、
         <span class="text-warning">粗蛋白質</span>總量 {{crudeFat}} g
       </h6>
+      <!-- 當購物車沒有品項時 -->
+      <div v-else class="d-flex flex-column align-items-center justify-content-center h-100">
+        <i class="bi bi-cart4 text-warning fz-24"></i>
+        <p class="text-warning fz-5">
+          把喜愛的美食加進來吧！
+        </p>
+      </div>
       <!-- Card 購物車卡片01 -->
       <div
         v-for="item in carts.carts"
@@ -135,7 +142,8 @@
         >
           清空購物車
         </button>
-        <router-link :to="{ name: 'checkoutCart'}">
+        <router-link :to="{ name: 'checkoutCart'}"
+         :class="{ 'pe-none': !is_cart }">
           <button
             type="button"
             class="btn btn-danger px-4 py-2"
