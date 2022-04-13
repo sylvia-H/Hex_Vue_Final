@@ -143,7 +143,6 @@ export default {
       this.orders.forEach((el) => {
         const item = el;
         if (item.id === id) {
-          // item.is_enabled ? (item.is_enabled = 0) : (item.is_enabled = 1);
           if (item.is_paid) {
             item.is_paid = false;
           } else {
@@ -166,7 +165,6 @@ export default {
       console.log(url);
       this.$http.put(url, dataObj)
         .then(() => {
-          // 成功更新訂單，sweetalert 跳出提示訊息視窗
           this.$swal.fire({
             icon: 'success',
             title: '成功！',
@@ -181,7 +179,6 @@ export default {
           errMSG.forEach((el) => {
             msg += `${el}。\n`;
           });
-          // 更新失敗，sweetalert 跳出提示訊息視窗
           this.$swal.fire({
             icon: 'error',
             title: '更新失敗！請重新操作。',
@@ -221,7 +218,6 @@ export default {
             this.$http
               .delete(url)
               .then(() => {
-                // 成功刪除產品，sweetalert 跳出提示訊息視窗
                 this.$swal.fire({
                   icon: 'success',
                   title: '成功！',
@@ -230,7 +226,6 @@ export default {
                 this.getProducts(this.pagination.current_page);
               })
               .catch(() => {
-                // 刪除失敗，sweetalert 跳出提示訊息視窗
                 this.$swal.fire({
                   icon: 'error',
                   title: '刪除失敗！',
@@ -250,9 +245,7 @@ export default {
       }
     },
     openOrderModal(item) {
-      // 資料接收與整理
       this.organizeData(item);
-      // 開啟 modal 元件
       this.$refs.editOrderModal.openModal(item);
     },
   },

@@ -201,7 +201,6 @@ export default {
     },
   },
   mounted() {
-    // 建立 modal 實體
     this.modal = new Modal(document.getElementById('orderModal'));
   },
 };

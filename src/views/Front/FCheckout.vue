@@ -1,5 +1,5 @@
 <template>
-    <router-view id="checkoutLayout" />
+    <RouterView id="checkoutLayout" />
 </template>
 
 <style>
@@ -8,7 +8,3 @@
   min-height: 90vh;
 }
 </style>
-
-<script>
-export default {};
-</script>

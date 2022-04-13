@@ -111,6 +111,9 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes,
   linkActiveClass: 'active',
+  scrollBehavior() {
+    return { top: 0 };
+  },
 });
 
 router.beforeEach((to, from, next) => {

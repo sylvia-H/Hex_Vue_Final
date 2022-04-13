@@ -15,10 +15,6 @@ export function transferTime(date) {
     ${year}/${month}/${day} 
     ${Number(hours) < 12 ? `上午 ${hours}` : `下午 ${hours}`}:
     ${Number(minutes) < 10 ? `0${minutes}` : minutes}`;
-  // const parts = new Date(date * 1000).toISOString().split('T');
-  // const day = parts[0];
-  // const time = parts[1].split('.')[0];
-  // str = `${day} ${time}`;
   return str;
 }
 
@@ -33,6 +29,4 @@ export function transferToDate(date) {
   const minutes = data.getMinutes();
   const str = `${year}-${month}-${day}T${Number(hours) < 10 ? `0${hours}` : hours}:${Number(minutes) < 10 ? `0${minutes}` : minutes}`;
   return str;
-  // return new Date(date * 1000).toISOString();
-  // return new Date(date * 1000).toLocaleDateString();
 }

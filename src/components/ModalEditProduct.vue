@@ -492,9 +492,7 @@ export default {
       this.modal.hide();
     },
     uploadProductImg() {
-      // 圖片上傳中
       this.is_uploadImg = 1;
-      // 清空預設
       this.uploadImgFile = {
         imageUrl: '',
         message: '',
@@ -503,7 +501,7 @@ export default {
       const btnUploadImg = document.querySelector('#btnUploadImg');
 
       const file = btnUploadImg.files[0];
-      console.dir(file); // 先對 input 內容進行觀察
+      console.dir(file); // 對 input 內容進行觀察
 
       const formData = new FormData();
       // 建立表單格式的物件
@@ -513,17 +511,12 @@ export default {
       this.$http
         .post(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/upload`, formData)
         .then((res) => {
-          console.log(res.data.imageUrl);
           this.uploadImgFile.imageUrl = res.data.imageUrl;
-          // 圖片上傳完成
           this.is_uploadImg = 0;
-          // 清空上傳檔案
           btnUploadImg.value = '';
         })
         .catch((err) => {
-          console.log(err.response.message);
           this.uploadImgFile.message = err.response.message;
-          // 圖片上傳失敗，重設狀態
           this.is_uploadImg = 0;
         });
     },
@@ -531,17 +524,17 @@ export default {
       const clipboard = new Clipboard('#btn_copyLink');
 
       clipboard.on('success', (e) => {
-        console.info('Action:', e.action);
-        console.info('Text:', e.text);
-        console.info('Trigger:', e.trigger);
+        // console.info('Action:', e.action);
+        // console.info('Text:', e.text);
+        // console.info('Trigger:', e.trigger);
         // 取消選取
         e.clearSelection();
       });
 
-      clipboard.on('error', (e) => {
-        console.error('Action:', e.action);
-        console.error('Trigger:', e.trigger);
-      });
+      // clipboard.on('error', (e) => {
+      //   console.error('Action:', e.action);
+      //   console.error('Trigger:', e.trigger);
+      // });
     },
     organizeData(isAddItem, item) {
       this.is_addNew = isAddItem;
@@ -557,7 +550,6 @@ export default {
     },
   },
   mounted() {
-    // 建立 modal 實體
     this.modal = new Modal(document.getElementById('editModal'));
   },
 };

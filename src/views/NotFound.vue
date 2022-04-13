@@ -10,7 +10,3 @@
     <p>您可以回首頁或上一頁，或與我們聯繫。謝謝！</p>
   </div>
 </template>
-
-<script>
-export default {};
-</script>

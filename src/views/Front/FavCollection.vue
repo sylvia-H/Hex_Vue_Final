@@ -31,8 +31,7 @@
                 {{ collection[item].title }}
               </th>
               <td class="align-middle">
-                <img
-                  style="max-width: 100px"
+                <img class="max-w-100px"
                   :src="collection[item].imageUrl"
                   :alt="collection[item].title"
                 />
@@ -119,8 +118,7 @@
                 {{ collection[item].title }}
               </th>
               <td class="align-middle">
-                <img
-                  style="max-width: 100px"
+                <img class="max-w-100px"
                   :src="collection[item].imageUrl"
                   :alt="collection[item].title"
                 />
@@ -193,8 +191,7 @@
                 {{ collection[item].title }}
               </th>
               <td class="align-middle">
-                <img
-                  style="max-width: 100px"
+                <img class="max-w-100px"
                   :src="collection[item].imageUrl"
                   :alt="collection[item].title"
                 />
@@ -293,7 +290,6 @@ export default {
           console.log(res.data);
           const name = res.data.data.product.title;
           const msg = res.data.message;
-          // SweetAlert：產品成功加入購物車
           this.$swal.fire({
             icon: 'success',
             title: '成功！',
@@ -322,3 +318,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.max-w-100px {
+  max-width: 100px;
+}
+</style>

@@ -3,29 +3,24 @@
   <nav class="navbar navbar-expand-lg navbar-light fixed-top
     bg-cream3 shadow-sm opacity-75 | py-5 py-md-4 py-lg-2">
     <div class="container">
-      <!-- 首頁 logo -->
       <router-link to="/" class="text-center me-10">
-        <!-- <i class="bi bi-house-heart-fill fs-4"></i> -->
         <h1 class="text-green1 fz-9"><strong>好食遞</strong></h1>
         <span class="text-gray fz-3">HEALTHY DIET</span>
       </router-link>
       <router-link to="/products"
-       class="d-none d-lg-flex text-dark me-8 | hvr-float-shadow">
-        <!-- <i class="bi bi-boxes fs-4"></i> -->
+      class="d-none d-lg-flex text-dark me-8 | hvr-float-shadow">
         <span class="material-icons me-2">
           restaurant_menu
         </span>
         <h5><strong>來選好食</strong></h5>
       </router-link>
       <router-link to="/dietInfo"
-       class="d-none d-lg-flex text-dark me-8 | hvr-float-shadow">
-        <!-- <i class="bi bi-boxes fs-4"></i> -->
+      class="d-none d-lg-flex text-dark me-8 | hvr-float-shadow">
         <i class="bi bi-lightbulb-fill me-2"></i>
         <h5><strong>食前好思</strong></h5>
       </router-link>
       <router-link to="/aboutShipping"
-       class="d-none d-lg-flex text-dark me-8 | hvr-float-shadow">
-        <!-- <i class="bi bi-boxes fs-4"></i> -->
+      class="d-none d-lg-flex text-dark me-8 | hvr-float-shadow">
         <span class="material-icons me-2">
           local_shipping
         </span>
@@ -34,6 +29,7 @@
       <!-- 漢堡 -->
       <button
         class="navbar-toggler"
+        ref="btnToggler"
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#navbarList"
@@ -46,26 +42,26 @@
       <!-- 選單內容 -->
       <div class="collapse navbar-collapse justify-content-end" id="navbarList">
         <ul class="navbar-nav py-6 py-md-5 py-lg-0">
-          <li class="nav-item d-flex align-items-center | my-4 me-4 d-lg-none">
+          <li @click="autoCollapse()" @keydown="enter"
+           class="nav-item d-flex align-items-center | my-4 me-4 d-lg-none">
             <router-link to="/products"
              class="d-flex text-dark nav-link">
-              <!-- <i class="bi bi-boxes fs-4"></i> -->
               <span class="material-icons me-2">
                 restaurant_menu
               </span>
               <h5><strong>來選好食</strong></h5>
             </router-link>
           </li>
-          <li class="nav-item d-flex align-items-center | my-4 me-4 d-lg-none">
+          <li @click="autoCollapse()" @keydown="enter"
+           class="nav-item d-flex align-items-center | my-4 me-4 d-lg-none">
             <router-link to="/dietInfo" class="d-flex text-dark nav-link">
-              <!-- <i class="bi bi-boxes fs-4"></i> -->
               <i class="bi bi-lightbulb-fill fs-5 text-dark | me-2 me-lg-0"></i>
               <h5><strong>食前好思</strong></h5>
             </router-link>
           </li>
-          <li class="nav-item d-flex align-items-center | my-4 me-4 d-lg-none">
+          <li @click="autoCollapse()" @keydown="enter"
+           class="nav-item d-flex align-items-center | my-4 me-4 d-lg-none">
             <router-link to="/aboutShipping" class="d-flex text-dark nav-link">
-              <!-- <i class="bi bi-boxes fs-4"></i> -->
               <span class="material-icons me-2">
                 local_shipping
               </span>
@@ -73,7 +69,8 @@
             </router-link>
           </li>
           <!-- 收藏我的最愛 -->
-          <li class="nav-item d-flex align-items-center | my-4 me-5">
+          <li @click="autoCollapse()" @keydown="enter"
+           class="nav-item d-flex align-items-center | my-4 me-5">
             <router-link to="/myFavorite" class="d-flex text-dark nav-link">
               <i class="bi bi-heart fz-5 fz-md-6 text-dark | me-2 me-lg-0"></i>
               <h5 class="d-lg-none text-dark">
@@ -83,21 +80,19 @@
           </li>
           <!-- 購物車 -->
           <li class="nav-item d-flex align-items-center | my-4 me-5"
-            @click="openCartCanvas" @keydown="enter">
+            @click="openCartCanvas();autoCollapse();" @keydown="enter">
             <i class="bi bi-cart3 fz-5 fz-md-6 text-dark | me-2 me-lg-0"></i>
             <h5 class="d-lg-none text-dark">
               <strong>購物車</strong>
             </h5>
           </li>
           <!-- 後台管理人員登入 -->
-          <li class="nav-item d-flex align-items-center | my-4 me-5"
-            @click="openLoginModel" @keydown="enter">
-            <!-- <router-link to="/login"> -->
-              <i class="bi bi-person-circle fz-5 fz-md-6 text-dark | me-2 me-lg-0"></i>
-              <h5 class="d-lg-none text-dark">
-                <strong>後台管理人員登入</strong>
-              </h5>
-            <!-- </router-link> -->
+          <li class="nav-item d-flex align-items-center | my-4"
+            @click="openLoginModel();autoCollapse();" @keydown="enter">
+            <i class="bi bi-person-circle fz-5 fz-md-6 text-dark | me-2 me-lg-0"></i>
+            <h5 class="d-lg-none text-dark">
+              <strong>後台管理人員登入</strong>
+            </h5>
           </li>
         </ul>
       </div>
@@ -106,12 +101,6 @@
   <CanvasCart ref="cartCanvas" />
   <ModalLogin ref="loginModal" />
 </template>
-
-<style>
-.nav-item{
-  cursor: pointer;
-}
-</style>
 
 <script>
 import CanvasCart from '@/components/CanvasCart.vue';
@@ -130,6 +119,15 @@ export default {
     openCartCanvas() {
       this.$refs.cartCanvas.openCanvas();
     },
+    autoCollapse() {
+      this.$refs.btnToggler.click();
+    },
   },
 };
 </script>
+
+<style>
+.nav-item{
+  cursor: pointer;
+}
+</style>

@@ -100,13 +100,6 @@
         @edit-product = "editProduct"
       >
       </ModalEdit>
-
-      <!-- Modal 刪除產品 -->
-      <!-- <ModalDelete
-        ref="delProductModal"
-        :AUTH_TOKEN = "AUTH_TOKEN"
-        @del-product = "delProduct">
-      </ModalDelete> -->
     </div>
   </div>
 </template>
@@ -149,7 +142,6 @@ export default {
       this.products.forEach((el) => {
         const item = el;
         if (item.id === id) {
-          // item.is_enabled ? (item.is_enabled = 0) : (item.is_enabled = 1);
           if (item.is_enabled) {
             item.is_enabled = 0;
           } else {
@@ -182,14 +174,12 @@ export default {
       this.$http[httpStatus](url, dataObj)
         .then(() => {
           if (httpStatus === 'post') {
-            // 成功新增產品，sweetalert 跳出提示訊息視窗
             this.$swal.fire({
               icon: 'success',
               title: '成功！',
               text: `成功新增 ${this.tempItemInfo.title}`,
             });
           } else {
-            // 成功更新產品，sweetalert 跳出提示訊息視窗
             this.$swal.fire({
               icon: 'success',
               title: '成功！',
@@ -205,7 +195,6 @@ export default {
           errMSG.forEach((el) => {
             msg += `${el}。\n`;
           });
-          // 更新失敗，sweetalert 跳出提示訊息視窗
           this.$swal.fire({
             icon: 'error',
             title: '失敗！請重新輸入資訊。',
@@ -241,7 +230,6 @@ export default {
             this.$http
               .delete(url)
               .then(() => {
-                // 成功刪除產品，sweetalert 跳出提示訊息視窗
                 this.$swal.fire({
                   icon: 'success',
                   title: '成功！',
@@ -250,7 +238,6 @@ export default {
                 this.getProducts(this.pagination.current_page);
               })
               .catch(() => {
-                // 刪除失敗，sweetalert 跳出提示訊息視窗
                 this.$swal.fire({
                   icon: 'error',
                   title: '失敗！',
@@ -273,9 +260,7 @@ export default {
       }
     },
     openEditModal(isAddItem, item) {
-      // 資料接收與整理
       this.organizeData(isAddItem, item);
-      // 開啟 modal 元件
       this.$refs.editProductModal.openModal(isAddItem, item);
     },
   },

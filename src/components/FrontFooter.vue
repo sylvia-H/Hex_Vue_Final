@@ -1,7 +1,6 @@
 <template>
   <footer class="bg-dark position-relative">
-    <div class="">
-      <!-- Copyright -->
+    <div>
       <p class="h6 text-white text-center position-absolute
         top-0 start-0 bottom-0 end-0 m-auto">
         HEALTHY DIET © 2022. All Rights Reserved.
@@ -9,6 +8,12 @@
     </div>
   </footer>
 </template>
+
+<script>
+export default {
+  name: 'FrontFooter',
+};
+</script>
 
 <style>
 footer {
@@ -20,9 +25,3 @@ footer p {
   height: 20px;
 }
 </style>
-
-<script>
-export default {
-  name: 'FrontFooter',
-};
-</script>

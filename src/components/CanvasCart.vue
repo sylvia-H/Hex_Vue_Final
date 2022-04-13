@@ -149,6 +149,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import { Offcanvas } from 'bootstrap';
 

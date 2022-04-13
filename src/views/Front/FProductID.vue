@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-3">
         <router-link to="../products">
-          <button class="bttn-unite bttn-md bttn-success bttn-no-outline py-2 fz-6">
+          <button type="button" class="btn btn-outline-gray1 fw-bold fz-4 | mx-8 mb-4">
             ⇦ 返回
           </button>
         </router-link>
@@ -17,20 +17,20 @@
         </h2>
         <div class="col-12">
           <div class="border overflow-hidden rounded-3 shadow | m-8">
-            <img class="w-100 heightLimit1 img-cover" :src="tempImgUrl" :alt="product.title">
+            <img class="w-100 heightLimit_main img-cover" :src="tempImgUrl" :alt="product.title">
           </div>
         </div>
         <div class="row m-6">
           <div class="col-4">
             <div class="border overflow-hidden rounded-3">
-              <img class="w-100 heightLimit2 img-cover btn p-0"
+              <img class="w-100 heightLimit_thumb img-cover btn p-0"
                :src="product.imageUrl" :alt="product.title"
                 @click="changeTemp" @keydown="enter">
             </div>
           </div>
           <div class="col-4" v-for="(imgUrl, i) in product.imagesUrl" :key="i">
             <div class="border overflow-hidden rounded-3">
-              <img class="w-100 heightLimit2 img-cover btn p-0"
+              <img class="w-100 heightLimit_thumb img-cover btn p-0"
                :src="imgUrl" :alt="product.title"
                 @click="changeTemp" @keydown="enter">
             </div>
@@ -61,13 +61,13 @@
               <p class="fw-bold text-muted">
                 原價：
               </p>
-              <span class="text-muted">
+              <span class="text-muted" v-cloak>
                 <s>{{ $filters.toCurrency(product.origin_price) }}</s> 元
               </span>
               <p class="ms-5">
                 折扣後優惠價：
               </p>
-              <span class="fw-bold text-danger fz-8">
+              <span class="fw-bold text-danger fz-8" v-cloak>
                 {{ $filters.toCurrency(product.price) }}
               </span>
               <p> 元</p>
@@ -218,16 +218,6 @@
   </section>
 </template>
 
-<style>
-.heightLimit1 {
-  height: 350px;
-}
-.heightLimit2 {
-  height: 100px;
-}
-
-</style>
-
 <script>
 export default {
   data() {
@@ -290,7 +280,6 @@ export default {
           console.log(res.data);
           const name = res.data.data.product.title;
           const msg = res.data.message;
-          // SweetAlert：產品成功加入購物車
           this.$swal.fire({
             icon: 'success',
             title: '成功！',
@@ -331,11 +320,23 @@ export default {
     },
   },
   mounted() {
-    this.showLoading();
     const { id } = this.$route.params;
     this.getProduct(id);
+    this.showLoading();
     this.getCart();
     this.getCollection();
   },
 };
 </script>
+
+<style>
+.heightLimit_main {
+  height: 350px;
+}
+.heightLimit_thumb {
+  height: 100px;
+}
+[v-cloak] {
+  display: none !important;
+}
+</style>

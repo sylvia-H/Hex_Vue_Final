@@ -4,15 +4,15 @@
     <h2 class="text-center">來選好食</h2>
     <hr class="my-6" />
     <!-- 品項分類按鈕 -->
-    <div class="row">
+    <div class="row my-7">
       <div v-for="(item, i) in Object.keys(categories)" :key="i"
        class="col-4 col-sm-3 col-lg-2">
         <button type="button"
-         class="btn btn-outline-blue2 fw-bold text-blue1 w-100 py-2 mb-4"
+         class="btn btn-outline-gray1 fw-bold w-100 py-2 mb-4"
          :class="{ active: item===showCategory }"
          @click="filterCategory(item)">
           {{ item }}
-          <span class="text-blue1">
+          <span class="fz-3 fz-lg-4">
             {{ categories[item] ? `（${categories[item]}）` : '' }}
           </span>
         </button>
@@ -148,7 +148,6 @@ export default {
           console.log(res.data);
           const name = res.data.data.product.title;
           const msg = res.data.message;
-          // SweetAlert：產品成功加入購物車
           this.$swal.fire({
             icon: 'success',
             title: '成功！',

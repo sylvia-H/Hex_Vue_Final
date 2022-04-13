@@ -26,9 +26,9 @@
         </div>
       </div>
     </div>
-    <div class="row flex-column-reverse flex-md-row">
+    <div class="row flex-column flex-md-row">
       <!-- 訂單內容 -->
-      <div class="col-12 col-lg-7">
+      <div class="col-12 col-lg-7 | mb-6">
         <table class="table table-hover">
           <thead>
             <tr>
@@ -138,7 +138,7 @@
         </table>
       </div>
       <!-- Info -->
-      <div class="col-12 offset-lg-1 col-lg-4 | mb-16 mb-md-0">
+      <div class="col-12 offset-lg-1 col-lg-4">
         <h5>付款資訊</h5>
         <div class="mb-10">
           <VForm ref="form" v-slot="{ errors }" @submit="submitPayment">
@@ -218,7 +218,7 @@
               <!-- 返回 & 下一步 -->
               <div class="col-6">
                 <router-link :to="{ name : 'checkoutOrder' }">
-                  <button class="btn btn-outline-primary w-100">
+                  <button type="button" class="btn btn-outline-primary w-100">
                     返回
                   </button>
                 </router-link>
@@ -284,7 +284,6 @@ export default {
         )
         .then((res) => {
           this.is_couponOK = 1;
-          // this.finalTotal = res.data.data.final_total;
           console.log(res.data);
         })
         .catch((err) => {
@@ -313,7 +312,6 @@ export default {
         })
         .catch((err) => {
           console.log(err.response);
-          // 刪除失敗，sweetalert 跳出提示訊息視窗
           this.$swal.fire('失敗！', '付款失敗，請再試一次！', {
             icon: 'error',
           });

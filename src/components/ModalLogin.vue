@@ -6,11 +6,8 @@
     aria-labelledby="loginModalLabel"
     aria-hidden="true"
   >
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-sm">
       <div class="modal-content">
-        <!-- <div class="modal-header bg-dark text-white">
-          <h5 class="modal-title" id="loginModalLabel">管理後台入口</h5>
-        </div> -->
         <div class="modal-body text-center | py-8">
           <h2 class="fw-bold text-green1 | mb-3">
             好食遞
@@ -61,7 +58,7 @@
 
 <script>
 import { Modal } from 'bootstrap';
-// 元件 - Modal 後台人員登入介面
+
 export default {
   name: 'ModalLogin',
   data() {
@@ -87,18 +84,14 @@ export default {
           const { token, expired } = res.data;
           // 用 cookie 儲存資料，myToken 是自定義名稱
           document.cookie = `myToken=${token}; expires=${new Date(expired)};`;
-          // 關閉 modal
           this.closeModal();
-          // window.location = "./admin/products.html";
           this.$router.push({
             name: 'dashboard_Products',
           });
         })
         .catch((err) => {
-          console.log(err.response);
           const errTitle = err.response.data.message;
           const errMSG = err.response.data.error.message;
-          // 登入失敗，sweetalert 跳出提示訊息視窗
           this.$swal.fire({
             icon: 'error',
             title: `${errTitle}！`,
