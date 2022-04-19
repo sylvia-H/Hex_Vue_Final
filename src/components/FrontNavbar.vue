@@ -79,12 +79,17 @@
             </router-link>
           </li>
           <!-- 購物車 -->
-          <li class="nav-item d-flex align-items-center | my-4 me-5"
+          <li class="nav-item d-flex align-items-center | my-4 me-5 | position-relative"
             @click="openCartCanvas();autoCollapse();" @keydown="enter">
             <i class="bi bi-cart3 fz-5 fz-md-6 text-dark | me-2 me-lg-0"></i>
             <h5 class="d-lg-none text-dark">
               <strong>購物車</strong>
             </h5>
+            <!-- <span v-if="is_cart" class="position-absolute top-25 start-75 translate-middle
+              badge rounded-pill bg-orange1 opacity-75 fz-3">
+              {{is_cart}}
+              <span class="visually-hidden">unread messages</span>
+            </span> -->
           </li>
           <!-- 後台管理人員登入 -->
           <li class="nav-item d-flex align-items-center | my-4"
