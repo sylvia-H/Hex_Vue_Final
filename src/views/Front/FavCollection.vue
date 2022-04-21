@@ -269,12 +269,14 @@ export default {
     },
     getCollection() {
       if (localStorage.getItem('myFavorite')) {
+        const loader = this.$loading.show();
         const jsonData = JSON.parse(localStorage.getItem('myFavorite'));
         this.collection = jsonData;
-        console.log(JSON.parse(localStorage.getItem('myFavorite')));
+        loader.hide();
       }
     },
     addCart(id, qty = 1) {
+      const loader = this.$loading.show();
       const data = {
         product_id: id,
         qty,
@@ -287,9 +289,9 @@ export default {
           { data },
         )
         .then((res) => {
-          console.log(res.data);
           const name = res.data.data.product.title;
           const msg = res.data.message;
+          loader.hide();
           this.$swal.fire({
             icon: 'success',
             title: '成功！',
@@ -297,23 +299,12 @@ export default {
           });
           this.is_loadingItem = '';
         })
-        .catch((err) => {
-          console.log(err.response);
+        .catch(() => {
+          loader.hide();
         });
-    },
-    showLoading() {
-      const loader = this.$loading.show();
-      setTimeout(() => {
-        loader.hide();
-      }, 500);
-      // this.isLoading = true;
-      // setTimeout(() => {
-      //   this.isLoading = false;
-      // }, 1000);
     },
   },
   mounted() {
-    this.showLoading();
     this.getCollection();
   },
 };

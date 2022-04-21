@@ -35,23 +35,3 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  methods: {
-    showLoading() {
-      const loader = this.$loading.show();
-      setTimeout(() => {
-        loader.hide();
-      }, 500);
-      // this.isLoading = true;
-      // setTimeout(() => {
-      //   this.isLoading = false;
-      // }, 1000);
-    },
-  },
-  mounted() {
-    this.showLoading();
-  },
-};
-</script>

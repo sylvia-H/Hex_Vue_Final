@@ -20,10 +20,6 @@ export default {
       setTimeout(() => {
         loader.hide();
       }, 600);
-      // this.isLoading = true;
-      // setTimeout(() => {
-      //   this.isLoading = false;
-      // }, 1000);
     },
   },
   mounted() {

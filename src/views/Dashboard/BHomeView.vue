@@ -17,6 +17,7 @@ export default {
   },
   methods: {
     checkLogin() {
+      const loader = this.$loading.show();
       const AUTH_TOKEN = document.cookie.replace(
         /(?:(?:^|.*;\s*)myToken\s*=\s*([^;]*).*$)|^.*$/,
         '$1',
@@ -25,10 +26,11 @@ export default {
       this.$http
         .post(`${process.env.VUE_APP_API}/api/user/check`)
         .then(() => {
+          loader.hide();
           this.status = true;
         })
-        .catch((err) => {
-          console.log(err.response);
+        .catch(() => {
+          loader.hide();
           this.$router.push('./');
         });
     },

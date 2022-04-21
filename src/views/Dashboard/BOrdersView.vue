@@ -88,11 +88,11 @@
         <br />
 
         <!-- 分頁元件 -->
-        <PaginationProducts
+        <PaginationOrders
           :pagination = "pagination"
           class = "d-flex justify-content-center"
-          @get-products="getProducts"
-        ></PaginationProducts>
+          @get-orders="getOrders"
+        ></PaginationOrders>
 
         <!-- Modal 編輯產品 -->
         <ModalOrder
@@ -106,7 +106,7 @@
 </template>
 
 <script>
-import PaginationProducts from '@/components/PaginationProducts.vue';
+import PaginationOrders from '@/components/PaginationOrders.vue';
 import ModalOrder from '@/components/ModalOrder.vue';
 
 export default {
@@ -122,21 +122,22 @@ export default {
   },
   components: {
     ModalOrder,
-    PaginationProducts,
+    PaginationOrders,
   },
   methods: {
-    getOrders() {
+    getOrders(page = 1) {
+      const loader = this.$loading.show();
       this.$http
         .get(
-          `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/orders`,
+          `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/orders?page=${page}`,
         )
         .then((res) => {
-          console.log(res.data);
           this.orders = res.data.orders;
           this.pagination = res.data.pagination;
+          loader.hide();
         })
-        .catch((err) => {
-          console.log(err.response);
+        .catch(() => {
+          loader.hide();
         });
     },
     changeStatus(id) {
@@ -153,6 +154,7 @@ export default {
       });
     },
     editOrder(item, id) {
+      const loader = this.$loading.show();
       if (item) {
         this.tempItemInfo = item;
       }
@@ -162,9 +164,9 @@ export default {
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/order/${
         id || this.tempItemInfo.id
       }`;
-      console.log(url);
       this.$http.put(url, dataObj)
         .then(() => {
+          loader.hide();
           this.$swal.fire({
             icon: 'success',
             title: '成功！',
@@ -173,7 +175,7 @@ export default {
           this.getOrders(this.pagination.current_page);
         })
         .catch((err) => {
-          console.log(err.response);
+          loader.hide();
           const errMSG = err.response.data.message;
           let msg = '';
           errMSG.forEach((el) => {
@@ -215,17 +217,20 @@ export default {
         })
         .then((result) => {
           if (result.isConfirmed) {
+            const loader = this.$loading.show();
             this.$http
               .delete(url)
               .then(() => {
+                loader.hide();
+                this.getOrders(this.pagination.current_page);
                 this.$swal.fire({
                   icon: 'success',
                   title: '成功！',
                   text: `已刪除 ${msgTitle}`,
                 });
-                this.getProducts(this.pagination.current_page);
               })
               .catch(() => {
+                loader.hide();
                 this.$swal.fire({
                   icon: 'error',
                   title: '刪除失敗！',

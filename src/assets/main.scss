@@ -1,7 +1,9 @@
-@import "./helpers/functions";
-@import "./helpers/variables";
-@import "./vendor/rfs";
-@import "~bootstrap";
+@import "~bootstrap/scss/functions";
+@import "./helpers/myVariables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/utilities/api";
+@import "./helpers/myUtilities";
 @import "./base/base";
 
 /* Utils */

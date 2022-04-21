@@ -4,11 +4,7 @@
       <div class="col-12">
         <div class="d-flex justify-content-between mx-6 my-8">
           <h2>優惠券列表</h2>
-          <button
-            type="button"
-            class="btn btn-outline-dark"
-            @click="openCouponModal(1, {});"
-          >
+          <button type="button" class="btn btn-outline-dark" @click="openCouponModal(1, {})">
             新增優惠券
           </button>
         </div>
@@ -26,14 +22,12 @@
           <tbody>
             <tr v-for="item in coupons" :key="item.code">
               <td>
-                  {{ item.title }}
+                {{ item.title }}
               </td>
               <td>
                 {{ item.code }}
               </td>
-              <td>
-                {{ item.percent }} %
-              </td>
+              <td>{{ item.percent }} %</td>
               <td>
                 {{ $filters.transferTime(item.due_date) }}
               </td>
@@ -58,19 +52,11 @@
               <td>
                 <div class="btn-group" role="group">
                   <!-- 編輯優惠券內容 -->
-                  <button
-                    type="button"
-                    class="btn btn-warning"
-                    @click="openCouponModal(0, item);"
-                  >
+                  <button type="button" class="btn btn-warning" @click="openCouponModal(0, item)">
                     <i class="bi bi-pencil-square"></i>
                   </button>
                   <!-- 刪除優惠券 -->
-                  <button
-                    type="button"
-                    class="btn btn-danger"
-                    @click="delCoupon(item)"
-                  >
+                  <button type="button" class="btn btn-danger" @click="delCoupon(item)">
                     <i class="bi bi-trash"></i>
                   </button>
                 </div>
@@ -85,18 +71,18 @@
         <br />
 
         <!-- 分頁元件 -->
-        <PaginationProducts
-          :pagination = "pagination"
-          class = "d-flex justify-content-center"
+        <PaginationCoupons
+          :pagination="pagination"
+          class="d-flex justify-content-center"
           @get-coupons="getCoupons"
-        ></PaginationProducts>
+        ></PaginationCoupons>
 
         <!-- Modal 編輯產品 -->
         <ModalCoupon
-         :coupon="tempItemInfo"
-         :is_addNewCoupon="is_addNewCoupon"
+          :coupon="tempItemInfo"
+          :is_addNewCoupon="is_addNewCoupon"
           ref="editCouponModal"
-          @edit-coupon = "editCoupon"
+          @edit-coupon="editCoupon"
         >
         </ModalCoupon>
       </div>
@@ -105,7 +91,7 @@
 </template>
 
 <script>
-import PaginationProducts from '@/components/PaginationProducts.vue';
+import PaginationCoupons from '@/components/PaginationCoupons.vue';
 import ModalCoupon from '@/components/ModalCoupon.vue';
 
 export default {
@@ -120,21 +106,20 @@ export default {
   },
   components: {
     ModalCoupon,
-    PaginationProducts,
+    PaginationCoupons,
   },
   methods: {
-    getCoupons() {
+    getCoupons(page = 1) {
+      const loader = this.$loading.show();
       this.$http
-        .get(
-          `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/coupons`,
-        )
+        .get(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/coupons?page=${page}`)
         .then((res) => {
-          console.log(res.data);
           this.coupons = res.data.coupons;
           this.pagination = res.data.pagination;
+          loader.hide();
         })
-        .catch((err) => {
-          console.log(err.response);
+        .catch(() => {
+          loader.hide();
         });
     },
     changeStatus(id) {
@@ -152,8 +137,8 @@ export default {
       });
     },
     editCoupon(item, id) {
+      const loader = this.$loading.show();
       if (item) {
-        console.log(item);
         this.tempItemInfo = item;
       }
       const dataObj = {
@@ -173,6 +158,8 @@ export default {
       }
       this.$http[httpStatus](url, dataObj)
         .then(() => {
+          loader.hide();
+          this.getCoupons(this.pagination.current_page);
           if (httpStatus === 'post') {
             this.$swal.fire({
               icon: 'success',
@@ -186,10 +173,9 @@ export default {
               text: `已更新 ${this.tempItemInfo.title} 的資訊`,
             });
           }
-          this.getCoupons(this.pagination.current_page);
         })
         .catch((err) => {
-          console.log(err.response);
+          loader.hide();
           const errMSG = err.response.data.message;
           let msg = '';
           errMSG.forEach((el) => {
@@ -231,15 +217,17 @@ export default {
         })
         .then((result) => {
           if (result.isConfirmed) {
+            const loader = this.$loading.show();
             this.$http
               .delete(url)
               .then(() => {
+                loader.hide();
+                this.getCoupons(this.pagination.current_page);
                 this.$swal.fire({
                   icon: 'success',
                   title: '成功！',
                   text: `已刪除 ${msgTitle}`,
                 });
-                this.getCoupons(this.pagination.current_page);
               })
               .catch(() => {
                 this.$swal.fire({

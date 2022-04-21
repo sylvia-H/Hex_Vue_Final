@@ -256,23 +256,25 @@ export default {
   },
   methods: {
     getOrder(id) {
+      const loader = this.$loading.show();
       this.$http
         .get(
           `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/order/${id}`,
         )
         .then((res) => {
-          console.log(res.data.order);
           this.order = res.data.order;
           Object.keys(this.order.products).forEach((item) => {
             this.products.push(this.order.products[`${item}`]);
           });
           this.user = this.order.user;
+          loader.hide();
         })
-        .catch((err) => {
-          console.log(err.response);
+        .catch(() => {
+          loader.hide();
         });
     },
     checkCoupon() {
+      const loader = this.$loading.show();
       const coupon = document.getElementById('couponData').value;
       const data = {
         code: coupon,
@@ -283,23 +285,25 @@ export default {
           { data },
         )
         .then((res) => {
+          console.dir(res);
           this.is_couponOK = 1;
-          console.log(res.data);
+          loader.hide();
         })
-        .catch((err) => {
+        .catch(() => {
           this.is_couponOK = 0;
-          console.log(err.response);
+          loader.hide();
         });
     },
     submitPayment() {
+      const loader = this.$loading.show();
       const { id } = this.$route.params;
       this.$http
         .post(
           `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/pay/${id}`,
         )
-        .then((res) => {
+        .then(() => {
           this.$refs.form.resetForm();
-          console.log(res.data);
+          loader.hide();
           this.$swal
             .fire('成功！', '已完成付款！', {
               icon: 'success',
@@ -310,28 +314,17 @@ export default {
               }
             });
         })
-        .catch((err) => {
-          console.log(err.response);
+        .catch(() => {
+          loader.hide();
           this.$swal.fire('失敗！', '付款失敗，請再試一次！', {
             icon: 'error',
           });
         });
     },
-    showLoading() {
-      const loader = this.$loading.show();
-      setTimeout(() => {
-        loader.hide();
-      }, 300);
-      // this.isLoading = true;
-      // setTimeout(() => {
-      //   this.isLoading = false;
-      // }, 1000);
-    },
   },
   mounted() {
     const { id } = this.$route.params;
     this.getOrder(id);
-    this.showLoading();
   },
 };
 </script>

@@ -16,23 +16,35 @@
           {{ product.title }}
         </h2>
         <div class="col-12">
-          <div class="border overflow-hidden rounded-3 shadow | m-8">
-            <img class="w-100 heightLimit_main img-cover" :src="tempImgUrl" :alt="product.title">
+          <div v-if="tempImgUrl" class="border overflow-hidden rounded-3 shadow | m-8">
+            <img
+              class="w-100 heightLimit_main img-cover"
+              :src="tempImgUrl"
+              :alt="product.title"
+            />
           </div>
         </div>
-        <div class="row m-6">
+        <div v-if="product.imagesUrl" class="row m-6">
           <div class="col-4">
             <div class="border overflow-hidden rounded-3">
-              <img class="w-100 heightLimit_thumb img-cover btn p-0"
-               :src="product.imageUrl" :alt="product.title"
-                @click="changeTemp" @keydown="enter">
+              <img
+                class="w-100 heightLimit_thumb img-cover btn p-0"
+                :src="product.imageUrl"
+                :alt="product.title"
+                @click="changeTemp"
+                @keydown="enter"
+              />
             </div>
           </div>
           <div class="col-4" v-for="(imgUrl, i) in product.imagesUrl" :key="i">
             <div class="border overflow-hidden rounded-3">
-              <img class="w-100 heightLimit_thumb img-cover btn p-0"
-               :src="imgUrl" :alt="product.title"
-                @click="changeTemp" @keydown="enter">
+              <img
+                class="w-100 heightLimit_thumb img-cover btn p-0"
+                :src="imgUrl"
+                :alt="product.title"
+                @click="changeTemp"
+                @keydown="enter"
+              />
             </div>
           </div>
         </div>
@@ -47,32 +59,26 @@
         <!-- 產品份量 & 價錢 -->
         <div class="row | my-5">
           <div class="col-10 offset-1">
-            <hr/>
+            <hr />
             <div class="d-flex align-items-center">
-              <p class="fw-bold">
-                本產品內含份量：
-              </p>
+              <p class="fw-bold">本產品內含份量：</p>
               <span>
                 {{ product.number }}
                 {{ product.unit }}
               </span>
             </div>
             <div class="d-flex align-items-center">
-              <p class="fw-bold text-muted">
-                原價：
-              </p>
+              <p class="fw-bold text-muted">原價：</p>
               <span class="text-muted" v-cloak>
                 <s>{{ $filters.toCurrency(product.origin_price) }}</s> 元
               </span>
-              <p class="ms-5">
-                折扣後優惠價：
-              </p>
+              <p class="ms-5">折扣後優惠價：</p>
               <span class="fw-bold text-danger fz-8" v-cloak>
                 {{ $filters.toCurrency(product.price) }}
               </span>
-              <p> 元</p>
+              <p>元</p>
             </div>
-            <hr/>
+            <hr />
           </div>
           <div class="col-10 offset-1 d-flex justify-content-between">
             <button
@@ -116,100 +122,66 @@
             <table class="table table-hover table-bordered">
               <thead>
                 <tr>
-                  <th colspan="4">
-                    食材內含主要營養素成份表（每 100g ）
-                  </th>
+                  <th colspan="4">食材內含主要營養素成份表（每 100g ）</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row" style="width:30%">
-                    熱量
-                  </th>
-                  <td style="width:25%">
-                    {{ product.calorie }} kcal
-                  </td>
-                  <td style="width:30%">
+                  <th scope="row" style="width: 30%">熱量</th>
+                  <td style="width: 25%">{{ product.calorie }} kcal</td>
+                  <td style="width: 30%">
                     <b>粗蛋白</b>
                   </td>
-                  <td>
-                    {{ product.protein }} g
-                  </td>
+                  <td>{{ product.protein }} g</td>
                 </tr>
                 <tr>
-                  <th scope="row">
-                    總碳水化合物
-                  </th>
-                  <td>
-                    {{ product.carbohydrate }} g
-                  </td>
+                  <th scope="row">總碳水化合物</th>
+                  <td>{{ product.carbohydrate }} g</td>
                   <td>
                     <b>膳食纖維</b>
                   </td>
-                  <td>
-                    {{ product.DietaryFiber }} g
-                  </td>
+                  <td>{{ product.DietaryFiber }} g</td>
                 </tr>
                 <tr>
-                  <th scope="row">
-                    粗脂肪
-                  </th>
-                  <td>
-                    {{ product.crudeFat }} g
-                  </td>
+                  <th scope="row">粗脂肪</th>
+                  <td>{{ product.crudeFat }} g</td>
                   <td>
                     <b>飽和脂肪</b>
                   </td>
-                  <td>
-                    {{ product.SaturatedFat }} g
-                  </td>
+                  <td>{{ product.SaturatedFat }} g</td>
                 </tr>
                 <tr>
-                  <th scope="row">
-                    鈉
-                  </th>
-                  <td>
-                    {{ product.sodium }} mg
-                  </td>
+                  <th scope="row">鈉</th>
+                  <td>{{ product.sodium }} mg</td>
                   <td>
                     <b>鈣</b>
                   </td>
-                  <td>
-                    {{ product.calcium }} mg
-                  </td>
+                  <td>{{ product.calcium }} mg</td>
                 </tr>
                 <tr>
-                  <th scope="row">
-                    鉀
-                  </th>
-                  <td>
-                    {{ product.potassium }} mg
-                  </td>
+                  <th scope="row">鉀</th>
+                  <td>{{ product.potassium }} mg</td>
                   <td>
                     <b>鋅</b>
                   </td>
-                  <td>
-                    {{ product.zinc }} mg
-                  </td>
+                  <td>{{ product.zinc }} mg</td>
                 </tr>
                 <tr>
-                  <th scope="row">
-                    鎂
-                  </th>
-                  <td>
-                    {{ product.magnesium }} mg
-                  </td>
+                  <th scope="row">鎂</th>
+                  <td>{{ product.magnesium }} mg</td>
                   <td>
                     <b>鐵</b>
                   </td>
-                  <td>
-                    {{ product.iron }} mg
-                  </td>
+                  <td>{{ product.iron }} mg</td>
                 </tr>
               </tbody>
             </table>
             <p class="text-start fz-3">
-              ✵ 依據衛生福利部食品藥物管理署所公佈<a href="https://data.gov.tw/dataset/8543" target="_blank">「食品營養成分資料集」</a>資料內容
+              ✵ 依據衛生福利部食品藥物管理署所公佈<a
+                href="https://data.gov.tw/dataset/8543"
+                target="_blank"
+                >「食品營養成分資料集」</a
+              >資料內容
             </p>
           </div>
         </div>
@@ -222,28 +194,27 @@
 export default {
   data() {
     return {
-      product: [],
+      product: {
+        price: '',
+      },
       tempImgUrl: '',
       is_loadingItem: '',
       carts: [],
-      isLoading: false,
       collection: {},
     };
   },
   methods: {
     getProduct(id) {
+      const loader = this.$loading.show();
       this.$http
-        .get(
-          `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/product/${id}`,
-        )
+        .get(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/product/${id}`)
         .then((res) => {
-          console.log(res.data);
           this.product = res.data.product;
           this.getTemp();
-          console.log(this.product);
+          loader.hide();
         })
-        .catch((err) => {
-          console.log(err.response);
+        .catch(() => {
+          loader.hide();
         });
     },
     getTemp() {
@@ -254,14 +225,12 @@ export default {
     },
     getCart() {
       this.$http
-        .get(
-          `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart`,
-        )
+        .get(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart`)
         .then((res) => {
           this.carts = res.data.data;
         })
         .catch((err) => {
-          console.log(err.response);
+          console.dir(err);
         });
     },
     addCart(id, qty = 1) {
@@ -272,12 +241,8 @@ export default {
       this.is_loadingItem = id;
 
       this.$http
-        .post(
-          `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart`,
-          { data },
-        )
+        .post(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart`, { data })
         .then((res) => {
-          console.log(res.data);
           const name = res.data.data.product.title;
           const msg = res.data.message;
           this.$swal.fire({
@@ -289,7 +254,7 @@ export default {
           this.is_loadingItem = '';
         })
         .catch((err) => {
-          console.log(err.response);
+          console.dir(err);
         });
     },
     addCollection(item) {
@@ -305,24 +270,12 @@ export default {
       if (localStorage.getItem('myFavorite')) {
         const jsonData = JSON.parse(localStorage.getItem('myFavorite'));
         this.collection = jsonData;
-        console.log(JSON.parse(localStorage.getItem('myFavorite')));
       }
-    },
-    showLoading() {
-      const loader = this.$loading.show();
-      setTimeout(() => {
-        loader.hide();
-      }, 500);
-      // this.isLoading = true;
-      // setTimeout(() => {
-      //   this.isLoading = false;
-      // }, 1000);
     },
   },
   mounted() {
     const { id } = this.$route.params;
     this.getProduct(id);
-    this.showLoading();
     this.getCart();
     this.getCollection();
   },

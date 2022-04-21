@@ -126,6 +126,7 @@ export default {
   },
   methods: {
     getProducts(page = 1) {
+      const loader = this.$loading.show();
       this.$http
         .get(
           `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/products?page=${page}`,
@@ -133,9 +134,10 @@ export default {
         .then((res) => {
           this.products = res.data.products;
           this.pagination = res.data.pagination;
+          loader.hide();
         })
-        .catch((err) => {
-          console.log(err.response);
+        .catch(() => {
+          loader.hide();
         });
     },
     changeStatus(id) {
@@ -153,6 +155,7 @@ export default {
       });
     },
     editProduct(item, id) {
+      const loader = this.$loading.show();
       if (item) {
         this.tempItemInfo = item;
       }
@@ -173,6 +176,8 @@ export default {
       }
       this.$http[httpStatus](url, dataObj)
         .then(() => {
+          loader.hide();
+          this.getProducts(this.pagination.current_page);
           if (httpStatus === 'post') {
             this.$swal.fire({
               icon: 'success',
@@ -186,10 +191,9 @@ export default {
               text: `已更新 ${this.tempItemInfo.title} 的資訊`,
             });
           }
-          this.getProducts(this.pagination.current_page);
         })
         .catch((err) => {
-          console.log(err.response);
+          loader.hide();
           const errMSG = err.response.data.message;
           let msg = '';
           errMSG.forEach((el) => {
@@ -227,17 +231,20 @@ export default {
         })
         .then((result) => {
           if (result.isConfirmed) {
+            const loader = this.$loading.show();
             this.$http
               .delete(url)
               .then(() => {
+                loader.hide();
+                this.getProducts(this.pagination.current_page);
                 this.$swal.fire({
                   icon: 'success',
                   title: '成功！',
                   text: `已刪除 ${this.tempItemInfo.title} 的資訊`,
                 });
-                this.getProducts(this.pagination.current_page);
               })
               .catch(() => {
+                loader.hide();
                 this.$swal.fire({
                   icon: 'error',
                   title: '失敗！',

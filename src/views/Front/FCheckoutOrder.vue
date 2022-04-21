@@ -211,18 +211,21 @@ export default {
   },
   methods: {
     getCart() {
+      const loader = this.$loading.show();
       this.$http
         .get(
           `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart`,
         )
         .then((res) => {
           this.carts = res.data.data;
+          loader.hide();
         })
-        .catch((err) => {
-          console.log(err.response);
+        .catch(() => {
+          loader.hide();
         });
     },
     editCart(id, qty) {
+      const loader = this.$loading.show();
       const data = {
         product_id: id,
         qty,
@@ -232,12 +235,12 @@ export default {
           `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart/${id}`,
           { data },
         )
-        .then((res) => {
-          console.log(res.data);
+        .then(() => {
           this.getCart();
+          loader.hide();
         })
-        .catch((err) => {
-          console.log(err.response);
+        .catch(() => {
+          loader.hide();
         });
     },
     delCart(id, title) {
@@ -256,17 +259,20 @@ export default {
         })
         .then((result) => {
           if (result.isConfirmed) {
+            const loader = this.$loading.show();
             this.$http
               .delete(url)
               .then(() => {
+                this.getCart();
+                loader.hide();
                 this.$swal.fire({
                   icon: 'success',
                   title: '成功！',
                   text: `您已將${title}刪除了！`,
                 });
-                this.getCart();
               })
               .catch(() => {
+                loader.hide();
                 this.$swal.fire({
                   icon: 'error',
                   title: '失敗！',
@@ -277,6 +283,7 @@ export default {
         });
     },
     submitOrder() {
+      const loader = this.$loading.show();
       const data = this.formData;
       this.$http
         .post(
@@ -285,6 +292,7 @@ export default {
         )
         .then((res) => {
           this.$refs.form.resetForm();
+          loader.hide();
           this.$swal
             .fire('成功！', `已送出訂單！總金額 NT$ ${res.data.total} 元`, {
               icon: 'success',
@@ -295,27 +303,16 @@ export default {
               }
             });
         })
-        .catch((err) => {
-          console.log(err.response);
+        .catch(() => {
+          loader.hide();
           this.$swal.fire('失敗！', '送出訂單失敗，請再試一次！', {
             icon: 'error',
           });
         });
     },
-    showLoading() {
-      const loader = this.$loading.show();
-      setTimeout(() => {
-        loader.hide();
-      }, 300);
-      // this.isLoading = true;
-      // setTimeout(() => {
-      //   this.isLoading = false;
-      // }, 1000);
-    },
   },
   mounted() {
     this.getCart();
-    this.showLoading();
   },
 };
 </script>

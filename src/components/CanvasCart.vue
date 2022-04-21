@@ -198,7 +198,7 @@ export default {
           this.calcNutrients();
         })
         .catch((err) => {
-          console.log(err.response);
+          console.dir(err);
         });
     },
     openCanvas() {
@@ -222,7 +222,7 @@ export default {
           this.getCart();
         })
         .catch((err) => {
-          console.log(err.response);
+          console.dir(err);
         });
     },
     delCart(id, title) {
@@ -244,7 +244,6 @@ export default {
               this.$http
                 .delete(url)
                 .then(() => {
-                  // 成功刪除產品，sweetalert 跳出提示訊息視窗
                   this.$swal.fire({
                     icon: 'success',
                     title: '成功！',
@@ -252,9 +251,7 @@ export default {
                   });
                   this.getCart();
                 })
-                .catch((err) => {
-                  console.log(err.response);
-                  // 刪除失敗，sweetalert 跳出提示訊息視窗
+                .catch(() => {
                   this.$swal.fire({
                     icon: 'error',
                     title: '刪除失敗！',
@@ -281,7 +278,6 @@ export default {
               this.$http
                 .delete(url)
                 .then(() => {
-                  // 成功刪除產品，sweetalert 跳出提示訊息視窗
                   this.$swal.fire({
                     icon: 'success',
                     title: '成功！',
@@ -289,9 +285,7 @@ export default {
                   });
                   this.getCart();
                 })
-                .catch((err) => {
-                  console.log(err.response);
-                  // 刪除失敗，sweetalert 跳出提示訊息視窗
+                .catch(() => {
                   this.$swal.fire({
                     icon: 'error',
                     title: '刪除失敗！',

@@ -4,11 +4,11 @@
     <h2 class="text-center">來選好食</h2>
     <hr class="my-6" />
     <!-- 品項分類按鈕 -->
-    <div class="row g-2 g-sm-1 g-md-3 my-7">
+    <div class="row g-2 g-sm-1 g-md-3 mt-8 mb-11">
       <div v-for="(item, i) in Object.keys(categories)" :key="i"
        class="col-4 col-sm-3 col-lg-2">
         <button type="button"
-         class="btn btn-outline-gray1 fw-bold w-100 py-2 mb-4"
+         class="btn btn-outline-gray1 fw-bold w-100 py-2 mb-1 "
          :class="{ active: item===showCategory }"
          @click="filterCategory(item)">
           {{ item }}
@@ -102,6 +102,7 @@ export default {
   },
   methods: {
     getProducts() {
+      const loader = this.$loading.show();
       this.$http
         .get(
           `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/products/all`,
@@ -115,9 +116,10 @@ export default {
               this.categories[item.category] += 1;
             }
           });
+          loader.hide();
         })
-        .catch((err) => {
-          console.log(err.response);
+        .catch(() => {
+          loader.hide();
         });
     },
     getCart() {
@@ -129,7 +131,7 @@ export default {
           this.carts = res.data.data;
         })
         .catch((err) => {
-          console.log(err.response);
+          console.dir(err);
         });
     },
     addCart(id, qty = 1) {
@@ -145,7 +147,6 @@ export default {
           { data },
         )
         .then((res) => {
-          console.log(res.data);
           const name = res.data.data.product.title;
           const msg = res.data.message;
           this.$swal.fire({
@@ -157,7 +158,7 @@ export default {
           this.is_loadingItem = '';
         })
         .catch((err) => {
-          console.log(err.response);
+          console.dir(err);
         });
     },
     filterCategory(category) {
@@ -176,22 +177,10 @@ export default {
       if (localStorage.getItem('myFavorite')) {
         const jsonData = JSON.parse(localStorage.getItem('myFavorite'));
         this.collection = jsonData;
-        console.log(JSON.parse(localStorage.getItem('myFavorite')));
       }
-    },
-    showLoading() {
-      const loader = this.$loading.show();
-      setTimeout(() => {
-        loader.hide();
-      }, 500);
-      // this.isLoading = true;
-      // setTimeout(() => {
-      //   this.isLoading = false;
-      // }, 1000);
     },
   },
   mounted() {
-    this.showLoading();
     this.getProducts();
     this.getCart();
     this.getCollection();
