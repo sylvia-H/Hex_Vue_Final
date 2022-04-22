@@ -1,4 +1,7 @@
 <template>
+  <VLoading :active="isLoading" :z-index="1000">
+    <VueLoader></VueLoader>
+  </VLoading>
   <div class="container py-18">
     <div class="row mb-6">
       <div class="col-12 col-lg-7">
@@ -244,9 +247,15 @@
 </template>
 
 <script>
+import VueLoader from '@/components/LoadingOverlay2.vue';
+
 export default {
+  components: {
+    VueLoader,
+  },
   data() {
     return {
+      isLoading: false,
       order: [],
       products: [],
       user: [],
@@ -256,7 +265,7 @@ export default {
   },
   methods: {
     getOrder(id) {
-      const loader = this.$loading.show();
+      this.isLoading = true;
       this.$http
         .get(
           `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/order/${id}`,
@@ -267,14 +276,14 @@ export default {
             this.products.push(this.order.products[`${item}`]);
           });
           this.user = this.order.user;
-          loader.hide();
+          this.isLoading = false;
         })
         .catch(() => {
-          loader.hide();
+          this.isLoading = false;
         });
     },
     checkCoupon() {
-      const loader = this.$loading.show();
+      this.isLoading = true;
       const coupon = document.getElementById('couponData').value;
       const data = {
         code: coupon,
@@ -287,15 +296,15 @@ export default {
         .then((res) => {
           console.dir(res);
           this.is_couponOK = 1;
-          loader.hide();
+          this.isLoading = false;
         })
         .catch(() => {
           this.is_couponOK = 0;
-          loader.hide();
+          this.isLoading = false;
         });
     },
     submitPayment() {
-      const loader = this.$loading.show();
+      this.isLoading = true;
       const { id } = this.$route.params;
       this.$http
         .post(
@@ -303,7 +312,7 @@ export default {
         )
         .then(() => {
           this.$refs.form.resetForm();
-          loader.hide();
+          this.isLoading = false;
           this.$swal
             .fire('成功！', '已完成付款！', {
               icon: 'success',
@@ -315,7 +324,7 @@ export default {
             });
         })
         .catch(() => {
-          loader.hide();
+          this.isLoading = false;
           this.$swal.fire('失敗！', '付款失敗，請再試一次！', {
             icon: 'error',
           });

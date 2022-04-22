@@ -1,23 +1,29 @@
 <template>
+  <VLoading :active="isLoading" :z-index="1000">
+    <VueLoader></VueLoader>
+  </VLoading>
   <BackendNavbar />
   <RouterView v-if="status" />
 </template>
 
 <script>
 import BackendNavbar from '@/components/BackendNavbar.vue';
+import VueLoader from '@/components/LoadingOverlay.vue';
 
 export default {
   components: {
     BackendNavbar,
+    VueLoader,
   },
   data() {
     return {
+      isLoading: false,
       status: false,
     };
   },
   methods: {
     checkLogin() {
-      const loader = this.$loading.show();
+      this.isLoading = true;
       const AUTH_TOKEN = document.cookie.replace(
         /(?:(?:^|.*;\s*)myToken\s*=\s*([^;]*).*$)|^.*$/,
         '$1',
@@ -26,11 +32,11 @@ export default {
       this.$http
         .post(`${process.env.VUE_APP_API}/api/user/check`)
         .then(() => {
-          loader.hide();
+          this.isLoading = false;
           this.status = true;
         })
         .catch(() => {
-          loader.hide();
+          this.isLoading = false;
           this.$router.push('./');
         });
     },

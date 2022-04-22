@@ -1,4 +1,7 @@
 <template>
+  <VLoading :active="isLoading" :z-index="1000">
+    <VueLoader></VueLoader>
+  </VLoading>
   <!-- 產品列表 -->
   <section class="container | py-20">
     <div class="row">
@@ -192,6 +195,7 @@
 
 <script>
 import emitter from '@/methods/mitt';
+import VueLoader from '@/components/LoadingOverlay2.vue';
 
 export default {
   data() {
@@ -203,21 +207,25 @@ export default {
       is_loadingItem: '',
       carts: [],
       collection: {},
+      isLoading: false,
     };
+  },
+  components: {
+    VueLoader,
   },
   inject: ['emitter'],
   methods: {
     getProduct(id) {
-      const loader = this.$loading.show();
+      this.isLoading = true;
       this.$http
         .get(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/product/${id}`)
         .then((res) => {
           this.product = res.data.product;
           this.getTemp();
-          loader.hide();
+          this.isLoading = false;
         })
         .catch(() => {
-          loader.hide();
+          this.isLoading = false;
         });
     },
     getTemp() {

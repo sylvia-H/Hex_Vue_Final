@@ -1,4 +1,7 @@
 <template>
+  <VLoading :active="isLoading" :z-index="1000">
+    <VueLoader></VueLoader>
+  </VLoading>
   <div class="container">
     <div class="row py-3">
       <div class="col-10 offset-1">
@@ -107,10 +110,12 @@
 <script>
 import PaginationProducts from '@/components/PaginationProducts.vue';
 import ModalEdit from '@/components/ModalEditProduct.vue';
+import VueLoader from '@/components/LoadingOverlay.vue';
 
 export default {
   data() {
     return {
+      isLoading: false,
       products: [],
       pagination: {},
       tempItemInfo: {
@@ -123,10 +128,11 @@ export default {
   components: {
     ModalEdit,
     PaginationProducts,
+    VueLoader,
   },
   methods: {
     getProducts(page = 1) {
-      const loader = this.$loading.show();
+      this.isLoading = true;
       this.$http
         .get(
           `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/products?page=${page}`,
@@ -134,10 +140,10 @@ export default {
         .then((res) => {
           this.products = res.data.products;
           this.pagination = res.data.pagination;
-          loader.hide();
+          this.isLoading = false;
         })
         .catch(() => {
-          loader.hide();
+          this.isLoading = false;
         });
     },
     changeStatus(id) {
@@ -155,7 +161,7 @@ export default {
       });
     },
     editProduct(item, id) {
-      const loader = this.$loading.show();
+      this.isLoading = true;
       if (item) {
         this.tempItemInfo = item;
       }
@@ -176,7 +182,7 @@ export default {
       }
       this.$http[httpStatus](url, dataObj)
         .then(() => {
-          loader.hide();
+          this.isLoading = false;
           this.getProducts(this.pagination.current_page);
           if (httpStatus === 'post') {
             this.$swal.fire({
@@ -193,7 +199,7 @@ export default {
           }
         })
         .catch((err) => {
-          loader.hide();
+          this.isLoading = false;
           const errMSG = err.response.data.message;
           let msg = '';
           errMSG.forEach((el) => {
@@ -231,11 +237,11 @@ export default {
         })
         .then((result) => {
           if (result.isConfirmed) {
-            const loader = this.$loading.show();
+            this.isLoading = true;
             this.$http
               .delete(url)
               .then(() => {
-                loader.hide();
+                this.isLoading = false;
                 this.getProducts(this.pagination.current_page);
                 this.$swal.fire({
                   icon: 'success',
@@ -244,7 +250,7 @@ export default {
                 });
               })
               .catch(() => {
-                loader.hide();
+                this.isLoading = false;
                 this.$swal.fire({
                   icon: 'error',
                   title: '失敗！',

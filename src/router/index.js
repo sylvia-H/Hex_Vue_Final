@@ -112,9 +112,9 @@ const router = createRouter({
   routes,
   linkActiveClass: 'active',
   linkExactActiveClass: 'active',
-  scrollBehavior() {
-    return { top: 0 };
-  },
+  // scrollBehavior() {
+  //   return { top: 0 };
+  // },
 });
 
 router.beforeEach((to, from, next) => {

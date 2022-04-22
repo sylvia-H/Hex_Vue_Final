@@ -1,4 +1,7 @@
 <template>
+  <VLoading :active="isLoading" :z-index="1000">
+    <VueLoader></VueLoader>
+  </VLoading>
   <section class="container | py-20">
     <h2 class="text-center">我的收藏</h2>
     <hr class="my-6" />
@@ -250,6 +253,7 @@
 
 <script>
 import emitter from '@/methods/mitt';
+import VueLoader from '@/components/LoadingOverlay2.vue';
 
 export default {
   data() {
@@ -258,6 +262,9 @@ export default {
       is_loadingItem: '',
       collection: {},
     };
+  },
+  components: {
+    VueLoader,
   },
   inject: ['emitter'],
   methods: {
@@ -274,10 +281,10 @@ export default {
     },
     getCollection() {
       if (localStorage.getItem('myFavorite')) {
-        const loader = this.$loading.show();
+        this.isLoading = true;
         const jsonData = JSON.parse(localStorage.getItem('myFavorite'));
         this.collection = jsonData;
-        loader.hide();
+        this.isLoading = false;
       }
     },
     addCart(id, qty = 1) {

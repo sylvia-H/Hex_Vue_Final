@@ -2,7 +2,7 @@ import { createApp } from 'vue';
 import 'bootstrap';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
-import VueLoading from 'vue-loading-overlay';
+import Loading from 'vue-loading-overlay';
 import VueSweetalert2 from 'vue-sweetalert2';
 import {
   Form, Field, ErrorMessage, defineRule, configure,
@@ -34,7 +34,7 @@ app.config.globalProperties.$filters = {
 app.use(router);
 app.use(VueAxios, axios);
 app.use(VueSweetalert2);
-app.use(VueLoading);
+app.component('VLoading', Loading);
 app.component('VForm', Form);
 app.component('VField', Field);
 app.component('ErrorMessage', ErrorMessage);

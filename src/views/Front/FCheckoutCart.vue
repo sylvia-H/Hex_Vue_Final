@@ -1,4 +1,7 @@
 <template>
+  <VLoading :active="isLoading" :z-index="1000">
+    <VueLoader></VueLoader>
+  </VLoading>
   <div class="container py-18">
     <div class="row mb-6">
       <div class="col-12 col-lg-7">
@@ -146,9 +149,15 @@
 </template>
 
 <script>
+import VueLoader from '@/components/LoadingOverlay2.vue';
+
 export default {
+  components: {
+    VueLoader,
+  },
   data() {
     return {
+      isLoading: false,
       carts: [],
       formData: {
         user: {
@@ -163,21 +172,21 @@ export default {
   },
   methods: {
     getCart() {
-      const loader = this.$loading.show();
+      this.isLoading = true;
       this.$http
         .get(
           `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart`,
         )
         .then((res) => {
           this.carts = res.data.data;
-          loader.hide();
+          this.isLoading = false;
         })
         .catch(() => {
-          loader.hide();
+          this.isLoading = false;
         });
     },
     editCart(id, qty) {
-      const loader = this.$loading.show();
+      this.isLoading = true;
       const data = {
         product_id: id,
         qty,
@@ -189,10 +198,10 @@ export default {
         )
         .then(() => {
           this.getCart();
-          loader.hide();
+          this.isLoading = false;
         })
         .catch(() => {
-          loader.hide();
+          this.isLoading = false;
         });
     },
     delCart(id, title) {
@@ -211,12 +220,12 @@ export default {
         })
         .then((result) => {
           if (result.isConfirmed) {
-            const loader = this.$loading.show();
+            this.isLoading = true;
             this.$http
               .delete(url)
               .then(() => {
                 this.getCart();
-                loader.hide();
+                this.isLoading = false;
                 this.$swal.fire({
                   icon: 'success',
                   title: '成功！',
@@ -224,7 +233,7 @@ export default {
                 });
               })
               .catch(() => {
-                loader.hide();
+                this.isLoading = false;
                 this.$swal.fire({
                   icon: 'error',
                   title: '失敗！',
@@ -235,7 +244,7 @@ export default {
         });
     },
     submitOrder() {
-      const loader = this.$loading.show();
+      this.isLoading = true;
       const data = this.formData;
       this.$http
         .post(
@@ -244,7 +253,7 @@ export default {
         )
         .then((res) => {
           this.$refs.form.resetForm();
-          loader.hide();
+          this.isLoading = false;
           this.$swal
             .fire('成功！', `已送出訂單！總金額 NT$ ${res.data.total} 元`, {
               icon: 'success',
@@ -256,7 +265,7 @@ export default {
             });
         })
         .catch(() => {
-          loader.hide();
+          this.isLoading = false;
           this.$swal.fire('失敗！', '送出訂單失敗，請再試一次！', {
             icon: 'error',
           });

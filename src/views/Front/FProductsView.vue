@@ -1,4 +1,7 @@
 <template>
+  <VLoading :active="isLoading" :z-index="1000">
+    <VueLoader></VueLoader>
+  </VLoading>
   <!-- 產品列表 -->
   <section class="container | py-20">
     <h2 class="text-center">來選好食</h2>
@@ -87,6 +90,7 @@
 
 <script>
 import emitter from '@/methods/mitt';
+import VueLoader from '@/components/LoadingOverlay2.vue';
 
 export default {
   data() {
@@ -103,9 +107,13 @@ export default {
     };
   },
   inject: ['emitter'],
+  components: {
+    VueLoader,
+  },
   methods: {
     getProducts() {
-      const loader = this.$loading.show();
+      // const loader = this.$loading.show();
+      this.isLoading = true;
       this.$http
         .get(
           `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/products/all`,
@@ -119,10 +127,12 @@ export default {
               this.categories[item.category] += 1;
             }
           });
-          loader.hide();
+          // loader.hide();
+          this.isLoading = false;
         })
         .catch(() => {
-          loader.hide();
+          // loader.hide();
+          this.isLoading = false;
         });
     },
     getCart() {

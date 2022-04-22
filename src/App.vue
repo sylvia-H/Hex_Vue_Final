@@ -11,6 +11,14 @@ export default {
       emitter,
     };
   },
+  watch: {
+    $route() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    },
+  },
 };
 </script>
 

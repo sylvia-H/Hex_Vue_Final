@@ -1,7 +1,7 @@
 <template>
   <FrontNavbar />
-  <div>
-    <RouterView id="mainLayout" />
+  <div id="mainLayout">
+    <RouterView />
   </div>
   <FrontFooter />
 </template>
