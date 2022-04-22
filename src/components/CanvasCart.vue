@@ -13,20 +13,18 @@
     <!-- Cart 購物車 offcanvas-body -->
     <div class="offcanvas-body fashion-scrollbar ps-8 pt-1 h-100">
       <!-- 營養素資訊 -->
-      <h6 v-if="is_cart" class="text-white mb-4">
-        您所選購的商品<span class="text-green2">總熱量</span>：{{calorie}} kcal(仟卡)
+      <h6 v-if="cartsTotal" class="text-white mb-4">
+        您所選購的商品<span class="text-green2">總熱量</span>：{{ calorie }} kcal(仟卡)
       </h6>
-      <h6 v-if="is_cart" class="text-white mb-4">
-        共含<span class="text-warning">碳水化合物</span>總量 {{carbohydrate}} g、
-        <span class="text-warning">粗脂肪</span>總量 {{protein}} g、
-        <span class="text-warning">粗蛋白質</span>總量 {{crudeFat}} g
+      <h6 v-if="cartsTotal" class="text-white mb-4">
+        共含<span class="text-warning">碳水化合物</span>總量 {{ carbohydrate }} g、
+        <span class="text-warning">粗脂肪</span>總量 {{ protein }} g、
+        <span class="text-warning">粗蛋白質</span>總量 {{ crudeFat }} g
       </h6>
       <!-- 當購物車沒有品項時 -->
       <div v-else class="d-flex flex-column align-items-center justify-content-center h-100">
         <i class="bi bi-cart4 text-warning fz-24"></i>
-        <p class="text-warning fz-5">
-          把喜愛的美食加進來吧！
-        </p>
+        <p class="text-warning fz-5">把喜愛的美食加進來吧！</p>
       </div>
       <!-- Card 購物車卡片01 -->
       <div
@@ -42,32 +40,17 @@
         ></button>
         <div class="row g-0 align-items-center">
           <div class="col-3">
-            <img
-              class="img-cover w-100 h-100"
-              :src="item.product.imageUrl"
-              alt="..."
-            />
+            <img class="img-cover w-100 h-100" :src="item.product.imageUrl" alt="..." />
           </div>
           <div class="col-9 ps-4">
             <div class="row">
-              <div
-                class="
-                  col-7
-                  d-flex
-                  flex-column
-                  align-items-center
-                  justify-content-center
-                "
-              >
+              <div class="col-7 d-flex flex-column align-items-center justify-content-center">
                 <h5 class="card-title mb-4">
                   {{ item.product.title }}
                 </h5>
                 <p class="card-text">
                   單價 NT
-                  <span
-                    v-if="item.product.origin_price !== item.product.price"
-                    class="text-gray"
-                  >
+                  <span v-if="item.product.origin_price !== item.product.price" class="text-gray">
                     <s>{{ item.product.origin_price }}</s>
                   </span>
                   {{ item.product.price }} 元
@@ -75,12 +58,7 @@
               </div>
               <div class="col-5 d-flex align-items-end">
                 <div
-                  class="
-                    btn-group
-                    d-flex
-                    justify-content-around
-                    align-items-center
-                  "
+                  class="btn-group d-flex justify-content-around align-items-center"
                   role="group"
                   aria-label="Basic"
                 >
@@ -96,13 +74,7 @@
                   <input
                     :value="item.qty"
                     type="text"
-                    class="
-                      form-control-plaintext
-                      p-0
-                      border-0
-                      fw-bold
-                      text-black text-center
-                    "
+                    class="form-control-plaintext p-0 border-0 fw-bold text-black text-center"
                   />
                   <button
                     @click="editCart(item.id, item.qty + 1)"
@@ -120,16 +92,7 @@
     </div>
 
     <!-- Cart 購物車 offcanvas-footer -->
-    <div
-      class="
-        offcanvas-footer
-        d-flex
-        justify-content-between
-        align-items-center
-        py-6
-        px-8
-      "
-    >
+    <div class="offcanvas-footer d-flex justify-content-between align-items-center py-6 px-8">
       <div class="d-flex ai-c">
         <p class="h5 text-white me-24">小計</p>
         <span class="h5 text-white">NT$ {{ carts.total }}</span>
@@ -142,8 +105,7 @@
         >
           清空購物車
         </button>
-        <router-link :to="{ name: 'checkoutCart'}"
-         :class="{ 'pe-none': !is_cart }">
+        <router-link :to="{ name: 'checkoutCart' }" :class="{ 'pe-none': !cartsTotal }">
           <button
             type="button"
             class="btn btn-danger px-4 py-2"
@@ -160,6 +122,7 @@
 
 <script>
 import { Offcanvas } from 'bootstrap';
+import emitter from '@/methods/mitt';
 
 export default {
   name: 'CanvasCart',
@@ -167,13 +130,14 @@ export default {
     return {
       canvas: '',
       carts: [],
-      is_cart: 0,
+      cartsTotal: 0,
       calorie: 0,
       carbohydrate: 0,
       protein: 0,
       crudeFat: 0,
     };
   },
+  inject: ['emitter'],
   methods: {
     calcNutrients() {
       this.calorie = 0;
@@ -189,17 +153,22 @@ export default {
     },
     getCart() {
       this.$http
-        .get(
-          `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart`,
-        )
+        .get(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart`)
         .then((res) => {
           this.carts = res.data.data;
-          this.is_cart = this.carts.carts.length;
+          this.cartsTotal = this.calcCartsTotal(this.carts.carts);
           this.calcNutrients();
         })
         .catch((err) => {
           console.dir(err);
         });
+    },
+    calcCartsTotal(arr) {
+      let sum = 0;
+      arr.forEach((item) => {
+        sum += item.qty;
+      });
+      return sum;
     },
     openCanvas() {
       this.getCart();
@@ -214,12 +183,11 @@ export default {
         qty,
       };
       this.$http
-        .put(
-          `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart/${id}`,
-          { data },
-        )
+        .put(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart/${id}`, { data })
         .then(() => {
           this.getCart();
+          // 給導覽列使用
+          emitter.emit('get-cart');
         })
         .catch((err) => {
           console.dir(err);
@@ -250,6 +218,8 @@ export default {
                     text: `您已將${title}刪除了！`,
                   });
                   this.getCart();
+                  // 給導覽列使用
+                  emitter.emit('get-cart');
                 })
                 .catch(() => {
                   this.$swal.fire({
@@ -284,6 +254,8 @@ export default {
                     text: '您已將購物車清空了！',
                   });
                   this.getCart();
+                  // 給導覽列使用
+                  emitter.emit('get-cart');
                 })
                 .catch(() => {
                   this.$swal.fire({

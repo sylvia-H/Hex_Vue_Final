@@ -191,6 +191,8 @@
 </template>
 
 <script>
+import emitter from '@/methods/mitt';
+
 export default {
   data() {
     return {
@@ -203,6 +205,7 @@ export default {
       collection: {},
     };
   },
+  inject: ['emitter'],
   methods: {
     getProduct(id) {
       const loader = this.$loading.show();
@@ -252,6 +255,8 @@ export default {
           });
           this.getCart();
           this.is_loadingItem = '';
+          // 給導覽列使用
+          emitter.emit('get-cart');
         })
         .catch((err) => {
           console.dir(err);
@@ -265,6 +270,8 @@ export default {
         this.collection[fvID] = item;
       }
       localStorage.setItem('myFavorite', JSON.stringify(this.collection));
+      // 給導覽列使用
+      emitter.emit('get-fav');
     },
     getCollection() {
       if (localStorage.getItem('myFavorite')) {
