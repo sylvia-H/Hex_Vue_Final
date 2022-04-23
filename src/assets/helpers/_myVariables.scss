@@ -79,7 +79,8 @@ $dark:          $gray-900 !default;
 //new
 $cream1:#E9D2A3;
 $cream2:#f7e7c8;
-$cream3:#f7edd9;
+$cream3:#ede6da;
+$cream4: #eae6de;
 $orange1:#fc9700;
 $green1:#166907;
 $green2:#83B875;
@@ -106,6 +107,7 @@ $theme-colors: (
   "cream1":     $cream1,
   "cream2":     $cream2,
   "cream3":     $cream3,
+  "cream4":     $cream4,
   "orange1":    $orange1,
   "green1":     $green1,
   "green2":     $green2,
@@ -244,7 +246,7 @@ $escaped-characters: (
 $enable-caret:                true !default;
 $enable-rounded:              true !default;
 $enable-shadows:              false !default;
-$enable-gradients:            false !default;
+$enable-gradients:            true; // false !default;
 $enable-transitions:          true !default;
 $enable-reduced-motion:       true !default;
 $enable-smooth-scroll:        true !default;
@@ -482,6 +484,8 @@ $aspect-ratios: (
 
 // scss-docs-start font-variables
 // stylelint-disable value-keyword-case
+// @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap');
+// $font-family-sans-serif:      "Roboto", "Noto Sans TC", system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 $font-family-sans-serif:      system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 $font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
 // stylelint-enable value-keyword-case

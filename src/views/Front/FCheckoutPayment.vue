@@ -143,10 +143,27 @@
       <!-- Info -->
       <div class="col-12 offset-lg-1 col-lg-4">
         <h5>付款資訊</h5>
+        <div class="row">
+          <div class="col-4">
+            <hr />
+          </div>
+          <div class="col-4 d-flex justify-content-center align-items-center">
+            <div class="fz-3">
+              <span class="text-danger mx-1">*</span>
+              為必填欄位
+            </div>
+          </div>
+          <div class="col-4">
+            <hr />
+          </div>
+        </div>
         <div class="mb-10">
           <VForm ref="form" v-slot="{ errors }" @submit="submitPayment">
-            <div class="mt-5">
-              <span class="mb-2">信用卡帳號</span>
+            <div class="mb-5">
+              <span class="mb-2">
+                信用卡帳號
+                <span class="text-danger ms-1">*</span>
+              </span>
               <VField
                 rules="required|min:16|max:19"
                 class="form-control"
@@ -161,8 +178,11 @@
                 name="信用卡帳號"
                 class="d-block text-end invalid-feedback"/>
             </div>
-            <div class="mt-5">
-              <span class="mb-2">有效日期</span>
+            <div class="mb-5">
+              <span class="mb-2">
+                有效日期
+                <span class="text-danger ms-1">*</span>
+              </span>
               <VField
                 rules="required"
                 class="form-control"
@@ -175,8 +195,11 @@
                 name="有效日期"
                 class="d-block text-end invalid-feedback"/>
             </div>
-            <div class="mt-5">
-              <span class="mb-2">安全碼</span>
+            <div class="mb-5">
+              <span class="mb-2">
+                安全碼
+                <span class="text-danger ms-1">*</span>
+              </span>
               <VField
                 rules="required|min:3|max:4"
                 class="form-control"
@@ -192,7 +215,7 @@
                 class="d-block text-end invalid-feedback"/>
             </div>
             <!-- subtotal -->
-            <div class="bg-light p-5 mt-5">
+            <div class="bg-light p-5 mb-5">
               <div class="d-flex align-items-center justify-content-between | mb-6">
                 <p>優惠碼</p>
                 <div class="d-flex flex-column">
@@ -221,7 +244,7 @@
               <!-- 返回 & 下一步 -->
               <div class="col-6">
                 <router-link :to="{ name : 'checkoutOrder' }">
-                  <button type="button" class="btn btn-outline-primary w-100">
+                  <button type="button" class="btn btn-outline-dark w-100">
                     返回
                   </button>
                 </router-link>

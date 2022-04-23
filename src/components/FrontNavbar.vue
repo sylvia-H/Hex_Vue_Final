@@ -2,7 +2,7 @@
   <!-- 前台導覽列 -->
   <nav
     class="navbar navbar-expand-lg navbar-light fixed-top bg-cream3 shadow-sm opacity-75
-      py-2 py-md-4 py-lg-2"
+     py-2 py-md-4 py-lg-2"
   >
     <div class="container">
       <router-link to="/" class="text-center me-10">
@@ -14,7 +14,7 @@
         <h5><strong>來選好食</strong></h5>
       </router-link>
       <router-link to="/dietInfo" class="d-none d-lg-flex text-dark me-8 | hvr-float-shadow">
-        <i class="bi bi-lightbulb-fill me-2"></i>
+        <span class="material-icons me-2">emoji_objects</span>
         <h5><strong>食前好思</strong></h5>
       </router-link>
       <router-link to="/aboutShipping" class="d-none d-lg-flex text-dark me-8 | hvr-float-shadow">
@@ -24,21 +24,21 @@
       <!-- 漢堡 -->
       <button
         class="navbar-toggler"
-        ref="btnToggler"
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#navbarList"
         aria-controls="navbarList"
         aria-expanded="false"
         aria-label="Toggle navigation"
+        @click="toggleNavMenu"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- 選單內容 -->
-      <div class="collapse navbar-collapse justify-content-end" id="navbarList">
+      <div class="collapse navbar-collapse justify-content-end" id="navbarList" ref="navMenu">
         <ul class="navbar-nav py-6 py-md-5 py-lg-0">
           <li
-            @click="autoCollapse()"
+            @click="hideNavMenu()"
             @keydown="enter"
             class="nav-item d-flex align-items-center | my-4 me-4 d-lg-none"
           >
@@ -48,17 +48,17 @@
             </router-link>
           </li>
           <li
-            @click="autoCollapse()"
+            @click="hideNavMenu()"
             @keydown="enter"
             class="nav-item d-flex align-items-center | my-4 me-4 d-lg-none"
           >
             <router-link to="/dietInfo" class="d-flex text-dark nav-link">
-              <i class="bi bi-lightbulb-fill fs-5 text-dark | me-2 me-lg-0"></i>
+              <span class="material-icons fs-5 text-dark | me-2 me-lg-0"> emoji_objects </span>
               <h5><strong>食前好思</strong></h5>
             </router-link>
           </li>
           <li
-            @click="autoCollapse()"
+            @click="hideNavMenu()"
             @keydown="enter"
             class="nav-item d-flex align-items-center | my-4 me-4 d-lg-none"
           >
@@ -70,18 +70,21 @@
           <!-- 收藏我的最愛 -->
           <router-link to="/myFavorite" class="d-flex text-dark nav-link">
             <li
-              @click="autoCollapse()"
+              @click="hideNavMenu()"
               @keydown="enter"
               class="nav-item d-flex align-items-center | my-4 me-5 | position-relative"
             >
-              <i class="bi bi-heart fz-5 fz-md-6 text-dark | me-2 me-lg-0"></i>
+              <!-- <i class="bi bi-heart fz-5 fz-md-6 text-dark | me-2 me-lg-0"></i> -->
+              <span class="material-icons fz-5 fz-md-6 text-dark | me-2 me-lg-0">
+                favorite_border
+              </span>
               <h5 class="d-lg-none text-dark">
                 <strong>我的收藏</strong>
               </h5>
               <span
                 v-if="fav"
                 class="position-absolute top-25 start-100 translate-middle
-                 badge rounded-pill bg-orange1 fz-3 opacity-75 | d-none d-lg-block"
+                 badge rounded-pill bg-brown1 fz-3 opacity-75 | d-none d-lg-block"
               >
                 {{ fav }}
                 <span class="visually-hidden">unread messages</span>
@@ -93,18 +96,21 @@
             class="nav-item d-flex align-items-center | my-4 me-5 | position-relative"
             @click="
               openCartCanvas();
-              autoCollapse();
+              hideNavMenu();
             "
             @keydown="enter"
           >
             <i class="bi bi-cart3 fz-5 fz-md-6 text-dark | me-2 me-lg-0"></i>
+            <!-- <span class="material-icons fz-5 fz-md-6 text-dark | me-2 me-lg-0">
+              shopping_cart
+            </span> -->
             <h5 class="d-lg-none text-dark">
               <strong>購物車</strong>
             </h5>
             <span
               v-if="cartsTotal"
               class="position-absolute top-25 start-100 translate-middle
-               badge rounded-pill bg-orange1 fz-3 opacity-75 | d-none d-lg-block"
+               badge rounded-pill bg-brown1 fz-3 opacity-75 | d-none d-lg-block"
             >
               {{ cartsTotal }}
               <span class="visually-hidden">unread messages</span>
@@ -115,7 +121,7 @@
             class="nav-item d-flex align-items-center | my-4"
             @click="
               openLoginModel();
-              autoCollapse();
+              hideNavMenu();
             "
             @keydown="enter"
           >
@@ -136,6 +142,7 @@
 import CanvasCart from '@/components/CanvasCart.vue';
 import ModalLogin from '@/components/ModalLogin.vue';
 import emitter from '@/methods/mitt';
+import Collapse from 'bootstrap/js/dist/collapse';
 
 export default {
   name: 'FrontNavbar',
@@ -144,6 +151,7 @@ export default {
       carts: [],
       cartsTotal: 0,
       fav: 0,
+      navMenu: '',
     };
   },
   components: {
@@ -152,22 +160,9 @@ export default {
   },
   inject: ['emitter'],
   methods: {
-    openLoginModel() {
-      this.$refs.loginModal.openModal();
-    },
-    openCartCanvas() {
-      this.$refs.cartCanvas.openCanvas();
-    },
-    autoCollapse() {
-      if (this.$refs.btnToggler.getAttribute('aria-expanded') !== false) {
-        this.$refs.btnToggler.click();
-      }
-    },
     getCart() {
       this.$http
-        .get(
-          `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart`,
-        )
+        .get(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart`)
         .then((res) => {
           this.carts = res.data.data;
           this.cartsTotal = this.calcCartsTotal(this.carts.carts);
@@ -192,6 +187,18 @@ export default {
     calcFav(collection) {
       this.fav = Object.keys(collection).length;
     },
+    openLoginModel() {
+      this.$refs.loginModal.openModal();
+    },
+    openCartCanvas() {
+      this.$refs.cartCanvas.openCanvas();
+    },
+    toggleNavMenu() {
+      this.navMenu.toggle();
+    },
+    hideNavMenu() {
+      this.navMenu.hide();
+    },
   },
   mounted() {
     this.getCart();
@@ -202,6 +209,10 @@ export default {
     });
     emitter.on('get-fav', () => {
       this.getFav();
+    });
+    // 解決手機版 Menu 無法自動收合問題
+    this.navMenu = new Collapse(this.$refs.navMenu, {
+      toggle: false,
     });
   },
 };

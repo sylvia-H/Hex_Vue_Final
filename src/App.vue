@@ -11,21 +11,9 @@ export default {
       emitter,
     };
   },
-  watch: {
-    $route() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
-    },
-  },
 };
 </script>
 
 <style lang="scss">
 @import './assets/main';
-@import 'bootstrap-icons/font/bootstrap-icons.css';
-@import 'material-design-icons/iconfont/material-icons.css';
-@import 'sweetalert2/dist/sweetalert2.min.css';
-@import 'vue-loading-overlay/dist/vue-loading.css';
 </style>

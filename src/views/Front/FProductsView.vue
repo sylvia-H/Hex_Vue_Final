@@ -34,7 +34,7 @@
           <router-link :to="`/product/${item.id}`">
             <div class="ratio ratio-4x3 hoverMask">
               <i class="bi bi-zoom-in"></i>
-              <img :src="item.imageUrl" class="w-100 h-100 img-cover" :alt='item.title' />
+              <img :src="item.imageUrl" class="img-cover" :alt='item.title' />
             </div>
           </router-link>
           <div class="card-body">

@@ -27,7 +27,6 @@
                 placeholder="name@example.com"
                 required
               />
-              <!-- eslint-disable-next-line -->
               <label for="username" class="text-brown1 fw-bold">Email address</label>
             </div>
             <div class="form-floating mb-4">
@@ -39,7 +38,6 @@
                 placeholder="Password"
                 required
               />
-              <!-- eslint-disable-next-line -->
               <label for="password" class="text-brown1 fw-bold">Password</label>
             </div>
             <button

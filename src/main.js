@@ -1,17 +1,21 @@
 import { createApp } from 'vue';
 import 'bootstrap';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'material-design-icons-iconfont/dist/material-design-icons.min.css';
+import 'vue-loading-overlay/dist/vue-loading.css';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import Loading from 'vue-loading-overlay';
 import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 import {
   Form, Field, ErrorMessage, defineRule, configure,
 } from 'vee-validate';
 import AllRules from '@vee-validate/rules';
 import { localize, setLocale } from '@vee-validate/i18n';
 import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json';
-import App from './App.vue';
 import router from './router';
+import App from './App.vue';
 import { transferTime, transferToDate, toCurrency } from './methods/filters';
 
 Object.keys(AllRules).forEach((rule) => {
@@ -19,10 +23,9 @@ Object.keys(AllRules).forEach((rule) => {
 });
 
 configure({
-  generateMessage: localize({ zh_TW: zhTW }), // 載入繁體中文語系
-  validateOnInput: true, // 當輸入任何內容直接進行驗證
+  generateMessage: localize({ zh_TW: zhTW }),
+  validateOnInput: true,
 });
-// 設定預設語系
 setLocale('zh_TW');
 
 const app = createApp(App);

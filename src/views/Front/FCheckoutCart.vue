@@ -125,7 +125,7 @@
             <!-- 返回 & 下一步 -->
             <div class="col-6">
               <router-link :to="{ name : 'products' }">
-                <button type="button" class="btn btn-outline-primary w-100">
+                <button type="button" class="btn btn-outline-dark w-100">
                   返回
                 </button>
               </router-link>

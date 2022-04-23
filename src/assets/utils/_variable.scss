@@ -11,16 +11,3 @@ $rwd-breakpoint-base:(
     "xl":1200px,
     "xxl":1400px
 );
-
-// flex 管理
-$justify-content:"fs","fe","c","sb","sa","se","stretch","baseline";
-$justify-content-base:(
-    "fs":flex-start,
-    "fe":flex-end,
-    "c":center,
-    "sb":space-between,
-    "sa":space-around,
-    "se":space-evenly,
-    "stretch":stretch,
-    "baseline":baseline
-);

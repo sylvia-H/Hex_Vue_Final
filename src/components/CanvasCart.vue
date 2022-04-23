@@ -1,64 +1,73 @@
 <template>
   <div
     ref="cart_canvas"
-    class="offcanvas offcanvas-end bg-dark"
+    class="offcanvas offcanvas-end bg-light"
     tabindex="-1"
     aria-labelledby="cartLabel"
   >
     <!-- Cart 購物車 offcanvas-header -->
-    <div class="offcanvas-header ps-8">
-      <h2 id="cartLabel" class="text-white py-2">購物車列表</h2>
+    <div class="offcanvas-header p-6">
+      <!-- <h2 id="cartLabel" class="text-green1 fw-bold py-2">購物車列表</h2> -->
+      <div></div>
+      <button
+        type="button"
+        class="btn-close text-reset"
+        data-bs-dismiss="offcanvas"
+        aria-label="Close"
+      ></button>
     </div>
 
     <!-- Cart 購物車 offcanvas-body -->
-    <div class="offcanvas-body fashion-scrollbar ps-8 pt-1 h-100">
+    <div class="offcanvas-body fashion-scrollbar py-0 px-8 h-100">
       <!-- 營養素資訊 -->
-      <h6 v-if="cartsTotal" class="text-white mb-4">
-        您所選購的商品<span class="text-green2">總熱量</span>：{{ calorie }} kcal(仟卡)
-      </h6>
-      <h6 v-if="cartsTotal" class="text-white mb-4">
-        共含<span class="text-warning">碳水化合物</span>總量 {{ carbohydrate }} g、
-        <span class="text-warning">粗脂肪</span>總量 {{ protein }} g、
-        <span class="text-warning">粗蛋白質</span>總量 {{ crudeFat }} g
-      </h6>
+      <div v-if="cartsTotal" class="bg-white border p-4">
+        <h6 class="mb-2">
+          您所選購的商品<span class="fw-bold ms-2">總熱量</span>：{{ calorie }} kcal(仟卡)
+        </h6>
+        <div>
+          <span class="text-green1 fw-bold">碳水化合物</span> {{ carbohydrate }} g、
+          <span class="text-green1 fw-bold">粗脂肪</span> {{ protein }} g、
+          <span class="text-green1 fw-bold">粗蛋白質</span> {{ crudeFat }} g
+        </div>
+      </div>
       <!-- 當購物車沒有品項時 -->
       <div v-else class="d-flex flex-column align-items-center justify-content-center h-100">
-        <i class="bi bi-cart4 text-warning fz-24"></i>
-        <p class="text-warning fz-5">把喜愛的美食加進來吧！</p>
+        <i class="bi bi-cart4 text-gray fz-24"></i>
+        <p class="text-gray fz-5 mb-6">把喜愛的美食加進來吧！</p>
+        <router-link to="/products" @click="closeCanvas">
+          <button type="button" class="btn btn-warning px-4 py-2">來去逛逛</button>
+        </router-link>
       </div>
       <!-- Card 購物車卡片01 -->
-      <div
-        v-for="item in carts.carts"
-        :key="item.id"
-        class="card rounded-2 py-6 px-4 mb-3 position-relative"
-      >
-        <button
-          @click="delCart(item.id, item.product.title)"
-          class="btn-close position-absolute top-0 end-0 m-2"
-          type="button"
-          aria-label="Close"
-        ></button>
-        <div class="row g-0 align-items-center">
-          <div class="col-3">
-            <img class="img-cover w-100 h-100" :src="item.product.imageUrl" alt="..." />
+      <div v-for="item in carts.carts" :key="item.id" class="py-6 px-4 mb-3 border-bottom">
+        <div class="row g-0">
+          <!-- 刪除商品 -->
+          <div class="col-2 d-flex justify-content-center align-items-center">
+            <button @click="delCart(item.id, item.product.title)" class="btn" type="button">
+              <i class="bi bi-trash3-fill fz-5"></i>
+            </button>
           </div>
-          <div class="col-9 ps-4">
+          <!-- 商品圖片 -->
+          <div class="col-4 border">
+            <img class="img-cover" :src="item.product.imageUrl" :alt="item.product.title" />
+          </div>
+          <!-- 商品資訊 -->
+          <div class="col-6 ps-4">
             <div class="row">
-              <div class="col-7 d-flex flex-column align-items-center justify-content-center">
-                <h5 class="card-title mb-4">
+              <div class="col-12 d-flex flex-column">
+                <h5 class="mb-2">
                   {{ item.product.title }}
                 </h5>
-                <p class="card-text">
-                  單價 NT
+                <p class="mb-2">
+                  NT
                   <span v-if="item.product.origin_price !== item.product.price" class="text-gray">
                     <s>{{ item.product.origin_price }}</s>
                   </span>
                   {{ item.product.price }} 元
                 </p>
-              </div>
-              <div class="col-5 d-flex align-items-end">
+                <!-- 數量調整按鈕 -->
                 <div
-                  class="btn-group d-flex justify-content-around align-items-center"
+                  class="w-75 btn-group d-flex justify-content-around align-items-center"
                   role="group"
                   aria-label="Basic"
                 >
@@ -66,7 +75,7 @@
                     @click="editCart(item.id, item.qty - 1)"
                     :disabled="item.qty - 1 === 0"
                     type="button"
-                    class="btn btn-warning fw-bold"
+                    class="btn btn-outline-dark fw-bold"
                   >
                     －
                   </button>
@@ -74,12 +83,12 @@
                   <input
                     :value="item.qty"
                     type="text"
-                    class="form-control-plaintext p-0 border-0 fw-bold text-black text-center"
+                    class="border-dark form-control-plaintext fw-bold text-black text-center"
                   />
                   <button
                     @click="editCart(item.id, item.qty + 1)"
                     type="button"
-                    class="btn btn-warning fw-bold"
+                    class="btn btn-outline-dark fw-bold"
                   >
                     ＋
                   </button>
@@ -92,29 +101,31 @@
     </div>
 
     <!-- Cart 購物車 offcanvas-footer -->
-    <div class="offcanvas-footer d-flex justify-content-between align-items-center py-6 px-8">
-      <div class="d-flex ai-c">
-        <p class="h5 text-white me-24">小計</p>
-        <span class="h5 text-white">NT$ {{ carts.total }}</span>
+    <div v-if="cartsTotal"
+     class="offcanvas-footer bg-cream3 border-2 border-top px-9">
+      <div class="d-flex justify-content-end align-items-center py-4">
+        <p class="h5 text-dark me-24">總計</p>
+        <span class="h5 text-dark ms-2">NT$ {{ carts.total }}</span>
       </div>
-      <div class="d-flex ai-c">
+      <router-link :to="{ name: 'checkoutCart' }" :class="{ 'pe-none': !cartsTotal }">
         <button
-          @click="delCart(null)"
+          type="button"
+          class="w-100 btn btn-green1 rounded-0 py-2 fw-bold"
           :disabled="carts.carts?.length === 0"
-          class="btn btn-outline-danger px-4 py-2 me-6"
+          @click="closeCanvas()"
+        >
+          前往結帳
+        </button>
+      </router-link>
+      <div class="text-end">
+        <button
+          type="button"
+          class="btn text-gray py-4 px-0"
+          :disabled="carts.carts?.length === 0"
+          @click="delCart(null)"
         >
           清空購物車
         </button>
-        <router-link :to="{ name: 'checkoutCart' }" :class="{ 'pe-none': !cartsTotal }">
-          <button
-            type="button"
-            class="btn btn-danger px-4 py-2"
-            @click="closeCanvas()"
-            :disabled="carts.carts?.length === 0"
-          >
-            前往結帳
-          </button>
-        </router-link>
       </div>
     </div>
   </div>

@@ -76,120 +76,144 @@
       </div>
       <!-- Info -->
       <div class="col-12 offset-lg-1 col-lg-4">
-        <h5>訂購人資訊</h5>
-        <div class="mb-10">
-          <VForm ref="form" v-slot="{ errors }" @submit="submitOrder">
-            <div class="mt-5">
-              <span class="mb-2">Email</span>
-              <VField
-                rules="email|required"
-                class="form-control"
-                v-model="formData.user.email"
-                id="femail"
-                name="E-mail"
-                type="email"
-                placeholder="example@gmail.com"/>
-              <ErrorMessage
-                name="E-mail"
-                class="d-block text-end invalid-feedback"/>
+        <div class="border border-dark p-6">
+          <h5>訂購人資訊</h5>
+          <div class="row my-5">
+            <div class="col-4">
+              <hr />
             </div>
-            <div class="mt-5">
-              <span class="mb-2">收件人姓名</span>
-              <VField
-                rules="required"
-                class="form-control"
-                v-model="formData.user.name"
-                type="text"
-                id="fname"
-                name="收件人姓名"
-                placeholder="請輸入姓名"/>
-              <ErrorMessage
-                name="收件人姓名"
-                class="d-block text-end invalid-feedback"/>
-            </div>
-            <div class="mt-5">
-              <span class="mb-2">收件人電話</span>
-              <VField
-                rules="required|min:8|max:10"
-                class="form-control"
-                v-model="formData.user.tel"
-                type="tel"
-                id="fphone"
-                name="收件人電話"
-                placeholder="請輸入電話"/>
-              <ErrorMessage
-                name="收件人電話"
-                class="d-block text-end invalid-feedback"/>
-            </div>
-            <div class="mt-5">
-              <span class="mb-2">收件人地址</span>
-              <VField
-                rules="required"
-                class="form-control"
-                v-model="formData.user.address"
-                type="text"
-                id="faddress"
-                name="收件人地址"
-                placeholder="請輸入地址"/>
-              <ErrorMessage
-                name="收件人地址"
-                class="d-block text-end invalid-feedback"/>
-            </div>
-            <div class="mt-5">
-              <span class="mb-4">留言</span><br />
-              <VField
-                as="textarea"
-                v-model="formData.message"
-                class="form-control"
-                cols="10"
-                rows="5"
-                type="text"
-                id="fmsg"
-                name="留言"
-                placeholder="請輸入留言"
-                value=""/>
-            </div>
-            <!-- subtotal -->
-            <div class="bg-light p-5 mt-5">
-              <div class="d-flex justify-content-between | mb-6">
-                <p class="fw-500">小計</p>
-                <p class="fw-light">NT$ {{ carts.total }} 元</p>
-              </div>
-              <div class="d-flex justify-content-between | mb-6">
-                <p class="fw-500">折扣</p>
-                <p class="fw-light">
-                  NT$ {{ carts.total - carts.final_total }} 元
-                </p>
-              </div>
-              <div class="d-flex justify-content-between">
-                <p class="fz-5">總金額</p>
-                <p class="fz-5 fw-bold">NT$ {{ carts.final_total }} 元</p>
+            <div class="col-4 d-flex justify-content-center align-items-center">
+              <div class="fz-3">
+                <span class="text-danger mx-1">*</span>
+                為必填欄位
               </div>
             </div>
-            <div class="row d-flex justify-content-end | my-8 my-md-4">
-              <!-- 返回 & 下一步 -->
-              <div class="col-6">
-                <router-link :to="{ name : 'checkoutCart' }">
-                  <button type="button" class="btn btn-outline-primary w-100">
-                    返回
+            <div class="col-4">
+              <hr />
+            </div>
+          </div>
+          <div class="mb-10">
+            <VForm ref="form" v-slot="{ errors }" @submit="submitOrder">
+              <div class="form-floating mb-5">
+                <VField
+                  rules="email|required"
+                  class="form-control"
+                  v-model="formData.user.email"
+                  id="femail"
+                  name="E-mail"
+                  type="email"/>
+                <label for="femail">
+                  Email
+                  <span class="text-danger ms-1">*</span>
+                </label>
+                <ErrorMessage
+                  name="E-mail"
+                  class="d-block text-end invalid-feedback"/>
+              </div>
+              <div class="form-floating mb-5">
+                <VField
+                  rules="required"
+                  class="form-control"
+                  v-model="formData.user.name"
+                  type="text"
+                  id="fname"
+                  name="收件人姓名"/>
+                <label for="fname">
+                  收件人姓名
+                  <span class="text-danger ms-1">*</span>
+                </label>
+                <ErrorMessage
+                  name="收件人姓名"
+                  class="d-block text-end invalid-feedback"/>
+              </div>
+              <div class="form-floating mb-5">
+                <VField
+                  rules="required|min:8|max:10"
+                  class="form-control"
+                  v-model="formData.user.tel"
+                  type="tel"
+                  id="fphone"
+                  name="收件人電話"/>
+                <label for="fphone">
+                  收件人電話
+                  <span class="text-danger ms-1">*</span>
+                </label>
+                <ErrorMessage
+                  name="收件人電話"
+                  class="d-block text-end invalid-feedback"/>
+              </div>
+              <div class="form-floating mb-5">
+                <VField
+                  rules="required"
+                  class="form-control"
+                  v-model="formData.user.address"
+                  type="text"
+                  id="faddress"
+                  name="收件人地址"/>
+                <label for="faddress">
+                  收件人地址
+                  <span class="text-danger ms-1">*</span>
+                </label>
+                <ErrorMessage
+                  name="收件人地址"
+                  class="d-block text-end invalid-feedback"/>
+              </div>
+              <div class="form-floating mb-5">
+                <span class="mb-4">留言</span><br />
+                <VField
+                  as="textarea"
+                  v-model="formData.message"
+                  class="form-control"
+                  cols="10"
+                  rows="5"
+                  type="text"
+                  id="fmsg"
+                  name="留言"
+                  placeholder="請輸入留言"
+                  value=""/>
+              </div>
+              <!-- subtotal -->
+              <div class="bg-light p-5 mb-5">
+                <div class="d-flex justify-content-between | mb-6">
+                  <p class="fw-500">小計</p>
+                  <p class="fw-light">NT$ {{ carts.total }} 元</p>
+                </div>
+                <div class="d-flex justify-content-between | mb-6">
+                  <p class="fw-500">折扣</p>
+                  <p class="fw-light">
+                    NT$ {{ carts.total - carts.final_total }} 元
+                  </p>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <p class="fz-5">總金額</p>
+                  <p class="fz-5 fw-bold">NT$ {{ carts.final_total }} 元</p>
+                </div>
+              </div>
+              <div class="row d-flex justify-content-end | my-8 my-md-4">
+                <!-- 返回 & 下一步 -->
+                <div class="col-6">
+                  <router-link :to="{ name : 'checkoutCart' }">
+                    <button type="button" class="btn btn-outline-dark w-100">
+                      返回
+                    </button>
+                  </router-link>
+                </div>
+                <div class="col-6">
+                  <button
+                    type="submit"
+                    :disabled="
+                      Object.keys(errors).length > 0 || carts.carts?.length === 0 ||
+                      !formData.user.name || !formData.user.email || !formData.user.tel ||
+                      !formData.user.address
+                    "
+                    class="btn btn-danger w-100"
+                  >
+                    送出訂單
                   </button>
-                </router-link>
+                </div>
               </div>
-              <div class="col-6">
-                <button
-                  type="submit"
-                  :disabled="
-                    Object.keys(errors).length > 0 || carts.carts?.length === 0 ||
-                    !formData.user.name || !formData.user.email || !formData.user.tel ||
-                    !formData.user.address
-                  "
-                  class="btn btn-danger w-100"
-                >
-                  送出訂單
-                </button>
-              </div>
-            </div>
-          </VForm>
+            </VForm>
+          </div>
         </div>
       </div>
     </div>

@@ -19,9 +19,10 @@
           {{ product.title }}
         </h2>
         <div class="col-12">
-          <div v-if="tempImgUrl" class="border overflow-hidden rounded-3 shadow | m-8">
+          <div v-if="tempImgUrl"
+           class="border overflow-hidden rounded-3 shadow heightLimit_main | m-8">
             <img
-              class="w-100 heightLimit_main img-cover"
+              class="img-cover"
               :src="tempImgUrl"
               :alt="product.title"
             />
@@ -29,9 +30,9 @@
         </div>
         <div v-if="product.imagesUrl" class="row m-6">
           <div class="col-4">
-            <div class="border overflow-hidden rounded-3">
+            <div class="border overflow-hidden rounded-3 heightLimit_thumb">
               <img
-                class="w-100 heightLimit_thumb img-cover btn p-0"
+                class="img-cover btn p-0"
                 :src="product.imageUrl"
                 :alt="product.title"
                 @click="changeTemp"
@@ -40,9 +41,9 @@
             </div>
           </div>
           <div class="col-4" v-for="(imgUrl, i) in product.imagesUrl" :key="i">
-            <div class="border overflow-hidden rounded-3">
+            <div class="border overflow-hidden rounded-3 heightLimit_thumb">
               <img
-                class="w-100 heightLimit_thumb img-cover btn p-0"
+                class="img-cover btn p-0"
                 :src="imgUrl"
                 :alt="product.title"
                 @click="changeTemp"
