@@ -97,7 +97,7 @@
       >
         <img src="../../assets/img/hero10.webp" class="img-cover" alt="Hero1" />
       </div>
-      <div class="col-10 offset-1 col-md-5 text-center
+      <div class="col-10 offset-1 col-md-5 offset-md-0 text-center
        d-flex align-items-center justify-content-center">
         <div
           data-aos="fade-left"
@@ -131,7 +131,7 @@
         </div>
       </div>
       <div
-        class="col-10 offset-1 col-md-5 heightLimit_banner | mb-12 mb-md-0"
+        class="col-10 offset-1 col-md-5 offset-md-0 heightLimit_banner | mb-12 mb-md-0"
         data-aos="fade-left"
         data-aos-easing="linear"
         data-aos-duration="600"
@@ -153,7 +153,7 @@
       >
         <img src="../../assets/img/hero09.webp" class="img-cover" alt="Hero3" />
       </div>
-      <div class="col-10 offset-1 col-md-5 text-center
+      <div class="col-10 offset-1 col-md-5 offset-md-0 text-center
        d-flex align-items-center justify-content-center | mb-12 mb-md-0">
         <div
           data-aos="fade-left"
