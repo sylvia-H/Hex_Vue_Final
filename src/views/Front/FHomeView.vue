@@ -267,7 +267,7 @@ export default {
 @media only screen and (max-width: 575px) {
   .hero {
     width: 100%;
-    height: 90vh;
+    height: 85vh;
     background-image: url('../../assets/img/hero01.webp');
     background-attachment: fixed;
     background-repeat: no-repeat;
