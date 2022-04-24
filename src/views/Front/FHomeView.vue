@@ -71,21 +71,21 @@
       >
         <p class="text-gray mb-4">繁忙的職場生活以及家事育兒日常，讓您忘了疼愛自己嗎？</p>
         <p class="text-gray mb-4 d-none d-md-block">
-          想要減重減脂，試過各種斷食法、努力揮汗運動，卻還是無法讓成功瘦身嗎？
+          想減重減脂，試過各種斷食法、努力揮汗運動，卻還是無法讓成功瘦身嗎？
         </p>
         <p class="text-gray d-none d-md-block">
-          減少食量卻忽略營養素的攝取，感到精神與體力變得比以前差了嗎？
+          減少食量卻忽略營養素攝取，感到精神與體力變得比以前差了嗎？
         </p>
         <p class="text-gray mb-4 d-block d-md-none">
-          想要減重減脂，試過各種斷食法，卻仍無法讓成功瘦身嗎？
+          想減重減脂，試過各種斷食法，卻仍無法讓成功瘦身嗎？
         </p>
         <p class="text-gray d-block d-md-none">
-          減少食量卻忽略營養素的攝取，感到精神與體力變差了嗎？
+          減少食量卻忽略營養素攝取，感到精神與體力變差了嗎？
         </p>
       </div>
       <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 text-center">
-        <p class="fz-5 text-dark fw-medium mb-4">想要吃進優質食材，讓味蕾享受食物的美味</p>
-        <p class="fz-5 text-dark fw-medium mb-4">想維持優雅體態，減重不復胖</p>
+        <p class="fz-5 text-dark fw-medium mb-4">吃進優質食材，讓味蕾享受食物的美味</p>
+        <p class="fz-5 text-dark fw-medium mb-4">維持優雅體態，減重不復胖</p>
         <div class="fz-5 text-dark fw-medium d-flex align-items-center justify-content-center">
           <h2 class="fz-6 fz-lg-8 text-brown1 me-3">好食遞</h2>
           <p class="d-none d-md-block">是值得您信任的優質餐飲管家，為食材與您的健康嚴格把關</p>
