@@ -1,16 +1,16 @@
 <template>
   <!-- NavBar -->
-  <FrontNavbar />
+  <FrontNavbarFixed />
   <RouterView id="checkoutLayout" />
 </template>
 
 <script>
 import emitter from '@/methods/mitt';
-import FrontNavbar from '@/components/FrontNavbar.vue';
+import FrontNavbarFixed from '@/components/FrontNavbarFixed.vue';
 
 export default {
   components: {
-    FrontNavbar,
+    FrontNavbarFixed,
   },
   inject: ['emitter'],
   mounted() {

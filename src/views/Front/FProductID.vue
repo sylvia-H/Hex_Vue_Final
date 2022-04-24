@@ -3,7 +3,7 @@
     <VueLoader></VueLoader>
   </VLoading>
   <!-- NavBar -->
-  <FrontNavbar />
+  <FrontNavbarFixed />
   <!-- 產品列表 -->
   <section class="container | py-20">
     <div class="row">
@@ -199,7 +199,7 @@
 <script>
 import emitter from '@/methods/mitt';
 import VueLoader from '@/components/LoadingOverlay2.vue';
-import FrontNavbar from '@/components/FrontNavbar.vue';
+import FrontNavbarFixed from '@/components/FrontNavbarFixed.vue';
 
 export default {
   data() {
@@ -216,7 +216,7 @@ export default {
   },
   components: {
     VueLoader,
-    FrontNavbar,
+    FrontNavbarFixed,
   },
   inject: ['emitter'],
   methods: {

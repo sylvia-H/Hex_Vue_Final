@@ -1,6 +1,6 @@
 <template>
   <!-- NavBar -->
-  <FrontNavbar />
+  <FrontNavbarFixed />
   <div class="container py-20 text-center">
     <h2 class="text-orange1 fz-20 | mb-10">
       Oops！４０４
@@ -15,11 +15,11 @@
 
 <script>
 import emitter from '@/methods/mitt';
-import FrontNavbar from '@/components/FrontNavbar.vue';
+import FrontNavbarFixed from '@/components/FrontNavbarFixed.vue';
 
 export default {
   components: {
-    FrontNavbar,
+    FrontNavbarFixed,
   },
   inject: ['emitter'],
   mounted() {

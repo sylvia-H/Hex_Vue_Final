@@ -3,7 +3,7 @@
     <VueLoader></VueLoader>
   </VLoading>
   <!-- NavBar -->
-  <FrontNavbar />
+  <FrontNavbarFixed />
   <section class="container | my-20">
     <h2 class="text-center">我的收藏</h2>
     <hr class="my-10" />
@@ -255,7 +255,7 @@
 <script>
 import emitter from '@/methods/mitt';
 import VueLoader from '@/components/LoadingOverlay2.vue';
-import FrontNavbar from '@/components/FrontNavbar.vue';
+import FrontNavbarFixed from '@/components/FrontNavbarFixed.vue';
 
 export default {
   data() {
@@ -267,7 +267,7 @@ export default {
   },
   components: {
     VueLoader,
-    FrontNavbar,
+    FrontNavbarFixed,
   },
   inject: ['emitter'],
   methods: {

@@ -3,7 +3,7 @@
     <VueLoader></VueLoader>
   </VLoading>
   <!-- NavBar -->
-  <FrontNavbar />
+  <FrontNavbarFixed />
   <!-- 產品列表 -->
   <section class="container my-16 my-lg-20">
     <h2 class="text-center">來選好食</h2>
@@ -112,7 +112,7 @@
 <script>
 import emitter from '@/methods/mitt';
 import VueLoader from '@/components/LoadingOverlay2.vue';
-import FrontNavbar from '@/components/FrontNavbar.vue';
+import FrontNavbarFixed from '@/components/FrontNavbarFixed.vue';
 
 export default {
   data() {
@@ -131,7 +131,7 @@ export default {
   inject: ['emitter'],
   components: {
     VueLoader,
-    FrontNavbar,
+    FrontNavbarFixed,
   },
   methods: {
     getProducts() {

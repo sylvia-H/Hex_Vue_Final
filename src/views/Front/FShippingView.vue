@@ -1,6 +1,6 @@
 <template>
   <!-- NavBar -->
-  <FrontNavbar />
+  <FrontNavbarFixed />
   <!-- 送貨須知 -->
   <section class="container | py-20">
     <h2 class="text-center">如何好遞</h2>
@@ -68,11 +68,11 @@
 
 <script>
 import emitter from '@/methods/mitt';
-import FrontNavbar from '@/components/FrontNavbar.vue';
+import FrontNavbarFixed from '@/components/FrontNavbarFixed.vue';
 
 export default {
   components: {
-    FrontNavbar,
+    FrontNavbarFixed,
   },
   inject: ['emitter'],
   mounted() {

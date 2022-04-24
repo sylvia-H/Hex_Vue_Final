@@ -1,6 +1,6 @@
 <template>
   <!-- NavBar -->
-  <FrontNavbar />
+  <FrontNavbarFixed />
   <!-- 關於健康減重資訊 -->
   <section class="container | py-20">
     <h2 class="text-center">食前好思</h2>
@@ -305,7 +305,7 @@
 
 <script>
 import emitter from '@/methods/mitt';
-import FrontNavbar from '@/components/FrontNavbar.vue';
+import FrontNavbarFixed from '@/components/FrontNavbarFixed.vue';
 
 export default {
   data() {
@@ -318,7 +318,7 @@ export default {
     };
   },
   components: {
-    FrontNavbar,
+    FrontNavbarFixed,
   },
   inject: ['emitter'],
   methods: {
