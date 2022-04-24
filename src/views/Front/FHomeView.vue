@@ -253,14 +253,27 @@ export default {
 .heightLimit_banner {
   height: 400px;
 }
-.hero {
-  width: 100%;
-  height: 100vh;
-  background-image: url('../../assets/img/hero01.webp');
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+@media only screen and (min-width: 960px) {
+  .hero {
+    width: 100%;
+    height: 100vh;
+    background-image: url('../../assets/img/hero01.webp');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+}
+@media only screen and (max-width: 575px) {
+  .hero {
+    width: 100%;
+    height: 90vh;
+    background-image: url('../../assets/img/hero01.webp');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
 }
 /* Hero 頁尾 scrollDownArrow 動畫 */
 #scrollDownArrow {
