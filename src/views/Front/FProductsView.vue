@@ -50,7 +50,7 @@
                 <h4 class="d-block d-lg-none | fz-5 mb-2 text-center">
                   {{ item.title }}
                 </h4>
-                <div class="d-flex d-md-none d-lg-flex | mb-4
+                <div class="d-none d-lg-flex | mb-4
                  align-items-center justify-content-between">
                   <p class="fw-bold">
                     好食價 <sapn class="fz-5 text-danger">{{ item.price }}</sapn> 元
@@ -59,7 +59,7 @@
                     <s>原價 {{ item.origin_price }} 元</s>
                   </p>
                 </div>
-                <div class="d-none d-md-block d-lg-none | mb-4
+                <div class="d-md-block d-lg-none | mb-4
                  text-center">
                   <p class="fw-bold">
                     好食價
