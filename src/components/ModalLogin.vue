@@ -6,7 +6,7 @@
     aria-labelledby="loginModalLabel"
     aria-hidden="true"
   >
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-body text-center | py-8">
           <h2 class="fw-bold text-green1 | mb-3">

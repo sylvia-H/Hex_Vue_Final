@@ -6,7 +6,7 @@
     aria-labelledby="orderModalLabel"
     aria-hidden="true"
   >
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
       <div class="modal-content border-0">
         <div class="modal-header bg-dark text-white">
           <h5 class="modal-title">
