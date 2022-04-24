@@ -1,5 +1,6 @@
-/* eslint-disable vuejs-accessibility/label-has-for */
 <template>
+  <!-- NavBar -->
+  <FrontNavbar />
   <!-- 關於健康減重資訊 -->
   <section class="container | py-20">
     <h2 class="text-center">食前好思</h2>
@@ -302,16 +303,10 @@
   </section>
 </template>
 
-<style>
-ul.list-style1 {
-  list-style-type: disc;
-}
-ul.list-style2 {
-  list-style-type: square;
-}
-</style>
-
 <script>
+import emitter from '@/methods/mitt';
+import FrontNavbar from '@/components/FrontNavbar.vue';
+
 export default {
   data() {
     return {
@@ -322,6 +317,10 @@ export default {
       carbo: 0,
     };
   },
+  components: {
+    FrontNavbar,
+  },
+  inject: ['emitter'],
   methods: {
     calcBMR() {
       const form = document.forms.bmrForm;
@@ -362,5 +361,17 @@ export default {
       this.carbo = Math.round(((carbo / 100) / 4) * this.tdee);
     },
   },
+  mounted() {
+    emitter.emit('nav-fix');
+  },
 };
 </script>
+
+<style>
+ul.list-style1 {
+  list-style-type: disc;
+}
+ul.list-style2 {
+  list-style-type: square;
+}
+</style>

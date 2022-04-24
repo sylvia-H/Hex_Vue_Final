@@ -1,36 +1,33 @@
 <template>
   <!-- 前台導覽列 -->
   <nav
-    class="navbar navbar-expand-lg navbar-light fixed-top bg-cream3 shadow-sm opacity-75
+    :class="{'fixed-top': is_navFixTop}"
+    class="navbar navbar-expand-lg navbar-light bg-cream3 shadow-sm
      py-2 py-md-4 py-lg-2"
   >
     <div class="container">
       <router-link to="/" class="text-center me-10">
-        <h1 class="text-green1 fz-7 fz-md-9"><strong>好食遞</strong></h1>
+        <!-- <h1 class="text-green1 fz-7 fz-md-9"><strong>好食遞</strong></h1> -->
+        <img style="max-width: 36px;" src="../assets/logo.png" alt="好食遞"><br>
         <span class="text-gray fz-3">HEALTHY DIET</span>
       </router-link>
       <router-link to="/products" class="d-none d-lg-flex text-dark me-8 | hvr-float-shadow">
         <span class="material-icons me-2"> restaurant_menu </span>
-        <h5><strong>來選好食</strong></h5>
+        <h5>來選好食</h5>
       </router-link>
       <router-link to="/dietInfo" class="d-none d-lg-flex text-dark me-8 | hvr-float-shadow">
         <span class="material-icons me-2">emoji_objects</span>
-        <h5><strong>食前好思</strong></h5>
+        <h5>食前好思</h5>
       </router-link>
       <router-link to="/aboutShipping" class="d-none d-lg-flex text-dark me-8 | hvr-float-shadow">
         <span class="material-icons me-2"> local_shipping </span>
-        <h5><strong>如何好遞</strong></h5>
+        <h5>如何好遞</h5>
       </router-link>
       <!-- 漢堡 -->
       <button
         class="navbar-toggler"
         type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarList"
-        aria-controls="navbarList"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-        @click="toggleNavMenu"
+        @click="toggleNavMenu()"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -68,12 +65,12 @@
             </router-link>
           </li>
           <!-- 收藏我的最愛 -->
-          <router-link to="/myFavorite" class="d-flex text-dark nav-link">
-            <li
-              @click="hideNavMenu()"
-              @keydown="enter"
-              class="nav-item d-flex align-items-center | my-4 me-5 | position-relative"
-            >
+          <li
+            @click="hideNavMenu()"
+            @keydown="enter"
+            class="nav-item d-flex align-items-center | my-4 me-8 | position-relative"
+          >
+            <router-link to="/myFavorite" class="d-flex text-dark nav-link">
               <!-- <i class="bi bi-heart fz-5 fz-md-6 text-dark | me-2 me-lg-0"></i> -->
               <span class="material-icons fz-5 fz-md-6 text-dark | me-2 me-lg-0">
                 favorite_border
@@ -89,11 +86,11 @@
                 {{ fav }}
                 <span class="visually-hidden">unread messages</span>
               </span>
-            </li>
-          </router-link>
+            </router-link>
+          </li>
           <!-- 購物車 -->
           <li
-            class="nav-item d-flex align-items-center | my-4 me-5 | position-relative"
+            class="nav-item d-flex align-items-center | my-4 | position-relative"
             @click="
               openCartCanvas();
               hideNavMenu();
@@ -116,31 +113,15 @@
               <span class="visually-hidden">unread messages</span>
             </span>
           </li>
-          <!-- 後台管理人員登入 -->
-          <li
-            class="nav-item d-flex align-items-center | my-4"
-            @click="
-              openLoginModel();
-              hideNavMenu();
-            "
-            @keydown="enter"
-          >
-            <i class="bi bi-person-circle fz-5 fz-md-6 text-dark | me-2 me-lg-0"></i>
-            <h5 class="d-lg-none text-dark">
-              <strong>後台管理人員登入</strong>
-            </h5>
-          </li>
         </ul>
       </div>
     </div>
   </nav>
   <CanvasCart ref="cartCanvas" />
-  <ModalLogin ref="loginModal" />
 </template>
 
 <script>
 import CanvasCart from '@/components/CanvasCart.vue';
-import ModalLogin from '@/components/ModalLogin.vue';
 import emitter from '@/methods/mitt';
 import Collapse from 'bootstrap/js/dist/collapse';
 
@@ -152,11 +133,11 @@ export default {
       cartsTotal: 0,
       fav: 0,
       navMenu: '',
+      is_navFixTop: false,
     };
   },
   components: {
     CanvasCart,
-    ModalLogin,
   },
   inject: ['emitter'],
   methods: {
@@ -187,9 +168,6 @@ export default {
     calcFav(collection) {
       this.fav = Object.keys(collection).length;
     },
-    openLoginModel() {
-      this.$refs.loginModal.openModal();
-    },
     openCartCanvas() {
       this.$refs.cartCanvas.openCanvas();
     },
@@ -209,6 +187,12 @@ export default {
     });
     emitter.on('get-fav', () => {
       this.getFav();
+    });
+    emitter.on('nav-fix', () => {
+      this.is_navFixTop = true;
+    });
+    emitter.on('nav-unfix', () => {
+      this.is_navFixTop = false;
     });
     // 解決手機版 Menu 無法自動收合問題
     this.navMenu = new Collapse(this.$refs.navMenu, {

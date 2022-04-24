@@ -1,4 +1,6 @@
 <template>
+  <!-- NavBar -->
+  <FrontNavbar />
   <!-- 送貨須知 -->
   <section class="container | py-20">
     <h2 class="text-center">如何好遞</h2>
@@ -63,3 +65,18 @@
     </div>
   </section>
 </template>
+
+<script>
+import emitter from '@/methods/mitt';
+import FrontNavbar from '@/components/FrontNavbar.vue';
+
+export default {
+  components: {
+    FrontNavbar,
+  },
+  inject: ['emitter'],
+  mounted() {
+    emitter.emit('nav-fix');
+  },
+};
+</script>

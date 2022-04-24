@@ -2,6 +2,8 @@
   <VLoading :active="isLoading" :z-index="1000">
     <VueLoader></VueLoader>
   </VLoading>
+  <!-- NavBar -->
+  <FrontNavbar />
   <!-- 產品列表 -->
   <section class="container | py-20">
     <div class="row">
@@ -197,6 +199,7 @@
 <script>
 import emitter from '@/methods/mitt';
 import VueLoader from '@/components/LoadingOverlay2.vue';
+import FrontNavbar from '@/components/FrontNavbar.vue';
 
 export default {
   data() {
@@ -213,6 +216,7 @@ export default {
   },
   components: {
     VueLoader,
+    FrontNavbar,
   },
   inject: ['emitter'],
   methods: {
@@ -294,6 +298,7 @@ export default {
     this.getProduct(id);
     this.getCart();
     this.getCollection();
+    emitter.emit('nav-fix');
   },
 };
 </script>

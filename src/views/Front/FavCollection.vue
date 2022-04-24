@@ -2,14 +2,16 @@
   <VLoading :active="isLoading" :z-index="1000">
     <VueLoader></VueLoader>
   </VLoading>
-  <section class="container | py-20">
+  <!-- NavBar -->
+  <FrontNavbar />
+  <section class="container | my-20">
     <h2 class="text-center">我的收藏</h2>
-    <hr class="my-6" />
+    <hr class="my-10" />
     <div class="row text-center">
-      <div class="col-12 table-responsive">
+      <div v-if="Object.keys(collection).length"
+       class="col-12 col-xl-10 offset-xl-1 table-responsive">
         <!-- 我的收藏列表 lg 以上電腦版本 -->
-        <table v-if="Object.keys(collection).length"
-         class="table table-hover | d-none d-lg-block">
+        <table class="table table-hover | d-none d-lg-block">
           <thead>
             <tr>
               <th scope="col">品名</th>
@@ -78,9 +80,10 @@
                   >
                     <span class="visually-hidden">Loading...</span>
                   </div>
-                  <div class="d-flex" v-else>
+                  <div v-else class="d-flex w-100">
                     <i class="bi bi-cart3 me-1"></i>
-                    <span class="d-none d-lg-block"> 想買 </span>
+                    <span class="d-none d-xl-block"> 加入購物車 </span>
+                    <span class="d-none d-lg-block d-xl-none"> 想買 </span>
                   </div>
                 </button>
               </td>
@@ -98,8 +101,7 @@
           </tbody>
         </table>
         <!-- 我的收藏列表 md 平板版本 -->
-        <table v-if="Object.keys(collection).length"
-         class="table table-hover | d-none d-md-block d-lg-none">
+        <table class="table table-hover | d-none d-md-block d-lg-none">
           <thead>
             <tr>
               <th scope="col">品名</th>
@@ -154,7 +156,7 @@
                   </div>
                   <div class="d-flex" v-else>
                     <i class="bi bi-cart3 me-1"></i>
-                    <span class="d-none d-lg-block"> 想買 </span>
+                    <span class="d-none d-md-block"> 想買 </span>
                   </div>
                 </button>
               </td>
@@ -172,8 +174,7 @@
           </tbody>
         </table>
         <!-- 我的收藏列表 md 以下手機版本 -->
-        <table v-if="Object.keys(collection).length"
-         class="table table-hover | d-block d-md-none">
+        <table class="table table-hover | d-block d-md-none">
           <thead>
             <tr>
               <th scope="col">品名</th>
@@ -240,12 +241,12 @@
             </tr>
           </tbody>
         </table>
-        <div v-else class="py-6">
-          <p class="text-orange1 fz-6 mb-4">
-            再多逛逛，把喜愛的商品收藏起來吧！
-          </p>
-          <i class="bi bi-search-heart text-orange1 fz-25"></i>
-        </div>
+      </div>
+      <div v-else class="col-12 py-6">
+        <p class="text-orange1 fz-6 mb-4">
+          再多逛逛，把喜愛的商品收藏起來吧！
+        </p>
+        <i class="bi bi-search-heart text-orange1 fz-25"></i>
       </div>
     </div>
   </section>
@@ -254,6 +255,7 @@
 <script>
 import emitter from '@/methods/mitt';
 import VueLoader from '@/components/LoadingOverlay2.vue';
+import FrontNavbar from '@/components/FrontNavbar.vue';
 
 export default {
   data() {
@@ -265,6 +267,7 @@ export default {
   },
   components: {
     VueLoader,
+    FrontNavbar,
   },
   inject: ['emitter'],
   methods: {
@@ -288,7 +291,6 @@ export default {
       }
     },
     addCart(id, qty = 1) {
-      const loader = this.$loading.show();
       const data = {
         product_id: id,
         qty,
@@ -303,7 +305,6 @@ export default {
         .then((res) => {
           const name = res.data.data.product.title;
           const msg = res.data.message;
-          loader.hide();
           this.$swal.fire({
             icon: 'success',
             title: '成功！',
@@ -313,13 +314,14 @@ export default {
           // 給導覽列使用
           emitter.emit('get-cart');
         })
-        .catch(() => {
-          loader.hide();
+        .catch((err) => {
+          console.dir(err);
         });
     },
   },
   mounted() {
     this.getCollection();
+    emitter.emit('nav-fix');
   },
 };
 </script>
