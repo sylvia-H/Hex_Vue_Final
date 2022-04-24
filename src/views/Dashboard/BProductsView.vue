@@ -15,74 +15,76 @@
             建立新的產品
           </button>
         </div>
-        <table class="table table-hover mt-4 text-center">
-          <thead>
-            <tr>
-              <th>分類</th>
-              <th>產品名稱</th>
-              <th>原售價（元）</th>
-              <th>優惠價（元）</th>
-              <th>是否上架</th>
-              <th>編輯</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in products" :key="item.id">
-              <td>
-                <p class="badge bg-primary">
-                  {{ item.category }}
-                </p>
-              </td>
-              <td>
-                {{ item.title }}
-              </td>
-              <td>
-                {{ item.origin_price }}
-              </td>
-              <td>
-                {{ item.price }}
-              </td>
-              <td>
-                <span
-                  v-if="item.is_enabled"
-                  @click="changeStatus(item.id)"
-                  @keydown="enter"
-                  class="btn btn-success py-2 px-2 rounded"
-                >
-                  上架
-                </span>
-                <span
-                  v-else
-                  @click="changeStatus(item.id)"
-                  @keydown="enter"
-                  class="btn btn-dark py-2 px-2 rounded"
-                >
-                  未上架
-                </span>
-              </td>
-              <td>
-                <div class="btn-group" role="group">
-                  <!-- 編輯產品內容 -->
-                  <button
-                    type="button"
-                    class="btn btn-warning"
-                    @click="openEditModal(0, item)"
+        <div class="table-responsive">
+          <table class="table table-hover mt-4 text-center">
+            <thead>
+              <tr>
+                <th>分類</th>
+                <th>產品名稱</th>
+                <th>原售價（元）</th>
+                <th>優惠價（元）</th>
+                <th>是否上架</th>
+                <th>編輯</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in products" :key="item.id">
+                <td>
+                  <p class="badge bg-primary">
+                    {{ item.category }}
+                  </p>
+                </td>
+                <td>
+                  {{ item.title }}
+                </td>
+                <td>
+                  {{ item.origin_price }}
+                </td>
+                <td>
+                  {{ item.price }}
+                </td>
+                <td>
+                  <span
+                    v-if="item.is_enabled"
+                    @click="changeStatus(item.id)"
+                    @keydown="enter"
+                    class="btn btn-success py-2 px-2 rounded"
                   >
-                    <i class="bi bi-pencil-square"></i>
-                  </button>
-                  <!-- 刪除品項 -->
-                  <button
-                    type="button"
-                    class="btn btn-danger"
-                    @click="delProduct(item)"
+                    上架
+                  </span>
+                  <span
+                    v-else
+                    @click="changeStatus(item.id)"
+                    @keydown="enter"
+                    class="btn btn-dark py-2 px-2 rounded"
                   >
-                    <i class="bi bi-trash"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                    未上架
+                  </span>
+                </td>
+                <td>
+                  <div class="btn-group" role="group">
+                    <!-- 編輯產品內容 -->
+                    <button
+                      type="button"
+                      class="btn btn-warning"
+                      @click="openEditModal(0, item)"
+                    >
+                      <i class="bi bi-pencil-square"></i>
+                    </button>
+                    <!-- 刪除品項 -->
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      @click="delProduct(item)"
+                    >
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <p>
           目前有 <span>{{ products.length }}</span> 項產品
         </p>

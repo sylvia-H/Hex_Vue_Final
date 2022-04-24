@@ -75,7 +75,7 @@
                     :class="{ active: collection[item.id] }"
                   >
                     <i class="bi bi-heart"></i>
-                    <span class="d-block d-md-none d-lg-block | ms-2">
+                    <span class="d-none d-md-block | ms-2">
                       收藏
                     </span>
                   </button>
@@ -94,7 +94,7 @@
                     </div>
                     <div class="d-flex" v-else>
                       <i class="bi bi-cart3 me-1"></i>
-                      <span>
+                      <span class="d-none d-md-block">
                         加入購物車
                       </span>
                     </div>

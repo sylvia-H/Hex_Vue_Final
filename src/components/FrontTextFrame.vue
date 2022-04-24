@@ -30,12 +30,17 @@
       data-aos-delay="1500"
       data-aos-offset="0">
     </div>
-    <div class="box box4"
+    <div class="box box4 position-relative"
       data-aos="fade-right"
       data-aos-easing="linear"
       data-aos-duration="1000"
       data-aos-delay="1500"
       data-aos-offset="0">
+      <div class="position-absolute top-75 start-75 translate-middle w-100 text-center">
+        <h3 class="d-sm-none text-gray1 fz-4 fw-light">
+          協助您打造專屬餐飲生活
+        </h3>
+      </div>
     </div>
     <div class="box box5 d-flex justify-content-center align-items-center"
       data-aos="flip-left"
@@ -50,17 +55,12 @@
         好<br>食<br>遞
       </h1>
     </div>
-    <div class="box box6 position-relative"
+    <div class="box box6"
       data-aos="fade-left"
       data-aos-easing="linear"
       data-aos-duration="1000"
       data-aos-delay="1500"
       data-aos-offset="0">
-      <div class="position-absolute top-75 start-0 translate-middle w-100 text-center">
-        <h3 class="d-sm-none text-gray1 fz-4 fw-light">
-          協助您打造專屬餐飲生活
-        </h3>
-      </div>
     </div>
     <div class="box box7"
       data-aos="fade-right"
@@ -301,9 +301,6 @@ export default {
     border-right: 3px solid #999;
     width: 12.5%;
     height: 66.6%;
-  }
-  .box6 .position-absolute{
-    background-color: rgba(255,255,255,0.1);
   }
   .box7 {
     position: relative;

@@ -11,62 +11,64 @@
             新增優惠券
           </button>
         </div>
-        <table class="table table-hover mt-4 text-center">
-          <thead>
-            <tr>
-              <th>優惠券主題</th>
-              <th>優惠碼</th>
-              <th>折扣百分比</th>
-              <th>優惠到期日</th>
-              <th>是否啟用</th>
-              <th>編輯</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in coupons" :key="item.code">
-              <td>
-                {{ item.title }}
-              </td>
-              <td>
-                {{ item.code }}
-              </td>
-              <td>{{ item.percent }} %</td>
-              <td>
-                {{ $filters.transferTime(item.due_date) }}
-              </td>
-              <td>
-                <span
-                  v-if="item.is_enabled"
-                  @click="changeStatus(item.id)"
-                  @keydown="enter"
-                  class="btn btn-success py-2 px-2 rounded"
-                >
-                  啟用
-                </span>
-                <span
-                  v-else
-                  @click="changeStatus(item.id)"
-                  @keydown="enter"
-                  class="btn btn-dark py-2 px-2 rounded"
-                >
-                  未啟用
-                </span>
-              </td>
-              <td>
-                <div class="btn-group" role="group">
-                  <!-- 編輯優惠券內容 -->
-                  <button type="button" class="btn btn-warning" @click="openCouponModal(0, item)">
-                    <i class="bi bi-pencil-square"></i>
-                  </button>
-                  <!-- 刪除優惠券 -->
-                  <button type="button" class="btn btn-danger" @click="delCoupon(item)">
-                    <i class="bi bi-trash"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <table class="table table-hover mt-4 text-center">
+            <thead>
+              <tr>
+                <th>優惠券主題</th>
+                <th>優惠碼</th>
+                <th>折扣百分比</th>
+                <th>優惠到期日</th>
+                <th>是否啟用</th>
+                <th>編輯</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in coupons" :key="item.code">
+                <td>
+                  {{ item.title }}
+                </td>
+                <td>
+                  {{ item.code }}
+                </td>
+                <td>{{ item.percent }} %</td>
+                <td>
+                  {{ $filters.transferTime(item.due_date) }}
+                </td>
+                <td>
+                  <span
+                    v-if="item.is_enabled"
+                    @click="changeStatus(item.id)"
+                    @keydown="enter"
+                    class="btn btn-success py-2 px-2 rounded"
+                  >
+                    啟用
+                  </span>
+                  <span
+                    v-else
+                    @click="changeStatus(item.id)"
+                    @keydown="enter"
+                    class="btn btn-dark py-2 px-2 rounded"
+                  >
+                    未啟用
+                  </span>
+                </td>
+                <td>
+                  <div class="btn-group" role="group">
+                    <!-- 編輯優惠券內容 -->
+                    <button type="button" class="btn btn-warning" @click="openCouponModal(0, item)">
+                      <i class="bi bi-pencil-square"></i>
+                    </button>
+                    <!-- 刪除優惠券 -->
+                    <button type="button" class="btn btn-danger" @click="delCoupon(item)">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <p>
           目前有 <span>{{ coupons.length }}</span> 種優惠券
         </p>

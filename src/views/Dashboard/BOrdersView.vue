@@ -15,75 +15,77 @@
             刪除所有訂單
           </button>
         </div>
-        <table class="table table-hover mt-4 text-center">
-          <thead>
-            <tr>
-              <th>購買時間</th>
-              <th>買家姓名</th>
-              <th>購買商品品項</th>
-              <th>應付金額</th>
-              <th>是否已結帳</th>
-              <th>編輯</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in orders" :key="item.id">
-              <td>
-                  {{ $filters.transferTime(item.create_at) }}
-              </td>
-              <td>
-                {{ item.user.name }}
-              </td>
-              <td>
-                <p v-for="el in Object.keys(item.products)" :key="el">
-                  {{ item.products[el].product.title }} －
-                  <span><b>數量：{{ item.products[el].qty }}</b></span>
-                </p>
-              </td>
-              <td>
-                {{ $filters.toCurrency(item.total) }}
-              </td>
-              <td>
-                <span
-                  v-if="item.is_paid"
-                  @click="changeStatus(item.id)"
-                  @keydown="enter"
-                  class="btn btn-success py-2 px-2 rounded"
-                >
-                  已付款
-                </span>
-                <span
-                  v-else
-                  @click="changeStatus(item.id)"
-                  @keydown="enter"
-                  class="btn btn-dark py-2 px-2 rounded"
-                >
-                  未付款
-                </span>
-              </td>
-              <td>
-                <div class="btn-group" role="group">
-                  <!-- 編輯產品內容 -->
-                  <button
-                    type="button"
-                    class="btn btn-warning"
-                    @click="openOrderModal(item)"
+        <div class="table-responsive">
+          <table class="table table-hover mt-4 text-center">
+            <thead>
+              <tr>
+                <th>購買時間</th>
+                <th>買家姓名</th>
+                <th>購買商品品項</th>
+                <th>應付金額</th>
+                <th>是否已結帳</th>
+                <th>編輯</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in orders" :key="item.id">
+                <td>
+                    {{ $filters.transferTime(item.create_at) }}
+                </td>
+                <td>
+                  {{ item.user.name }}
+                </td>
+                <td>
+                  <p v-for="el in Object.keys(item.products)" :key="el">
+                    {{ item.products[el].product.title }} －
+                    <span><b>數量：{{ item.products[el].qty }}</b></span>
+                  </p>
+                </td>
+                <td>
+                  {{ $filters.toCurrency(item.total) }}
+                </td>
+                <td>
+                  <span
+                    v-if="item.is_paid"
+                    @click="changeStatus(item.id)"
+                    @keydown="enter"
+                    class="btn btn-success py-2 px-2 rounded"
                   >
-                    <i class="bi bi-pencil-square"></i>
-                  </button>
-                  <!-- 刪除品項 -->
-                  <button
-                    type="button"
-                    class="btn btn-danger"
-                    @click="delOrder(item)"
+                    已付款
+                  </span>
+                  <span
+                    v-else
+                    @click="changeStatus(item.id)"
+                    @keydown="enter"
+                    class="btn btn-dark py-2 px-2 rounded"
                   >
-                    <i class="bi bi-trash"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                    未付款
+                  </span>
+                </td>
+                <td>
+                  <div class="btn-group" role="group">
+                    <!-- 編輯產品內容 -->
+                    <button
+                      type="button"
+                      class="btn btn-warning"
+                      @click="openOrderModal(item)"
+                    >
+                      <i class="bi bi-pencil-square"></i>
+                    </button>
+                    <!-- 刪除品項 -->
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      @click="delOrder(item)"
+                    >
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <p>
           目前有 <span>{{ orders.length }}</span> 張訂單
         </p>

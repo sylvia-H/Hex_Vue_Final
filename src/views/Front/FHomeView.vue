@@ -4,7 +4,7 @@
   </VLoading>
   <!-- 首頁 Hero -->
   <section
-    class="hero position-relative"
+    class="hero position-relative overflow-hidden"
     data-aos="fade-zoom-in"
     data-aos-easing="linear"
     data-aos-duration="1800"
@@ -84,7 +84,7 @@
     </div>
   </section>
   <!-- 主要內容 - 圖文 -->
-  <section class="container-fluid bg-light">
+  <section class="container-fluid bg-light overflow-hidden">
     <!-- 圖文 1 -->
     <div class="row py-10">
       <div
