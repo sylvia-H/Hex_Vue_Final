@@ -32,17 +32,7 @@
     </div>
     <!-- ScroolDown -->
     <div
-      class="d-none d-sm-block position-absolute top-90 start-50 translate-middle"
-      @click="scrollDown()"
-      @keydown="enter"
-    >
-      <span id="scrollDownArrow" class="btn material-icons fz-20 text-gray2 opacity-50">
-        expand_more
-      </span>
-    </div>
-    <!-- ScroolDown：因應手機版 100 vh 誤差，導致按鈕無法出現，修正為 top-85 -->
-    <div
-      class="d-block d-sm-none position-absolute top-85 start-50 translate-middle"
+      class="position-absolute top-90 start-50 translate-middle"
       @click="scrollDown()"
       @keydown="enter"
     >
