@@ -47,7 +47,7 @@
                 <h4 class="d-none d-lg-block | fz-6 mb-2">
                   {{ item.title }}
                 </h4>
-                <h4 class="d-block d-lg-none | fz-5 mb-2 text-center">
+                <h4 class="d-block d-lg-none | fz-4 fz-md-5 mb-2 text-center">
                   {{ item.title }}
                 </h4>
                 <div class="d-none d-lg-flex | mb-4
@@ -62,7 +62,7 @@
                 <div class="d-md-block d-lg-none | mb-4
                  text-center">
                   <p class="fw-bold">
-                    好食價
+                    NT
                     <sapn class="fz-5 text-danger mx-2">{{ item.price }}</sapn>
                     <s class="fz-4 fw-normal text-muted">{{ item.origin_price }}</s>
                     元

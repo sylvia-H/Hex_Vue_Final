@@ -9,7 +9,7 @@
     <hr class="my-10" />
     <div class="row text-center">
       <div v-if="Object.keys(collection).length"
-       class="col-12 col-xl-10 offset-xl-1 table-responsive">
+       class="col-12 col-xl-10 offset-xl-1 table-responsive py-6">
         <!-- 我的收藏列表 lg 以上電腦版本 -->
         <table class="table table-hover | d-none d-lg-block">
           <thead>
