@@ -40,9 +40,9 @@
         expand_more
       </span>
     </div>
-    <!-- ScroolDown：因應手機版 100 vh 誤差，導致按鈕無法出現，修正為 top-75 -->
+    <!-- ScroolDown：因應手機版 100 vh 誤差，導致按鈕無法出現，修正為 top-85 -->
     <div
-      class="d-block d-sm-none position-absolute top-75 start-50 translate-middle"
+      class="d-block d-sm-none position-absolute top-85 start-50 translate-middle"
       @click="scrollDown()"
       @keydown="enter"
     >
