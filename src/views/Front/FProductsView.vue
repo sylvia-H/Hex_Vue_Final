@@ -15,7 +15,7 @@
           <div v-for="(item, i) in Object.keys(categories)" :key="i"
           class="col-4 col-md-3 col-lg-12">
             <button type="button"
-            class="btn btn-outline-gray1 fw-bold w-100 py-2 mb-1"
+            class="btn btn-outline-gray1 fw-bold w-100 p-2 mb-1"
             :class="{ active: item===showCategory }"
             @click="filterCategory(item)">
               {{ item }}
