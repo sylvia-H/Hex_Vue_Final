@@ -4,7 +4,7 @@
   <!-- 送貨須知 -->
   <section class="container | py-20" style="min-height: 90vh;">
     <h2 class="text-center">如何好遞</h2>
-    <hr class="my-6" />
+    <hr class="my-8" />
     <div class="row text-center">
       <div class="col-12 col-sm-6 col-md-3 px-5">
         <div class="my-5">

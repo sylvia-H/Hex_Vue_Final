@@ -6,7 +6,7 @@
   <FrontNavbarFixed />
   <section class="container | my-20" style="min-height: 90vh;">
     <h2 class="text-center">我的收藏</h2>
-    <hr class="my-10" />
+    <hr class="my-8" />
     <div class="row text-center">
       <div v-if="Object.keys(collection).length"
        class="col-12 table-responsive py-6">
