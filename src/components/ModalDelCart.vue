@@ -22,7 +22,7 @@
             class="btn-close"
             data-bs-dismiss="modal"
             aria-label="Close"
-            @click="closeModal()">
+            @click="closeModal()"
           ></button>
         </div>
         <div class="modal-body fz-5">
