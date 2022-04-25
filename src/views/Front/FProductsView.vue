@@ -210,6 +210,10 @@ export default {
         this.collection[fvID] = item;
       }
       localStorage.setItem('myFavorite', JSON.stringify(this.collection));
+      this.emitter.emit('toast-msg', {
+        style: 'success',
+        content: `${item.title} 加入我的收藏囉！`,
+      });
       // 給導覽列使用
       this.emitter.emit('get-fav');
     },
