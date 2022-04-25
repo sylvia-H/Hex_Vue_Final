@@ -4,7 +4,7 @@
   </VLoading>
   <!-- NavBar -->
   <FrontNavbarFixed />
-  <section class="container | my-20">
+  <section class="container | my-20" style="min-height: 90vh;">
     <h2 class="text-center">我的收藏</h2>
     <hr class="my-10" />
     <div class="row text-center">

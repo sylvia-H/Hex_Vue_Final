@@ -2,7 +2,7 @@
   <!-- NavBar -->
   <FrontNavbarFixed />
   <!-- 送貨須知 -->
-  <section class="container | py-20">
+  <section class="container | py-20" style="min-height: 90vh;">
     <h2 class="text-center">如何好遞</h2>
     <hr class="my-6" />
     <div class="row text-center">
