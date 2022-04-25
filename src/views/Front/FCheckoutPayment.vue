@@ -286,6 +286,7 @@ export default {
       is_couponOK: 0,
     };
   },
+  inject: ['emitter'],
   methods: {
     getOrder(id) {
       this.isLoading = true;
@@ -316,8 +317,7 @@ export default {
           `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/coupon`,
           { data },
         )
-        .then((res) => {
-          console.dir(res);
+        .then(() => {
           this.is_couponOK = 1;
           this.isLoading = false;
         })
@@ -336,20 +336,17 @@ export default {
         .then(() => {
           this.$refs.form.resetForm();
           this.isLoading = false;
-          this.$swal
-            .fire('成功！', '已完成付款！', {
-              icon: 'success',
-            })
-            .then((check) => {
-              if (check) {
-                this.$router.push({ name: 'checkoutComplete' });
-              }
-            });
+          this.emitter.emit('toast-msg', {
+            style: 'success',
+            content: '已完成付款流程！',
+          });
+          this.$router.push({ name: 'checkoutComplete' });
         })
         .catch(() => {
           this.isLoading = false;
-          this.$swal.fire('失敗！', '付款失敗，請再試一次！', {
-            icon: 'error',
+          this.emitter.emit('toast-msg', {
+            style: 'error',
+            content: '付款失敗，請再試一次！',
           });
         });
     },

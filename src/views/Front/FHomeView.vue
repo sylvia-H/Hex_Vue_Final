@@ -202,7 +202,6 @@
 </template>
 
 <script>
-import emitter from '@/methods/mitt';
 import FrontNavbar from '@/components/FrontNavbar.vue';
 import VueLoader from '@/components/LoadingOverlay2.vue';
 import TextFrame from '@/components/FrontTextFrame.vue';
@@ -230,9 +229,9 @@ export default {
   mounted() {
     document.addEventListener('scroll', () => {
       if (window.pageYOffset > window.innerHeight) {
-        emitter.emit('nav-fix');
+        this.emitter.emit('nav-fix');
       } else {
-        emitter.emit('nav-unfix');
+        this.emitter.emit('nav-unfix');
       }
     });
   },
@@ -247,17 +246,6 @@ export default {
   .hero {
     width: 100%;
     height: 100vh;
-    background-image: url('../../assets/img/hero01.webp');
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-  }
-}
-@media only screen and (max-width: 575px) {
-  .hero {
-    width: 100%;
-    height: 90vh;
     background-image: url('../../assets/img/hero01.webp');
     background-attachment: fixed;
     background-repeat: no-repeat;

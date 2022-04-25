@@ -1,14 +1,13 @@
 <template>
   <!-- 前台導覽列 -->
   <nav
-    :class="{'fixed-top': is_navFixTop}"
-    class="navbar navbar-expand-lg navbar-light bg-cream3 shadow-sm
-     py-2 py-md-4 py-lg-2"
+    :class="{ 'fixed-top': is_navFixTop }"
+    class="navbar navbar-expand-lg navbar-light bg-cream3 shadow-sm py-2 py-md-4 py-lg-2"
   >
     <div class="container">
       <router-link to="/" class="text-center me-10">
         <!-- <h1 class="text-green1 fz-7 fz-md-9"><strong>好食遞</strong></h1> -->
-        <img style="max-width: 36px;" src="../assets/logo.png" alt="好食遞"><br>
+        <img style="max-width: 36px" src="../assets/logo.png" alt="好食遞" /><br />
         <span class="text-gray fz-3">HEALTHY DIET</span>
       </router-link>
       <router-link to="/products" class="d-none d-lg-flex text-dark me-8 | hvr-float-shadow">
@@ -24,11 +23,7 @@
         <h5>如何好遞</h5>
       </router-link>
       <!-- 漢堡 -->
-      <button
-        class="navbar-toggler"
-        type="button"
-        @click="toggleNavMenu()"
-      >
+      <button class="navbar-toggler" type="button" @click="toggleNavMenu()">
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- 選單內容 -->
@@ -122,7 +117,6 @@
 
 <script>
 import CanvasCart from '@/components/CanvasCart.vue';
-import emitter from '@/methods/mitt';
 import Collapse from 'bootstrap/js/dist/collapse';
 
 export default {
@@ -182,16 +176,16 @@ export default {
     this.getCart();
     this.getFav();
     // emitter
-    emitter.on('get-cart', () => {
+    this.emitter.on('get-cart', () => {
       this.getCart();
     });
-    emitter.on('get-fav', () => {
+    this.emitter.on('get-fav', () => {
       this.getFav();
     });
-    emitter.on('nav-fix', () => {
+    this.emitter.on('nav-fix', () => {
       this.is_navFixTop = true;
     });
-    emitter.on('nav-unfix', () => {
+    this.emitter.on('nav-unfix', () => {
       this.is_navFixTop = false;
     });
     // 解決手機版 Menu 無法自動收合問題

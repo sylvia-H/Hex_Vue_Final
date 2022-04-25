@@ -53,7 +53,7 @@
                 <div class="d-none d-lg-flex | mb-4
                  align-items-center justify-content-between">
                   <p class="fw-bold">
-                    好食價 <sapn class="fz-5 text-danger">{{ item.price }}</sapn> 元
+                    好食價 <span class="fz-5 text-danger">{{ item.price }}</span> 元
                   </p>
                   <p class="fz-4 text-muted">
                     <s>原價 {{ item.origin_price }} 元</s>
@@ -63,7 +63,7 @@
                  text-center">
                   <p class="fw-bold">
                     NT
-                    <sapn class="fz-5 text-danger mx-2">{{ item.price }}</sapn>
+                    <span class="fz-5 text-danger mx-2">{{ item.price }}</span>
                     <s class="fz-4 fw-normal text-muted">{{ item.origin_price }}</s>
                     元
                   </p>
@@ -110,7 +110,6 @@
 </template>
 
 <script>
-import emitter from '@/methods/mitt';
 import VueLoader from '@/components/LoadingOverlay2.vue';
 import FrontNavbarFixed from '@/components/FrontNavbarFixed.vue';
 
@@ -135,7 +134,6 @@ export default {
   },
   methods: {
     getProducts() {
-      // const loader = this.$loading.show();
       this.isLoading = true;
       this.$http
         .get(
@@ -150,11 +148,9 @@ export default {
               this.categories[item.category] += 1;
             }
           });
-          // loader.hide();
           this.isLoading = false;
         })
         .catch(() => {
-          // loader.hide();
           this.isLoading = false;
         });
     },
@@ -185,18 +181,22 @@ export default {
         .then((res) => {
           const name = res.data.data.product.title;
           const msg = res.data.message;
-          this.$swal.fire({
-            icon: 'success',
-            title: '成功！',
-            text: `${name} ${msg}`,
+          this.emitter.emit('toast-msg', {
+            style: 'success',
+            content: `${name} ${msg}`,
           });
-          this.getCart();
           this.is_loadingItem = '';
+          this.getCart();
           // 給導覽列使用
-          emitter.emit('get-cart');
+          this.emitter.emit('get-cart');
         })
         .catch((err) => {
-          console.dir(err);
+          const msg = err.response.data.message || '出現錯誤，請重試一次！';
+          this.emitter.emit('toast-msg', {
+            style: 'error',
+            content: `${msg}`,
+          });
+          this.is_loadingItem = '';
         });
     },
     filterCategory(category) {
@@ -211,7 +211,7 @@ export default {
       }
       localStorage.setItem('myFavorite', JSON.stringify(this.collection));
       // 給導覽列使用
-      emitter.emit('get-fav');
+      this.emitter.emit('get-fav');
     },
     getCollection() {
       if (localStorage.getItem('myFavorite')) {
@@ -224,7 +224,7 @@ export default {
     this.getProducts();
     this.getCart();
     this.getCollection();
-    emitter.emit('nav-fix');
+    this.emitter.emit('nav-fix');
   },
 };
 </script>

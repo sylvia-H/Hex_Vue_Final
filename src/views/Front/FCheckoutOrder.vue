@@ -242,6 +242,7 @@ export default {
       },
     };
   },
+  inject: ['emitter'],
   methods: {
     getCart() {
       this.isLoading = true;
@@ -276,45 +277,6 @@ export default {
           this.isLoading = false;
         });
     },
-    delCart(id, title) {
-      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart/${id}`;
-
-      this.$swal
-        .fire({
-          title: `確定要將${title}刪除嗎？`,
-          text: '商品刪除後將無法恢復。',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#d33',
-          cancelButtonColor: '#3085d6',
-          confirmButtonText: '確定刪除！',
-          cancelButtonText: '取消',
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            this.isLoading = true;
-            this.$http
-              .delete(url)
-              .then(() => {
-                this.getCart();
-                this.isLoading = false;
-                this.$swal.fire({
-                  icon: 'success',
-                  title: '成功！',
-                  text: `您已將${title}刪除了！`,
-                });
-              })
-              .catch(() => {
-                this.isLoading = false;
-                this.$swal.fire({
-                  icon: 'error',
-                  title: '失敗！',
-                  text: '請再試一次',
-                });
-              });
-          }
-        });
-    },
     submitOrder() {
       this.isLoading = true;
       const data = this.formData;
@@ -326,20 +288,19 @@ export default {
         .then((res) => {
           this.$refs.form.resetForm();
           this.isLoading = false;
-          this.$swal
-            .fire('成功！', `已送出訂單！總金額 NT$ ${res.data.total} 元`, {
-              icon: 'success',
-            })
-            .then((check) => {
-              if (check) {
-                this.$router.push(`./payment/${res.data.orderId}`);
-              }
-            });
+          this.emitter.emit('toast-msg', {
+            style: 'success',
+            content: `已成功送出訂單！總金額 NT$ ${res.data.total} 元`,
+          });
+          // 給導覽列使用
+          this.emitter.emit('get-cart');
+          this.$router.push(`./payment/${res.data.orderId}`);
         })
         .catch(() => {
           this.isLoading = false;
-          this.$swal.fire('失敗！', '送出訂單失敗，請再試一次！', {
-            icon: 'error',
+          this.emitter.emit('toast-msg', {
+            style: 'error',
+            content: '送出訂單失敗，請再試一次！',
           });
         });
     },

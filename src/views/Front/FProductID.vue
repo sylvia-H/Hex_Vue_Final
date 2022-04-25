@@ -197,7 +197,6 @@
 </template>
 
 <script>
-import emitter from '@/methods/mitt';
 import VueLoader from '@/components/LoadingOverlay2.vue';
 import FrontNavbarFixed from '@/components/FrontNavbarFixed.vue';
 
@@ -261,18 +260,22 @@ export default {
         .then((res) => {
           const name = res.data.data.product.title;
           const msg = res.data.message;
-          this.$swal.fire({
-            icon: 'success',
-            title: '成功！',
-            text: `${name} ${msg}`,
+          this.emitter.emit('toast-msg', {
+            style: 'success',
+            content: `${name} ${msg}`,
           });
           this.getCart();
           this.is_loadingItem = '';
           // 給導覽列使用
-          emitter.emit('get-cart');
+          this.emitter.emit('get-cart');
         })
         .catch((err) => {
-          console.dir(err);
+          const msg = err.response.data.message || '出現錯誤，請重試一次！';
+          this.emitter.emit('toast-msg', {
+            style: 'error',
+            content: `${msg}`,
+          });
+          this.is_loadingItem = '';
         });
     },
     addCollection(item) {
@@ -284,7 +287,7 @@ export default {
       }
       localStorage.setItem('myFavorite', JSON.stringify(this.collection));
       // 給導覽列使用
-      emitter.emit('get-fav');
+      this.emitter.emit('get-fav');
     },
     getCollection() {
       if (localStorage.getItem('myFavorite')) {
@@ -298,7 +301,6 @@ export default {
     this.getProduct(id);
     this.getCart();
     this.getCollection();
-    emitter.emit('nav-fix');
   },
 };
 </script>

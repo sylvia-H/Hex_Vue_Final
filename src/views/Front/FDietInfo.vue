@@ -304,7 +304,6 @@
 </template>
 
 <script>
-import emitter from '@/methods/mitt';
 import FrontNavbarFixed from '@/components/FrontNavbarFixed.vue';
 
 export default {
@@ -320,7 +319,6 @@ export default {
   components: {
     FrontNavbarFixed,
   },
-  inject: ['emitter'],
   methods: {
     calcBMR() {
       const form = document.forms.bmrForm;
@@ -360,9 +358,6 @@ export default {
       this.fat = Math.round(((fat / 100) / 9) * this.tdee);
       this.carbo = Math.round(((carbo / 100) / 4) * this.tdee);
     },
-  },
-  mounted() {
-    emitter.emit('nav-fix');
   },
 };
 </script>

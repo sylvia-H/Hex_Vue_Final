@@ -43,7 +43,11 @@
         <div class="row g-0">
           <!-- 刪除商品 -->
           <div class="col-2 d-flex justify-content-center align-items-center">
-            <button @click="delCart(item.id, item.product.title)" class="btn" type="button">
+            <button
+              @click="openDelCartModal(item.id, item.product.title)"
+              class="btn"
+              type="button"
+            >
               <i class="bi bi-trash3-fill fz-5"></i>
             </button>
           </div>
@@ -101,8 +105,7 @@
     </div>
 
     <!-- Cart 購物車 offcanvas-footer -->
-    <div v-if="cartsTotal"
-     class="offcanvas-footer bg-cream3 border-2 border-top px-9">
+    <div v-if="cartsTotal" class="offcanvas-footer bg-cream3 border-2 border-top px-9">
       <div class="d-flex justify-content-end align-items-center py-4">
         <p class="h5 text-dark me-24">總計</p>
         <span class="h5 text-dark ms-2">NT$ {{ carts.total }}</span>
@@ -122,21 +125,25 @@
           type="button"
           class="btn text-gray py-4 px-0"
           :disabled="carts.carts?.length === 0"
-          @click="delCart(null)"
+          @click="openDelCartModal()"
         >
           清空購物車
         </button>
       </div>
     </div>
   </div>
+  <ModalDelCart ref="delCartModal" />
 </template>
 
 <script>
 import { Offcanvas } from 'bootstrap';
-import emitter from '@/methods/mitt';
+import ModalDelCart from '@/components/ModalDelCart.vue';
 
 export default {
   name: 'CanvasCart',
+  components: {
+    ModalDelCart,
+  },
   data() {
     return {
       canvas: '',
@@ -198,91 +205,23 @@ export default {
         .then(() => {
           this.getCart();
           // 給導覽列使用
-          emitter.emit('get-cart');
+          this.emitter.emit('get-cart');
         })
         .catch((err) => {
           console.dir(err);
         });
     },
-    delCart(id, title) {
-      let url = '';
-      if (id) {
-        url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart/${id}`;
-        this.$swal
-          .fire({
-            title: `確定要將${title}刪除嗎？`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: '確定刪除！',
-            cancelButtonText: '取消',
-          })
-          .then((result) => {
-            if (result.isConfirmed) {
-              this.$http
-                .delete(url)
-                .then(() => {
-                  this.$swal.fire({
-                    icon: 'success',
-                    title: '成功！',
-                    text: `您已將${title}刪除了！`,
-                  });
-                  this.getCart();
-                  // 給導覽列使用
-                  emitter.emit('get-cart');
-                })
-                .catch(() => {
-                  this.$swal.fire({
-                    icon: 'error',
-                    title: '刪除失敗！',
-                    text: '請再試一次',
-                  });
-                });
-            }
-          });
-      } else {
-        url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/carts`;
-
-        this.$swal
-          .fire({
-            title: '確定要清空購物車嗎？',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: '確定刪除！',
-            cancelButtonText: '取消',
-          })
-          .then((result) => {
-            if (result.isConfirmed) {
-              this.$http
-                .delete(url)
-                .then(() => {
-                  this.$swal.fire({
-                    icon: 'success',
-                    title: '成功！',
-                    text: '您已將購物車清空了！',
-                  });
-                  this.getCart();
-                  // 給導覽列使用
-                  emitter.emit('get-cart');
-                })
-                .catch(() => {
-                  this.$swal.fire({
-                    icon: 'error',
-                    title: '刪除失敗！',
-                    text: '請再試一次',
-                  });
-                });
-            }
-          });
-      }
+    openDelCartModal(id, title) {
+      this.$refs.delCartModal.openModal(id, title);
     },
   },
   mounted() {
     this.getCart();
     this.canvas = new Offcanvas(this.$refs.cart_canvas);
+    // emitter
+    this.emitter.on('get-cart', () => {
+      this.getCart();
+    });
   },
 };
 </script>

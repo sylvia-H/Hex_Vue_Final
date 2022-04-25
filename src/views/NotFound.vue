@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import emitter from '@/methods/mitt';
 import FrontNavbarFixed from '@/components/FrontNavbarFixed.vue';
 
 export default {
@@ -22,8 +21,5 @@ export default {
     FrontNavbarFixed,
   },
   inject: ['emitter'],
-  mounted() {
-    emitter.emit('nav-fix');
-  },
 };
 </script>

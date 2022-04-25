@@ -1,7 +1,5 @@
 <template>
-  <div id="mainLayout">
-    <RouterView />
-  </div>
+  <RouterView />
   <FrontFooter />
 </template>
 
@@ -14,10 +12,3 @@ export default {
   },
 };
 </script>
-
-<style>
-#mainLayout {
-  position: relative;
-  min-height: 90vh;
-}
-</style>

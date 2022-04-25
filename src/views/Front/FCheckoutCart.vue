@@ -2,7 +2,7 @@
   <VLoading :active="isLoading" :z-index="1000">
     <VueLoader></VueLoader>
   </VLoading>
-  <div class="container py-18">
+  <div class="container py-18" style="min-height: 90vh;">
     <div class="row mb-6">
       <div class="col-12 col-lg-7">
         <div class="row g-0 | timeline">
@@ -101,7 +101,7 @@
               </td>
               <td class="text-end">
                 <button
-                  @click="delCart(item.id, item.product.title)"
+                  @click="openDelCartModal(item.id, item.product.title)"
                   class="btn-close"
                   type="button"
                   aria-label="Close"
@@ -146,14 +146,17 @@
       </div>
     </div>
   </div>
+  <ModalDelCart ref="delCartModal" />
 </template>
 
 <script>
 import VueLoader from '@/components/LoadingOverlay2.vue';
+import ModalDelCart from '@/components/ModalDelCart.vue';
 
 export default {
   components: {
     VueLoader,
+    ModalDelCart,
   },
   data() {
     return {
@@ -170,6 +173,7 @@ export default {
       },
     };
   },
+  inject: ['emitter'],
   methods: {
     getCart() {
       this.isLoading = true;
@@ -204,72 +208,8 @@ export default {
           this.isLoading = false;
         });
     },
-    delCart(id, title) {
-      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart/${id}`;
-
-      this.$swal
-        .fire({
-          title: `確定要將${title}刪除嗎？`,
-          text: '商品刪除後將無法恢復。',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#d33',
-          cancelButtonColor: '#3085d6',
-          confirmButtonText: '確定刪除！',
-          cancelButtonText: '取消',
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            this.isLoading = true;
-            this.$http
-              .delete(url)
-              .then(() => {
-                this.getCart();
-                this.isLoading = false;
-                this.$swal.fire({
-                  icon: 'success',
-                  title: '成功！',
-                  text: `您已將${title}刪除了！`,
-                });
-              })
-              .catch(() => {
-                this.isLoading = false;
-                this.$swal.fire({
-                  icon: 'error',
-                  title: '失敗！',
-                  text: '請再試一次',
-                });
-              });
-          }
-        });
-    },
-    submitOrder() {
-      this.isLoading = true;
-      const data = this.formData;
-      this.$http
-        .post(
-          `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/order`,
-          { data },
-        )
-        .then((res) => {
-          this.$refs.form.resetForm();
-          this.isLoading = false;
-          this.$swal
-            .fire('成功！', `已送出訂單！總金額 NT$ ${res.data.total} 元`, {
-              icon: 'success',
-            })
-            .then((check) => {
-              if (check) {
-                this.$router.push('/');
-              }
-            });
-        })
-        .catch(() => {
-          this.isLoading = false;
-          this.$swal.fire('失敗！', '送出訂單失敗，請再試一次！', {
-            icon: 'error',
-          });
-        });
+    openDelCartModal(id, title) {
+      this.$refs.delCartModal.openModal(id, title);
     },
   },
   mounted() {

@@ -116,7 +116,6 @@
 
 <script>
 import CanvasCart from '@/components/CanvasCart.vue';
-import emitter from '@/methods/mitt';
 import Collapse from 'bootstrap/js/dist/collapse';
 
 export default {
@@ -175,10 +174,10 @@ export default {
     this.getCart();
     this.getFav();
     // emitter
-    emitter.on('get-cart', () => {
+    this.emitter.on('get-cart', () => {
       this.getCart();
     });
-    emitter.on('get-fav', () => {
+    this.emitter.on('get-fav', () => {
       this.getFav();
     });
     // 解決手機版 Menu 無法自動收合問題
