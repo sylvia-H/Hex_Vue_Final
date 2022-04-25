@@ -1,9 +1,9 @@
 <template>
   <div
     class="modal fade border-0"
-    id="delCartModal"
+    id="delCartPaymentModal"
     tabindex="-1"
-    aria-labelledby="delCartModalLabel"
+    aria-labelledby="delCartPaymentModalLabel"
     aria-hidden="true"
   >
     <div class="modal-dialog modal-dialog-centered">
@@ -54,7 +54,7 @@
 import { Modal } from 'bootstrap';
 
 export default {
-  name: 'ModalDelCart',
+  name: 'ModalDelCartPayment',
   data() {
     return {
       modal: '',
@@ -126,7 +126,7 @@ export default {
     },
   },
   mounted() {
-    this.modal = new Modal(document.getElementById('delCartModal'));
+    this.modal = new Modal(document.getElementById('delCartPaymentModal'));
   },
 };
 </script>

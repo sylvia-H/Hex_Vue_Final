@@ -146,17 +146,17 @@
       </div>
     </div>
   </div>
-  <ModalDelCart ref="delCartModal" />
+  <ModalDelCartPayment ref="delCartPaymentModal" />
 </template>
 
 <script>
 import VueLoader from '@/components/LoadingOverlay2.vue';
-import ModalDelCart from '@/components/ModalDelCart.vue';
+import ModalDelCartPayment from '@/components/ModalDelCartPayment.vue';
 
 export default {
   components: {
     VueLoader,
-    ModalDelCart,
+    ModalDelCartPayment,
   },
   data() {
     return {
@@ -209,7 +209,7 @@ export default {
         });
     },
     openDelCartModal(id, title) {
-      this.$refs.delCartModal.openModal(id, title);
+      this.$refs.delCartPaymentModal.openModal(id, title);
     },
   },
   mounted() {
