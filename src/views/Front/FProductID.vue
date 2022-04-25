@@ -284,7 +284,7 @@ export default {
         delete this.collection[fvID];
         this.emitter.emit('toast-msg', {
           style: 'success',
-          content: `將 ${item.title} 從我的收藏中移除囉！`,
+          content: `${item.title} 從我的收藏中移除囉！`,
         });
       } else {
         this.collection[fvID] = item;
