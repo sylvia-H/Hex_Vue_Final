@@ -214,6 +214,10 @@ export default {
   },
   mounted() {
     this.getCart();
+    // emitter
+    this.emitter.on('get-cart', () => {
+      this.getCart();
+    });
   },
 };
 </script>

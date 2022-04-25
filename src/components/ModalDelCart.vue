@@ -13,7 +13,7 @@
             <span v-if="itemInfo.title">
               刪除 {{ itemInfo.title }}
             </span>
-            <span v-else class="modal-title">
+            <span v-else>
               清空購物車
             </span>
           </h5>
@@ -22,6 +22,7 @@
             class="btn-close"
             data-bs-dismiss="modal"
             aria-label="Close"
+            @click="closeModal()">
           ></button>
         </div>
         <div class="modal-body fz-5">
@@ -36,7 +37,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
-           @click="closeModal();">
+           @click="closeModal()">
             取消
           </button>
           <button type="button" class="btn btn-danger"
@@ -72,8 +73,8 @@ export default {
       this.modal.show();
     },
     closeModal() {
-      this.modal.hide();
       this.itemInfo = {};
+      this.modal.hide();
     },
     delCart() {
       let url = '';
