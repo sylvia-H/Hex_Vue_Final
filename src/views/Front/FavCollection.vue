@@ -13,7 +13,6 @@
         <table class="table table-hover | d-none d-lg-block">
           <thead>
             <tr>
-              <th scope="col">類別</th>
               <th scope="col">品名</th>
               <th scope="col"></th>
               <th scope="col">內含份量</th>
@@ -32,8 +31,7 @@
                 <span class="badge bg-primary mb-2">
                   {{ collection[item].category }}
                 </span>
-              </th>
-              <th scope="row" class="align-middle">
+                <br />
                 {{ collection[item].title }}
               </th>
               <td class="align-middle">
