@@ -242,16 +242,14 @@ export default {
 .heightLimit_banner {
   height: 400px;
 }
-@media only screen and (min-width: 960px) {
-  .hero {
-    width: 100%;
-    height: 100vh;
-    background-image: url('../../assets/img/hero01.webp');
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-  }
+.hero {
+  width: 100%;
+  height: 100vh;
+  background-image: url('../../assets/img/hero01.webp');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 /* Hero 頁尾 scrollDownArrow 動畫 */
 #scrollDownArrow {
