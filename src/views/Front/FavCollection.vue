@@ -4,18 +4,18 @@
   </VLoading>
   <!-- NavBar -->
   <FrontNavbarFixed />
-  <section class="container | py-20" style="min-height: 90vh;">
+  <section class="container | py-20" style="min-height: 90vh">
     <h2 class="text-center">我的收藏</h2>
     <hr class="my-8" />
     <div class="row text-center">
-      <div v-if="Object.keys(collection).length"
-       class="col-12 table-responsive py-6">
+      <div v-if="Object.keys(collection).length" class="col-12 table-responsive py-6">
         <!-- 我的收藏列表 lg 以上電腦版本 -->
         <table class="table table-hover | d-none d-lg-block">
           <thead>
             <tr>
-              <th scope="col">品名</th>
               <th scope="col">類別</th>
+              <th scope="col">品名</th>
+              <th scope="col"></th>
               <th scope="col">內含份量</th>
               <th scope="col">總熱量</th>
               <th scope="col">總碳水化合物</th>
@@ -32,11 +32,13 @@
                 <span class="badge bg-primary mb-2">
                   {{ collection[item].category }}
                 </span>
-                <br />
+              </th>
+              <th scope="row" class="align-middle">
                 {{ collection[item].title }}
               </th>
               <td class="align-middle">
-                <img class="max-w-100px"
+                <img
+                  class="max-w-100px"
                   :src="collection[item].imageUrl"
                   :alt="collection[item].title"
                 />
@@ -45,21 +47,19 @@
                 {{ collection[item].number }} {{ collection[item].unit }}
               </td>
               <td class="align-middle">
-                {{ (collection[item].calorie * collection[item].number) / 100 }}
+                {{ ((collection[item].calorie * collection[item].number) / 100).toFixed(2) }}
                 kcal
               </td>
               <td class="align-middle">
-                {{
-                  (collection[item].carbohydrate * collection[item].number) / 100
-                }}
+                {{ ((collection[item].carbohydrate * collection[item].number) / 100).toFixed(2) }}
                 g
               </td>
               <td class="align-middle">
-                {{ (collection[item].crudeFat * collection[item].number) / 100 }}
+                {{ ((collection[item].crudeFat * collection[item].number) / 100).toFixed(2) }}
                 g
               </td>
               <td class="align-middle">
-                {{ (collection[item].protein * collection[item].number) / 100 }} g
+                {{ ((collection[item].protein * collection[item].number) / 100).toFixed(2) }} g
               </td>
               <td class="align-middle">
                 <router-link :to="`/product/${collection[item].id}`">
@@ -83,7 +83,6 @@
                   <div v-else class="d-flex w-100">
                     <i class="bi bi-cart3 me-1"></i>
                     <span class="d-none d-xl-block"> 加入購物車 </span>
-                    <span class="d-none d-lg-block d-xl-none"> 想買 </span>
                   </div>
                 </button>
               </td>
@@ -123,7 +122,8 @@
                 {{ collection[item].title }}
               </th>
               <td class="align-middle">
-                <img class="max-w-100px"
+                <img
+                  class="max-w-100px"
                   :src="collection[item].imageUrl"
                   :alt="collection[item].title"
                 />
@@ -132,7 +132,7 @@
                 {{ collection[item].number }} {{ collection[item].unit }}
               </td>
               <td class="align-middle">
-                {{ (collection[item].calorie * collection[item].number) / 100 }}
+                {{ ((collection[item].calorie * collection[item].number) / 100).toFixed(2) }}
                 kcal
               </td>
               <td class="align-middle">
@@ -156,7 +156,6 @@
                   </div>
                   <div class="d-flex" v-else>
                     <i class="bi bi-cart3 me-1"></i>
-                    <span class="d-none d-md-block"> 想買 </span>
                   </div>
                 </button>
               </td>
@@ -195,7 +194,8 @@
                 {{ collection[item].title }}
               </th>
               <td class="align-middle">
-                <img class="max-w-100px"
+                <img
+                  class="max-w-100px"
                   :src="collection[item].imageUrl"
                   :alt="collection[item].title"
                 />
@@ -243,9 +243,7 @@
         </table>
       </div>
       <div v-else class="col-12 py-6">
-        <p class="text-orange1 fz-6 mb-4">
-          再多逛逛，把喜愛的商品收藏起來吧！
-        </p>
+        <p class="text-orange1 fz-6 mb-4">再多逛逛，把喜愛的商品收藏起來吧！</p>
         <i class="bi bi-search-heart text-orange1 fz-25"></i>
       </div>
     </div>
@@ -297,10 +295,7 @@ export default {
       this.is_loadingItem = id;
 
       this.$http
-        .post(
-          `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart`,
-          { data },
-        )
+        .post(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart`, { data })
         .then((res) => {
           const name = res.data.data.product.title;
           const msg = res.data.message;
