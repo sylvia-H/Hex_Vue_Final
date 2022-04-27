@@ -7,12 +7,14 @@
   <!-- 產品列表 -->
   <section class="container | py-20">
     <div class="row">
-      <div class="col-3">
-        <router-link to="../products">
-          <button type="button" class="btn btn-outline-gray1 fw-bold fz-4 | mx-8 mb-4">
-            ⇦ 返回
-          </button>
-        </router-link>
+      <div class="d-flex mx-8 mb-10">
+        <router-link to="../" class="text-gray"> 首頁 </router-link>
+        <span class="text-miute mx-2">/</span>
+        <router-link to="../products" class="text-gray"> 來選好食 </router-link>
+        <span class="text-mute mx-2">/</span>
+        <p class="text-green1">
+          {{ product.title }}
+        </p>
       </div>
     </div>
     <div class="row">
@@ -21,13 +23,11 @@
           {{ product.title }}
         </h2>
         <div class="col-12">
-          <div v-if="tempImgUrl"
-           class="border overflow-hidden rounded-3 shadow heightLimit_main | m-8">
-            <img
-              class="img-cover"
-              :src="tempImgUrl"
-              :alt="product.title"
-            />
+          <div
+            v-if="tempImgUrl"
+            class="border overflow-hidden rounded-3 shadow heightLimit_main | m-8"
+          >
+            <img class="img-cover" :src="tempImgUrl" :alt="product.title" />
           </div>
         </div>
         <div v-if="product.imagesUrl" class="row m-6">
@@ -104,7 +104,7 @@
             >
               <div
                 v-if="product.id === is_loadingItem"
-                class="spinner-border text-warning"
+                class="spinner-border spinner-border-sm text-warning"
                 role="status"
               >
                 <span class="visually-hidden">Loading...</span>
@@ -204,8 +204,10 @@ export default {
   data() {
     return {
       product: {
+        origin_price: '',
         price: '',
       },
+      products: [],
       tempImgUrl: '',
       is_loadingItem: '',
       carts: [],
@@ -226,10 +228,27 @@ export default {
         .then((res) => {
           this.product = res.data.product;
           this.getTemp();
+          this.getProducts(this.product.id, this.product.category);
           this.isLoading = false;
         })
         .catch(() => {
           this.isLoading = false;
+        });
+    },
+    getProducts(id, category) {
+      this.$http
+        .get(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/products/all`)
+        .then((res) => {
+          this.products = res.data.products.filter(
+            (item) => item.id !== id && item.category === category,
+          );
+        })
+        .catch((err) => {
+          const msg = err.response.data.message || '出現錯誤，請重試一次！';
+          this.emitter.emit('toast-msg', {
+            style: 'error',
+            content: `${msg}`,
+          });
         });
     },
     getTemp() {

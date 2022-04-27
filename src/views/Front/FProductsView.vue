@@ -11,11 +11,11 @@
     <div class="row">
       <!-- 品項分類按鈕 -->
       <div class="col-12 col-lg-3 mb-10">
-        <div class="row g-2 g-sm-1 g-md-3 g-lg-4 | pe-0 pe-lg-10">
+        <div class="row g-2 g-md-3 g-lg-4 | pe-0 pe-lg-10">
           <div v-for="(item, i) in Object.keys(categories)" :key="i"
           class="col-4 col-md-3 col-lg-12">
             <button type="button"
-            class="btn btn-outline-gray1 fw-bold w-100 p-2 mb-1"
+            class="btn btn-outline-gray1 fw-bold w-100 p-2 mb-1 fz-3 fz-md-4"
             :class="{ active: item===showCategory }"
             @click="filterCategory(item)">
               {{ item }}
@@ -87,7 +87,7 @@
                   >
                     <div
                       v-if="item.id === is_loadingItem"
-                      class="spinner-border text-warning"
+                      class="spinner-border spinner-border-sm text-warning"
                       role="status"
                     >
                       <span class="visually-hidden">Loading...</span>

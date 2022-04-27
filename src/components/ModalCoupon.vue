@@ -198,17 +198,8 @@ export default {
       const clipboard = new Clipboard('#btn_copyLink');
 
       clipboard.on('success', (e) => {
-        // console.info('Action:', e.action);
-        // console.info('Text:', e.text);
-        // console.info('Trigger:', e.trigger);
-        // 取消選取
         e.clearSelection();
       });
-
-      // clipboard.on('error', (e) => {
-      //   console.error('Action:', e.action);
-      //   console.error('Trigger:', e.trigger);
-      // });
     },
     organizeData() {
       this.tempItem = this.coupon;

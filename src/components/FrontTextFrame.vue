@@ -4,15 +4,15 @@
     <div class="box box1"
       data-aos="fade-right"
       data-aos-easing="linear"
-      data-aos-duration="1000"
-      data-aos-delay="1500"
+      data-aos-duration="700"
+      data-aos-delay="500"
       data-aos-offset="0">
     </div>
     <div class="box box2 position-relative"
       data-aos="zoom-in"
       data-aos-easing="linear"
       data-aos-duration="1000"
-      data-aos-delay="3000"
+      data-aos-delay="1000"
       data-aos-offset="0">
       <div class="position-absolute top-0 start-50 translate-middle w-100 text-center">
         <h2 class="d-none d-sm-block fz-6 fz-lg-8 text-gray1">
@@ -26,15 +26,15 @@
     <div class="box box3"
       data-aos="fade-left"
       data-aos-easing="linear"
-      data-aos-duration="1000"
-      data-aos-delay="1500"
+      data-aos-duration="700"
+      data-aos-delay="500"
       data-aos-offset="0">
     </div>
     <div class="box box4 position-relative"
       data-aos="fade-right"
       data-aos-easing="linear"
-      data-aos-duration="1000"
-      data-aos-delay="1500"
+      data-aos-duration="700"
+      data-aos-delay="500"
       data-aos-offset="0">
       <div class="position-absolute top-75 start-75 translate-middle w-100 text-center">
         <h3 class="d-sm-none text-gray1 fz-4 fw-light">
@@ -45,8 +45,8 @@
     <div class="box box5 d-flex justify-content-center align-items-center"
       data-aos="flip-left"
       data-aos-easing="ease-out-cubic"
-      data-aos-duration="1200"
-      data-aos-delay="2600"
+      data-aos-duration="1000"
+      data-aos-delay="1200"
       data-aos-offset="0">
       <h1 class="d-none d-sm-block text-green1 fz-20 fz-lg-25 fw-normal">
         好食遞
@@ -58,15 +58,15 @@
     <div class="box box6"
       data-aos="fade-left"
       data-aos-easing="linear"
-      data-aos-duration="1000"
-      data-aos-delay="1500"
+      data-aos-duration="700"
+      data-aos-delay="500"
       data-aos-offset="0">
     </div>
     <div class="box box7"
       data-aos="fade-right"
       data-aos-easing="linear"
-      data-aos-duration="1000"
-      data-aos-delay="1500"
+      data-aos-duration="700"
+      data-aos-delay="500"
       data-aos-offset="0">
     </div>
     <div class="box box8 position-relative">
@@ -74,7 +74,7 @@
       data-aos="zoom-in"
       data-aos-easing="linear"
       data-aos-duration="1000"
-      data-aos-delay="3000"
+      data-aos-delay="1000"
       data-aos-offset="0">
         <h3 class="d-none d-sm-block text-gray1 fz-6 fz-lg-7 fw-normal mb-1">
           您的優質餐飲管家
@@ -90,8 +90,8 @@
     <div class="box box9"
       data-aos="fade-left"
       data-aos-easing="linear"
-      data-aos-duration="1000"
-      data-aos-delay="1500"
+      data-aos-duration="700"
+      data-aos-delay="500"
       data-aos-offset="0">
     </div>
   </div>

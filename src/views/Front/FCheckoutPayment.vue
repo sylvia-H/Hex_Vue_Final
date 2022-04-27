@@ -340,6 +340,7 @@ export default {
             style: 'success',
             content: '已完成付款流程！',
           });
+          this.emitter.emit('get-cart');
           this.$router.push({ name: 'checkoutComplete' });
         })
         .catch(() => {

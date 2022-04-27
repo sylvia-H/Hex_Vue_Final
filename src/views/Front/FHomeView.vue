@@ -7,8 +7,8 @@
     class="hero position-relative overflow-hidden"
     data-aos="fade-zoom-in"
     data-aos-easing="linear"
-    data-aos-duration="1800"
-    data-aos-delay="300"
+    data-aos-duration="1000"
+    data-aos-delay="200"
     data-aos-offset="0"
   >
     <div class="d-none d-xl-block position-absolute top-50 start-25 translate-middle">
