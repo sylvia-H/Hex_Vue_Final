@@ -96,8 +96,8 @@
 </template>
 
 <script>
-import PaginationCoupons from '@/components/PaginationCoupons.vue';
-import ModalCoupon from '@/components/ModalCoupon.vue';
+import PaginationCoupons from '@/components/backend/PaginationCoupons.vue';
+import ModalCoupon from '@/components/backend/ModalCoupon.vue';
 import VueLoader from '@/components/LoadingOverlay.vue';
 
 export default {

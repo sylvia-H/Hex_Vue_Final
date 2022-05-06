@@ -8,73 +8,74 @@ const routes = [
   },
   {
     path: '/',
-    name: 'home',
-    component: () => import('../views/Front/FHome.vue'),
+    name: 'homeView',
+    component: () => import('../views/frontend/IndexView.vue'),
     meta: {
       title: '好食遞 HEALTHY DIET - 您的優質餐飲管家',
     },
+  },
+  {
+    path: '/',
+    name: 'home',
+    component: () => import('../views/frontend/HomeView.vue'),
     children: [
-      {
-        path: '/',
-        name: 'homeView',
-        component: () => import('../views/Front/FHomeView.vue'),
-      },
       {
         path: 'products',
         name: 'products',
-        component: () => import('../views/Front/FProductsView.vue'),
+        component: () => import('../views/frontend/ProductsView.vue'),
         meta: {
           title: '來選好食 | 好食遞 HEALTHY DIET',
         },
       },
       {
         path: 'product/:id',
-        component: () => import('../views/Front/FProductID.vue'),
+        name: 'product',
+        component: () => import('../views/frontend/ProductID.vue'),
       },
       {
         path: 'dietInfo',
-        component: () => import('../views/Front/FDietInfo.vue'),
+        component: () => import('../views/frontend/DietInfo.vue'),
         meta: {
           title: '食前好思 | 好食遞 HEALTHY DIET',
         },
       },
       {
         path: 'aboutShipping',
-        component: () => import('../views/Front/FShippingView.vue'),
+        component: () => import('../views/frontend/ShippingView.vue'),
         meta: {
           title: '如何好遞 | 好食遞 HEALTHY DIET',
         },
       },
       {
         path: 'myFavorite',
-        component: () => import('../views/Front/FavCollection.vue'),
+        component: () => import('../views/frontend/FavCollection.vue'),
         meta: {
           title: '我的收藏 | 好食遞 HEALTHY DIET',
         },
       },
       {
         path: 'checkout',
-        component: () => import('../views/Front/FCheckout.vue'),
+        component: () => import('../views/frontend/CheckoutView.vue'),
         children: [
           {
             path: 'cart',
             name: 'checkoutCart',
-            component: () => import('../views/Front/FCheckoutCart.vue'),
+            component: () => import('../views/frontend/CheckoutCart.vue'),
           },
           {
             path: 'order',
             name: 'checkoutOrder',
-            component: () => import('../views/Front/FCheckoutOrder.vue'),
+            component: () => import('../views/frontend/CheckoutOrder.vue'),
           },
           {
             path: 'payment/:id',
             name: 'checkoutPayment',
-            component: () => import('../views/Front/FCheckoutPayment.vue'),
+            component: () => import('../views/frontend/CheckoutPayment.vue'),
           },
           {
             path: 'complete',
             name: 'checkoutComplete',
-            component: () => import('../views/Front/FCheckoutComplete.vue'),
+            component: () => import('../views/frontend/CheckoutComplete.vue'),
           },
         ],
       },
@@ -83,7 +84,7 @@ const routes = [
   {
     path: '/admin',
     name: 'dashboard_home',
-    component: () => import('../views/Dashboard/BHomeView.vue'),
+    component: () => import('../views/backend/HomeView.vue'),
     meta: {
       title: '管理後台 | 好食遞 HEALTHY DIET',
     },
@@ -91,17 +92,17 @@ const routes = [
       {
         path: 'products',
         name: 'dashboard_Products',
-        component: () => import('../views/Dashboard/BProductsView.vue'),
+        component: () => import('../views/backend/ProductsView.vue'),
       },
       {
         path: 'orders',
         name: 'dashboard_Orders',
-        component: () => import('../views/Dashboard/BOrdersView.vue'),
+        component: () => import('../views/backend/OrdersView.vue'),
       },
       {
         path: 'coupon',
         name: 'dashboard_Coupon',
-        component: () => import('../views/Dashboard/BCouponView.vue'),
+        component: () => import('../views/backend/CouponView.vue'),
       },
     ],
   },

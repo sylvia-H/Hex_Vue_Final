@@ -1,5 +1,5 @@
 <template>
-  <div class="container py-18">
+  <div class="container py-20">
     <div class="row mb-6">
       <div class="col-12 col-lg-7">
         <div class="row g-0 | timeline">

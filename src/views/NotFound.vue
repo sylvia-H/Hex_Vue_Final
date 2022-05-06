@@ -1,6 +1,4 @@
 <template>
-  <!-- NavBar -->
-  <FrontNavbarFixed />
   <div class="container py-20 text-center">
     <h2 class="text-orange1 fz-20 | mb-10">
       Oops！４０４
@@ -12,14 +10,3 @@
     <p>您可以回首頁或上一頁，或與我們聯繫。謝謝！</p>
   </div>
 </template>
-
-<script>
-import FrontNavbarFixed from '@/components/FrontNavbarFixed.vue';
-
-export default {
-  components: {
-    FrontNavbarFixed,
-  },
-  inject: ['emitter'],
-};
-</script>

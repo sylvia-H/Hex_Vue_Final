@@ -2,22 +2,22 @@
   <!-- 後台導覽列 -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark | py-4">
     <div class="container">
-      <router-link to="/" class="text-light me-8">
+      <RouterLink to="/" class="text-light me-8">
         <i class="bi bi-box-arrow-left fs-4 me-1"></i>
         返回前台
-      </router-link>
-      <router-link to="./products" class="text-light me-8">
+      </RouterLink>
+      <RouterLink to="./products" class="text-light me-8">
         <i class="bi bi-boxes fs-4 me-1"></i>
         產品列表
-      </router-link>
-      <router-link to="./orders" class="text-light me-8">
+      </RouterLink>
+      <RouterLink to="./orders" class="text-light me-8">
         <i class="bi bi-clipboard-data fs-4 me-1"></i>
         訂單列表
-      </router-link>
-      <router-link to="./coupon" class="text-light me-8">
+      </RouterLink>
+      <RouterLink to="./coupon" class="text-light me-8">
         <i class="bi bi-ticket-perforated fs-4 me-1"></i>
         優惠券管理
-      </router-link>
+      </RouterLink>
       <!-- 漢堡 -->
       <button
         class="navbar-toggler"
@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import ModalLogin from '@/components/ModalLogin.vue';
+import ModalLogin from '@/components/frontend/ModalLogin.vue';
 
 export default {
   name: 'BackendNavbar',

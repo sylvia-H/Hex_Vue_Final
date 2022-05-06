@@ -2,15 +2,13 @@
   <VLoading :active="isLoading" :z-index="1000">
     <VueLoader></VueLoader>
   </VLoading>
-  <!-- NavBar -->
-  <FrontNavbarFixed />
   <!-- 產品列表 -->
-  <section class="container | py-20">
+  <section class="container | py-10">
     <div class="row">
       <div class="d-flex mx-8 mb-10">
-        <router-link to="../" class="text-gray"> 首頁 </router-link>
+        <RouterLink to="../" class="text-gray"> 首頁 </RouterLink>
         <span class="text-miute mx-2">/</span>
-        <router-link to="../products" class="text-gray"> 來選好食 </router-link>
+        <RouterLink to="../products" class="text-gray"> 來選好食 </RouterLink>
         <span class="text-mute mx-2">/</span>
         <p class="text-green1">
           {{ product.title }}
@@ -193,16 +191,28 @@
         </div>
       </div>
     </div>
+    <hr class="my-12" />
+    <!-- Swiper 推薦同類別商品 -->
+    <div>
+      <h3 class="mb-8 ms-8">這些你也會喜歡...</h3>
+      <SwiperRecommend
+        class="ms-8"
+        :products="products"
+        :collection="collection"
+        @add-collection="addCollection"
+      />
+    </div>
   </section>
 </template>
 
 <script>
 import VueLoader from '@/components/LoadingOverlay2.vue';
-import FrontNavbarFixed from '@/components/FrontNavbarFixed.vue';
+import SwiperRecommend from '@/components/frontend/SwiperRecommend.vue';
 
 export default {
   data() {
     return {
+      is_navFixTop: true,
       product: {
         origin_price: '',
         price: '',
@@ -217,7 +227,7 @@ export default {
   },
   components: {
     VueLoader,
-    FrontNavbarFixed,
+    SwiperRecommend,
   },
   inject: ['emitter'],
   methods: {
@@ -228,7 +238,7 @@ export default {
         .then((res) => {
           this.product = res.data.product;
           this.getTemp();
-          this.getProducts(this.product.id, this.product.category);
+          this.getProducts(res.data.product.id, res.data.product.category);
           this.isLoading = false;
         })
         .catch(() => {
@@ -321,6 +331,12 @@ export default {
         const jsonData = JSON.parse(localStorage.getItem('myFavorite'));
         this.collection = jsonData;
       }
+    },
+  },
+  watch: {
+    $route() {
+      const { id } = this.$route.params;
+      this.getProduct(id);
     },
   },
   mounted() {

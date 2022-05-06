@@ -2,10 +2,8 @@
   <VLoading :active="isLoading" :z-index="1000">
     <VueLoader></VueLoader>
   </VLoading>
-  <!-- NavBar -->
-  <FrontNavbarFixed />
   <!-- 產品列表 -->
-  <section class="container my-16 my-lg-20">
+  <section class="container py-20">
     <h2 class="text-center">來選好食</h2>
     <hr class="mt-8 mb-10" />
     <div class="row">
@@ -37,12 +35,12 @@
             class="col-6 col-md-4 col-lg-6 col-xl-4 | p-lg-6 p-xl-4 | mb-8"
           >
             <div class="card rounded-4 overflow-hidden w-100">
-              <router-link :to="`/product/${item.id}`">
+              <RouterLink :to="`/product/${item.id}`">
                 <div class="ratio ratio-4x3 hoverMask hvr-grow">
                   <i class="bi bi-zoom-in"></i>
                   <img :src="item.imageUrl" class="img-cover" :alt='item.title' />
                 </div>
-              </router-link>
+              </RouterLink>
               <div class="card-body">
                 <h4 class="d-none d-lg-block | fz-6 mb-2">
                   {{ item.title }}
@@ -111,7 +109,6 @@
 
 <script>
 import VueLoader from '@/components/LoadingOverlay2.vue';
-import FrontNavbarFixed from '@/components/FrontNavbarFixed.vue';
 
 export default {
   data() {
@@ -130,7 +127,6 @@ export default {
   inject: ['emitter'],
   components: {
     VueLoader,
-    FrontNavbarFixed,
   },
   methods: {
     getProducts() {
@@ -232,7 +228,6 @@ export default {
     this.getProducts();
     this.getCart();
     this.getCollection();
-    this.emitter.emit('nav-fix');
   },
 };
 </script>

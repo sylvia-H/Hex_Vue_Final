@@ -110,8 +110,8 @@
 </template>
 
 <script>
-import PaginationProducts from '@/components/PaginationProducts.vue';
-import ModalEdit from '@/components/ModalEditProduct.vue';
+import PaginationProducts from '@/components/backend/PaginationProducts.vue';
+import ModalEdit from '@/components/backend/ModalEditProduct.vue';
 import VueLoader from '@/components/LoadingOverlay.vue';
 
 export default {

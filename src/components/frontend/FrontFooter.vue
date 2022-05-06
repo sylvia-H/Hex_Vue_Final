@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import ModalLogin from '@/components/ModalLogin.vue';
+import ModalLogin from '@/components/frontend/ModalLogin.vue';
 
 export default {
   name: 'FrontFooter',

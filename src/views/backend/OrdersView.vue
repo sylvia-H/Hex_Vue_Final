@@ -111,8 +111,8 @@
 </template>
 
 <script>
-import PaginationOrders from '@/components/PaginationOrders.vue';
-import ModalOrder from '@/components/ModalOrder.vue';
+import PaginationOrders from '@/components/backend/PaginationOrders.vue';
+import ModalOrder from '@/components/backend/ModalOrder.vue';
 import VueLoader from '@/components/LoadingOverlay.vue';
 
 export default {

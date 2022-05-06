@@ -2,7 +2,7 @@
   <VLoading :active="isLoading" :z-index="1000">
     <VueLoader></VueLoader>
   </VLoading>
-  <div class="container py-18" style="min-height: 90vh;">
+  <div class="container py-20" style="min-height: 90vh;">
     <div class="row mb-6">
       <div class="col-12 col-lg-7">
         <div class="row g-0 | timeline">
@@ -124,14 +124,14 @@
           <div class="row d-flex justify-content-end | my-8 my-md-4">
             <!-- 返回 & 下一步 -->
             <div class="col-6">
-              <router-link :to="{ name : 'products' }">
+              <RouterLink :to="{ name : 'products' }">
                 <button type="button" class="btn btn-outline-dark w-100">
                   返回
                 </button>
-              </router-link>
+              </RouterLink>
             </div>
             <div class="col-6">
-              <router-link :to="{ name : 'checkoutOrder' }">
+              <RouterLink :to="{ name : 'checkoutOrder' }">
                 <button
                   type="button"
                   :disabled="carts.carts?.length === 0"
@@ -139,7 +139,7 @@
                 >
                   下一步
                 </button>
-              </router-link>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -151,7 +151,7 @@
 
 <script>
 import VueLoader from '@/components/LoadingOverlay2.vue';
-import ModalDelCartPayment from '@/components/ModalDelCartPayment.vue';
+import ModalDelCartPayment from '@/components/frontend/ModalDelCartPayment.vue';
 
 export default {
   components: {

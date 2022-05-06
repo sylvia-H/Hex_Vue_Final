@@ -26,17 +26,17 @@
         </h6>
         <div>
           <span class="text-green1 fw-bold">碳水化合物</span> {{ carbohydrate }} g、
-          <span class="text-green1 fw-bold">粗脂肪</span> {{ protein }} g、
-          <span class="text-green1 fw-bold">粗蛋白質</span> {{ crudeFat }} g
+          <span class="text-green1 fw-bold">粗蛋白質</span> {{ protein }} g、
+          <span class="text-green1 fw-bold">粗脂肪</span> {{ crudeFat }} g
         </div>
       </div>
       <!-- 當購物車沒有品項時 -->
       <div v-else class="d-flex flex-column align-items-center justify-content-center h-100">
         <i class="bi bi-cart4 text-gray fz-24"></i>
         <p class="text-gray fz-5 mb-6">把喜愛的美食加進來吧！</p>
-        <router-link to="/products" @click="closeCanvas">
+        <RouterLink to="/products" @click="closeCanvas">
           <button type="button" class="btn btn-warning px-4 py-2">來去逛逛</button>
-        </router-link>
+        </RouterLink>
       </div>
       <!-- Card 購物車卡片01 -->
       <div v-for="item in carts.carts" :key="item.id" class="py-6 px-4 mb-3 border-bottom">
@@ -110,7 +110,7 @@
         <p class="h5 text-dark me-24">總計</p>
         <span class="h5 text-dark ms-2">NT$ {{ carts.total }}</span>
       </div>
-      <router-link :to="{ name: 'checkoutCart' }" :class="{ 'pe-none': !cartsTotal }">
+      <RouterLink :to="{ name: 'checkoutCart' }" :class="{ 'pe-none': !cartsTotal }">
         <button
           type="button"
           class="w-100 btn btn-green1 rounded-0 py-2 fw-bold"
@@ -119,7 +119,7 @@
         >
           前往結帳
         </button>
-      </router-link>
+      </RouterLink>
       <div class="text-end">
         <button
           type="button"
@@ -137,7 +137,7 @@
 
 <script>
 import { Offcanvas } from 'bootstrap';
-import ModalDelCart from '@/components/ModalDelCart.vue';
+import ModalDelCart from '@/components/frontend/ModalDelCart.vue';
 
 export default {
   name: 'CanvasCart',
@@ -153,6 +153,7 @@ export default {
       carbohydrate: 0,
       protein: 0,
       crudeFat: 0,
+      isLoading: false,
     };
   },
   inject: ['emitter'],
@@ -163,22 +164,27 @@ export default {
       this.protein = 0;
       this.crudeFat = 0;
       this.carts.carts.forEach((item) => {
-        this.calorie += Math.floor(item.product.calorie * (item.product.number / 100));
-        this.carbohydrate += Math.floor(item.product.carbohydrate * (item.product.number / 100));
-        this.protein += Math.floor(item.product.protein * (item.product.number / 100));
-        this.crudeFat += Math.floor(item.product.crudeFat * (item.product.number / 100));
+        this.calorie += Math.floor(item.product.calorie * (item.product.number / 100) * item.qty);
+        this.carbohydrate += Math.floor(
+          item.product.carbohydrate * (item.product.number / 100) * item.qty,
+        );
+        this.protein += Math.floor(item.product.protein * (item.product.number / 100) * item.qty);
+        this.crudeFat += Math.floor(item.product.crudeFat * (item.product.number / 100) * item.qty);
       });
     },
     getCart() {
+      this.isLoading = true;
       this.$http
         .get(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart`)
         .then((res) => {
           this.carts = res.data.data;
           this.cartsTotal = this.calcCartsTotal(this.carts.carts);
           this.calcNutrients();
+          this.isLoading = false;
         })
         .catch((err) => {
           console.dir(err);
+          this.isLoading = false;
         });
     },
     calcCartsTotal(arr) {
@@ -196,6 +202,7 @@ export default {
       this.canvas.hide();
     },
     editCart(id, qty) {
+      this.isLoading = true;
       const data = {
         product_id: id,
         qty,
@@ -206,9 +213,10 @@ export default {
           this.getCart();
           // 給導覽列使用
           this.emitter.emit('get-cart');
+          this.isLoading = false;
         })
-        .catch((err) => {
-          console.dir(err);
+        .catch(() => {
+          this.isLoading = false;
         });
     },
     openDelCartModal(id, title) {

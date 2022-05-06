@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import BackendNavbar from '@/components/BackendNavbar.vue';
+import BackendNavbar from '@/components/backend/BackendNavbar.vue';
 import VueLoader from '@/components/LoadingOverlay.vue';
 
 export default {

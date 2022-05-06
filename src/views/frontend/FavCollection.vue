@@ -2,8 +2,6 @@
   <VLoading :active="isLoading" :z-index="1000">
     <VueLoader></VueLoader>
   </VLoading>
-  <!-- NavBar -->
-  <FrontNavbarFixed />
   <section class="container | py-20" style="min-height: 90vh">
     <h2 class="text-center">我的收藏</h2>
     <hr class="my-8" />
@@ -60,9 +58,9 @@
                 {{ ((collection[item].protein * collection[item].number) / 100).toFixed(2) }} g
               </td>
               <td class="align-middle">
-                <router-link :to="`/product/${collection[item].id}`">
+                <RouterLink :to="`/product/${collection[item].id}`">
                   <i class="bi bi-zoom-in"></i>
-                </router-link>
+                </RouterLink>
               </td>
               <td class="align-middle">
                 <button
@@ -134,9 +132,9 @@
                 kcal
               </td>
               <td class="align-middle">
-                <router-link :to="`/product/${collection[item].id}`">
+                <RouterLink :to="`/product/${collection[item].id}`">
                   <i class="bi bi-zoom-in"></i>
-                </router-link>
+                </RouterLink>
               </td>
               <td class="align-middle">
                 <button
@@ -202,9 +200,9 @@
                 {{ collection[item].number }} {{ collection[item].unit }}
               </td>
               <td class="align-middle">
-                <router-link :to="`/product/${collection[item].id}`">
+                <RouterLink :to="`/product/${collection[item].id}`">
                   <i class="bi bi-zoom-in"></i>
-                </router-link>
+                </RouterLink>
               </td>
               <td class="align-middle">
                 <button
@@ -250,7 +248,6 @@
 
 <script>
 import VueLoader from '@/components/LoadingOverlay2.vue';
-import FrontNavbarFixed from '@/components/FrontNavbarFixed.vue';
 
 export default {
   data() {
@@ -262,7 +259,6 @@ export default {
   },
   components: {
     VueLoader,
-    FrontNavbarFixed,
   },
   inject: ['emitter'],
   methods: {

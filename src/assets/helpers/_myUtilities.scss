@@ -6,6 +6,8 @@ $utilities: map-merge(
           values:
           map-merge(map-get(map-get($utilities, "rounded"), "values"),
             (
+              05: $border-radius-05,
+              075: $border-radius-075,
               4: $border-radius-4,
             )
           ),
