@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkhealthy_diet"]=self["webpackChunkhealthy_diet"]||[]).push([[810],{3810:function(e,t,n){n.r(t),n.d(t,{default:function(){return i}});var r=n(6252);function u(e,t){const n=(0,r.up)("RouterView");return(0,r.wg)(),(0,r.j4)(n)}var a=n(3744);const c={},h=(0,a.Z)(c,[["render",u]]);var i=h}}]);
+//# sourceMappingURL=810.fe7373b4.js.map
