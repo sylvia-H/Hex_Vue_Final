@@ -1,6 +1,8 @@
 <template>
   <!-- 前台導覽列 -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-cream3 shadow-sm py-2 py-md-4 py-lg-2"
+  <nav
+    :class="{ 'fixed-top': is_navFixTop }"
+    class="navbar navbar-expand-lg navbar-light bg-cream3 shadow-sm py-2 py-md-4 py-lg-2"
   >
     <div class="container">
       <RouterLink to="/" class="text-center me-10">
@@ -137,6 +139,7 @@ export default {
       cartsTotal: 0,
       fav: 0,
       navMenu: '',
+      is_navFixTop: false,
     };
   },
   components: {
@@ -199,6 +202,12 @@ export default {
     });
     this.emitter.on('get-fav', () => {
       this.getFav();
+    });
+    this.emitter.on('nav-fix', () => {
+      this.is_navFixTop = true;
+    });
+    this.emitter.on('nav-unfix', () => {
+      this.is_navFixTop = false;
     });
     // 解決手機版 Menu 無法自動收合問題
     this.navMenu = new Collapse(this.$refs.navMenu, {
